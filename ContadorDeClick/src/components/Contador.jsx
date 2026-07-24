@@ -23,12 +23,12 @@ const Contador = () => {
   return (
     <>
     <h1>Contador de clicks:</h1>
-    
     <button onClick={() => settClick(click + 1)} style={{width: "10rem",height: "3rem", alignSelf: "center"}}>Clique aqui</button>   
     <h3>{click}</h3>
     <h3 style={{color: "red"}}>{msg}</h3>
     <h1>Contador de resets:</h1>
     <h3>{reset > 0 && <p>{reset}</p>}</h3>    
+    <h3>{reset > 5 ? (<p style={{fontSize: "6rem", color: "green"}}>VAI TRABALHAR!!!</p>) : (<p></p>)}</h3>
     </>
   )
 }
