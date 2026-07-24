@@ -20,8 +20,6 @@ const Contador = () => {
         }
     })
 
-
-
   return (
     <>
     <h1>Contador de clicks:</h1>
