@@ -1,10 +1,13 @@
 import './App.css'
+import RenderCondicionals from './components/RenderCondicionals'
 
 function App() {
 
   return (
     <>
-      <h1>a</h1>
+      
+      <RenderCondicionals />
+      
     </>
   )
 }

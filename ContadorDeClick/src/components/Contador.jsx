@@ -27,8 +27,8 @@ const Contador = () => {
     <h3>{click}</h3>
     <h3 style={{color: "red"}}>{msg}</h3>
     <h1>Contador de resets:</h1>
-    <h3>{reset > 0 && <p>{reset}</p>}</h3>    
-    <h3>{reset > 5 ? (<p style={{fontSize: "6rem", color: "green"}}>VAI TRABALHAR!!!</p>) : (<p></p>)}</h3>
+    <h3>{reset > 0 && <p>{reset}</p>}</h3>  {/*Render condicional sem else */}  
+    <h3>{reset > 5 ? (<p style={{fontSize: "6rem", color: "green"}}>VAI TRABALHAR!!!</p>) : (<p></p>)}</h3> {/*Render condicional com operador ternario */}
     </>
   )
 }
