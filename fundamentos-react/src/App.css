@@ -1,6 +1,7 @@
-p {
-  margin-top: 2rem;
+div p{
+  margin-top: 3rem;
   color: green;
+  text-align: center;
 }
 
 h1  {
@@ -9,4 +10,8 @@ h1  {
 
 div {
   border-bottom: green solid 2px;
+}
+
+li {
+  list-style: none;
 }

@@ -1,12 +1,24 @@
 import './App.css'
 import Props from './components/Props'
 import PropDestructurin from './components/PropDestructurin'
+import RenderCondicionals from './components/RenderCondicionals'
+import List from './components/List'
 
 function App() {
 
 
   return (
     <>
+      <div>
+        <p>Estudando renderização de listas</p>
+        <List />
+      </div>
+
+      <div>
+        <p>Estudando renderização condicional</p>
+        <RenderCondicionals />
+      </div>
+
       <div>
         <p>estudando props</p>
         <Props name='Matheus' /> {/* enviando props sem destructurin */}
