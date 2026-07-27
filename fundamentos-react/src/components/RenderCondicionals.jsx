@@ -17,8 +17,8 @@ const RenderCondicionals = () => {
   return (
     <>
         <button onClick={() => settClick(click + 1)}>Click Aqui!</button>        
-        <h2>{click % 2 === 0 ? (<p>Render condicional com else condição verdadeira</p>) : (<p>Render condicional com else condição falsa</p>)}</h2>
-        <h2>{click >= 1 && <p>{msg}</p>}</h2>      
+        <h2>{click % 2 === 0 ? (<p style={{color: "red"}}>Render condicional com else condição verdadeira</p>) : (<p style={{color: "red"}}>Render condicional com else condição falsa</p>)}</h2>
+        <h2>{click >= 1 && <p style={{color: "red"}}>{msg}</p>}</h2>      
     </>
   )
 }

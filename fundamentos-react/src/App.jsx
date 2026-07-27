@@ -32,6 +32,11 @@ function App() {
         Lembrar de não passar numeros entre aspas no props, numeros devem ser enviado entre chaves
       */}
       </div>
+
+      <div>
+        <p>Reutilizando componentes</p>
+          <PropDestructurin nome='Lucas' curso="Direito" periodo={9} />        
+      </div>
     </>
   )
 }
