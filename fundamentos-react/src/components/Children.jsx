@@ -1,7 +1,7 @@
 const Children = ({children}) => {
   return (
     <>
-    <h3>Esse é meu elemento pai</h3>
+    <h2 style={{fontSize: "3rem"}}>Esse é meu elemento pai</h2>
     {children}
     </>
   )

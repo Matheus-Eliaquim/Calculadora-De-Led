@@ -63,6 +63,7 @@ function App() {
       </div>
 
       <div>
+        <p>Renderizando um objeto atravez do propriedade children</p>
         <Children>
           <div>
             <h4>Esse é o texto criado com a children</h4>
