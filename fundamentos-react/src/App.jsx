@@ -2,7 +2,15 @@ import './App.css'
 import Props from './components/Props'
 import PropDestructurin from './components/PropDestructurin'
 import RenderCondicionals from './components/RenderCondicionals'
+import ListComponents from './components/ListComponents'
 import List from './components/List'
+
+//definindo objeto alunos para repetição de lista com componentes usando o metodo map
+const alunos = [
+  { id: 1, nome: "Sara", periodo: 7, curso: "Arquitetura e urbanismo" },
+  { id: 2, nome: "Jorge", periodo: 3, curso: "Enhenharia Civil" },
+  { id: 3, nome: "Lucas", periodo: 9, curso: "Design Grafico" },
+]
 
 function App() {
 
@@ -35,7 +43,22 @@ function App() {
 
       <div>
         <p>Reutilizando componentes</p>
-          <PropDestructurin nome='Lucas' curso="Direito" periodo={9} />        
+        <PropDestructurin nome='Lucas' curso="Direito" periodo={9} />
+      </div>
+      
+      {/*renderizando informações do objeto alunos com map atravez do componento PropDestructurin */}
+      <div>
+        {alunos.map((aluno) => {
+          return (
+            <div key={aluno.id}>
+              <p>Renderizando componentes com o map</p>
+            <PropDestructurin
+              nome={aluno.nome}
+              curso={aluno.curso}
+              periodo={aluno.periodo} />
+              </div>
+          )
+        })}
       </div>
     </>
   )
