@@ -3,6 +3,7 @@ import Props from './components/Props'
 import PropDestructurin from './components/PropDestructurin'
 import RenderCondicionals from './components/RenderCondicionals'
 import ListComponents from './components/ListComponents'
+import Children from './components/Children'
 import List from './components/List'
 
 //definindo objeto alunos para repetição de lista com componentes usando o metodo map
@@ -45,20 +46,28 @@ function App() {
         <p>Reutilizando componentes</p>
         <PropDestructurin nome='Lucas' curso="Direito" periodo={9} />
       </div>
-      
+
       {/*renderizando informações do objeto alunos com map atravez do componento PropDestructurin */}
       <div>
         {alunos.map((aluno) => {
           return (
             <div key={aluno.id}>
               <p>Renderizando componentes com o map</p>
-            <PropDestructurin
-              nome={aluno.nome}
-              curso={aluno.curso}
-              periodo={aluno.periodo} />
-              </div>
+              <PropDestructurin
+                nome={aluno.nome}
+                curso={aluno.curso}
+                periodo={aluno.periodo} />
+            </div>
           )
         })}
+      </div>
+
+      <div>
+        <Children>
+          <div>
+            <h4>Esse é o texto criado com a children</h4>
+          </div>
+        </Children>
       </div>
     </>
   )
