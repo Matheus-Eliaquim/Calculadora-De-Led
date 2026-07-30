@@ -6,6 +6,8 @@ import RenderCondicionals from './components/RenderCondicionals'
 import Children from './components/Children'
 import FunctionProp from './components/FunctionProp'
 import List from './components/List'
+import StateLift from './components/StateLift'
+import TrocarMsg from './components/TrocarMsg'
 
 //definindo objeto alunos para repetição de lista com componentes usando o metodo map
 const alunos = [
@@ -25,6 +27,13 @@ function App() {
     )
   }
 
+  {/* Função para o state lifft */}
+  const [msg, settMsg] = useState('')
+
+  const handlemsg = (msg) => {
+    settMsg(msg)
+  }
+  
   return (
     <>
       <div>
@@ -84,6 +93,12 @@ function App() {
         <p>Aprendendo a passar functio em props</p>
         <FunctionProp myFunction={somatorio} />
         <h3>{resultado}</h3>
+      </div>
+
+      <div>
+        <p>Aprendendo State Lift</p>
+        <StateLift message= {msg} />
+        <TrocarMsg handlemsg={handlemsg} />
       </div>
     </>
   )
