@@ -90,9 +90,9 @@ function App() {
       </div>
 
       <div>
-        <p>Aprendendo a passar functio em props</p>
+        <p className={resultado > 20 ? "redTitle" : "blueTitle"}>Aprendendo a passar functio em props</p>
         <FunctionProp myFunction={somatorio} />
-        <h3>{resultado}</h3>
+        <h3 style={resultado > 10 ? {color: "red"} : {color: "blue"} }>{resultado}</h3> {/* CSS inline dinamico */}
       </div>
 
       <div>
