@@ -8,6 +8,7 @@ import FunctionProp from './components/FunctionProp'
 import List from './components/List'
 import StateLift from './components/StateLift'
 import TrocarMsg from './components/TrocarMsg'
+import CssModule from './components/CssModule'
 
 //definindo objeto alunos para repetição de lista com componentes usando o metodo map
 const alunos = [
@@ -99,6 +100,11 @@ function App() {
         <p>Aprendendo State Lift</p>
         <StateLift message= {msg} />
         <TrocarMsg handlemsg={handlemsg} />
+      </div>
+
+      <div>
+        <p>Usando CSS modulo</p>
+        <CssModule />
       </div>
     </>
   )
