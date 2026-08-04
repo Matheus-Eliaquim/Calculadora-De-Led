@@ -1,16 +1,25 @@
-import DadosDeEntrada
 import './App.css'
+import DadosEntrada from './components/DadosDeEntrada.jsx'
+import TabelasFitasPerfis from './components/TabelasFitasPerfis.jsx'
+import TabelaFitasPerfis from './components/TabelasFitasPerfis.jsx'
+import TabelasFontesTotais from './components/TabelasFontesTotais.jsx'
 
 function App() {
 
   return (
     <>
-      <DadosEntrada />
+      <section>
+        <DadosEntrada />
+        <TabelasFitasPerfis />
+        <TabelasFontesTotais />
+      </section>
 
-      <div>
-        <span>Metragem: </span>
-        <input type="text" name='entradaValor' placeholder='15.50' onChange={handlePerfil} className={CSS.entradaMetros} />
-      </div>
+      <section>
+        <div>
+          <span>Metragem: </span>
+          <input type="text" name='entradaValor' placeholder='15.50' />
+        </div>
+      </section>      
     </>
   )
 }
