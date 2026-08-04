@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 
 
-const MyForm = () => {
+const DadosEntrada = () => {
 
     const [potencia, settPotencia] = useState("")
     const [rolo, settRolo] = useState("")
@@ -47,18 +47,15 @@ const MyForm = () => {
                     <input type="text" name='perfil' placeholder='3' onChange={handlePerfil} className={CSS.dadosIniciais} />
                 </label>
 
+                
                 <label className={CSS.divisao}>
                     <span>Coeficiente de Segurança (%): <span className={CSS.obrigatorio}>*</span> </span>
                     <input type="text" name='coeficiente' placeholder='20' onChange={handleCoeficiente} className={CSS.dadosIniciais} />
                 </label>
 
-                <label className={CSS.divisao}>
-                    <span>Metragem: </span>
-                    <input type="text" name='entradaValor' placeholder='15.50' onChange={handlePerfil} className={CSS.entradaMetros} />
-                </label>
             </form>
         </>
     )
 }
 
-export default MyForm
+export default DadosEntrada
