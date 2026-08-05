@@ -27,7 +27,9 @@
     padding: 1rem 0.5rem;
 }
 
-.acontion-control {
+.action-control{
     display: flex;
-    jus
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
 }
