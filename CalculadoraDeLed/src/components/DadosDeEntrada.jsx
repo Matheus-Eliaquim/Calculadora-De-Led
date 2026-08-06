@@ -4,7 +4,7 @@ import Button from './Button.jsx'
 
 
 
-const DadosEntrada = () => {
+const DadosEntrada = ({ entradaDados }) => {
 
     const [potencia, settPotencia] = useState("")
     const [rolo, settRolo] = useState("")
@@ -13,26 +13,18 @@ const DadosEntrada = () => {
 
     {/* Funcões para manipular dados */ }
 
-    const handlePotencia = (e) => {
-        settPotencia(e.target.value)
-    }
+    const handlePotencia = (e) => settPotencia(e.target.value)
+    const handleRolo = (e) => settRolo(e.target.value)
+    const handlePerfil = (e) => settPerfil(e.target.value)
+    const handleCoeficiente = (e) => settCoeficiente(e.target.value)
 
-    const handleRolo = (e) => {
-        settRolo(e.target.value)
-    }
-
-    const handlePerfil = (e) => {
-        settPerfil(e.target.value)
-    }
-
-    const handleCoeficiente = (e) => {
-        settCoeficiente(e.target.value)
-    }
-
+    {/* enviando dados para o elemento pai */ }
     const savedDados = (e) => {
-        e.precentDefault()
-    }
+        e.preventDefault()
 
+        entradaDados({ potencia, rolo, perfil, coeficiente })
+
+    }
 
     return (
         <div className="container">
@@ -52,10 +44,10 @@ const DadosEntrada = () => {
                     <input type="text" name='perfil' placeholder='3' onChange={handlePerfil} className="dados-iniciais" />
                 </label>
 
-                
+
                 <label className="divisao">
                     <span>Coeficiente de Segurança (%): <span className="obrigatorio">*</span> </span>
-                    <input type="text" name='coeficiente' placeholder='20' onChange={handleCoeficiente} className="dados-iniciais"/>
+                    <input type="text" name='coeficiente' placeholder='20' onChange={handleCoeficiente} className="dados-iniciais" />
                 </label>
             </form>
 
