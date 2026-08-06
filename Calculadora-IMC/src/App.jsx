@@ -19,11 +19,26 @@ function App() {
     const imcResult = (weightFloat / (heightFloat * heightFloat)).toFixed(1)
 
     settImc(imcResult)
+
+    data.forEach((item) => {
+      if (imcResult >= item.min && imcResult <= item.max) {
+        settInfo(item.info)
+        settInfoClass(item.infoClass)
+      }
+    })
+  }
+
+  const resetTable = (e) => {
+    e.preventDefault()
+
+    settImc("")
+    settInfo("")
+    settInfoClass("")
   }
 
   return (
     <div className='container'>
-      {!imc ? <ImcCalc calcImc = {calcImc}/> : <ImcTable />}   
+      {!imc ? <ImcCalc calcImc = {calcImc}/> : <ImcTable data={data} imc={imc} info={info} infoClass={infoClass} reset={resetTable}/>}   
     </div>
   )
 }
