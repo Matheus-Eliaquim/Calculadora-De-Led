@@ -1,5 +1,6 @@
-import CSS from './moduleCSS/Myform.module.css'
+import './DadosDeEntrada.css'
 import { useState } from 'react'
+import Button from './Button.jsx'
 
 
 
@@ -28,33 +29,38 @@ const DadosEntrada = () => {
         settCoeficiente(e.target.value)
     }
 
+    const savedDados = (e) => {
+        e.precentDefault()
+    }
+
 
     return (
-        <>
-            <form className={CSS.formGeral} >
-                <label className={CSS.divisao}>
-                    <span>Potencia da fita (W/metros): <span className={CSS.obrigatorio}>*</span> </span>
-                    <input type="text" name='potencia' placeholder='12' onChange={handlePotencia} className={CSS.dadosIniciais} />
+        <div className="container">
+            <form className="form-geral" >
+                <label className="divisao">
+                    <span>Potencia da fita (W/metros): <span className="obrigatorio">*</span> </span>
+                    <input type="text" name='potencia' placeholder='12' onChange={handlePotencia} className="dados-iniciais" />
                 </label>
 
-                <label className={CSS.divisao}>
-                    <span>Tamanho do rolo de fita (Metros): <span className={CSS.obrigatorio}>*</span> </span>
-                    <input type="text" name='roloDeFita' placeholder='5' onChange={handleRolo} className={CSS.dadosIniciais} />
+                <label className="divisao">
+                    <span>Tamanho do rolo de fita (Metros): <span className="obrigatorio">*</span> </span>
+                    <input type="text" name='roloDeFita' placeholder='5' onChange={handleRolo} className="dados-iniciais" />
                 </label>
 
-                <label className={CSS.divisao}>
-                    <span>Tamanho do perfil (Metros): <span className={CSS.obrigatorio}>*</span> </span>
-                    <input type="text" name='perfil' placeholder='3' onChange={handlePerfil} className={CSS.dadosIniciais} />
+                <label className="divisao">
+                    <span>Tamanho do perfil (Metros): <span className="obrigatorio">*</span> </span>
+                    <input type="text" name='perfil' placeholder='3' onChange={handlePerfil} className="dados-iniciais" />
                 </label>
 
                 
-                <label className={CSS.divisao}>
-                    <span>Coeficiente de Segurança (%): <span className={CSS.obrigatorio}>*</span> </span>
-                    <input type="text" name='coeficiente' placeholder='20' onChange={handleCoeficiente} className={CSS.dadosIniciais} />
+                <label className="divisao">
+                    <span>Coeficiente de Segurança (%): <span className="obrigatorio">*</span> </span>
+                    <input type="text" name='coeficiente' placeholder='20' onChange={handleCoeficiente} className="dados-iniciais"/>
                 </label>
-
             </form>
-        </>
+
+            <Button id="save" text="Salvar Configurações" action={savedDados} />
+        </div>
     )
 }
 
