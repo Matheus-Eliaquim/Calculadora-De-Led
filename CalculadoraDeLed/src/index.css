@@ -9,6 +9,7 @@
 body {
   background-color: black;
   color: azure;
-  height: 100vh;
+  height: 100vh;  
   align-content: center;
+  margin: 0;
 }

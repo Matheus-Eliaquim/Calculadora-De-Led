@@ -1,8 +1,8 @@
 import './App.css'
 import DadosEntrada from './components/DadosDeEntrada.jsx'
 import TabelasFitasPerfis from './components/TabelasFitasPerfis.jsx'
-import TabelaFitasPerfis from './components/TabelasFitasPerfis.jsx'
 import TabelasFontesTotais from './components/TabelasFontesTotais.jsx'
+import InputMetros from './components/InputMetros.jsx'
 import { useState } from 'react'
 
 
@@ -20,17 +20,12 @@ function App() {
     settCoeficiente(coeficiente);
   }
 
-  return (
-    <>
-      <DadosEntrada entradaDados={receberDados} />
-      <div>
-        <p>{potencia}</p>
-        <p>{rolo}</p>
-        <p>{perfil}</p>
-        <p>{coeficiente}</p>
-      </div>
+  const invalid = Number(potencia) + Number(rolo) + Number(perfil) + Number(coeficiente)
 
-    </>
+  return (
+    <div>
+    {invalid > 0 ? <InputMetros  potencia={potencia} rolo={rolo} perfil={perfil} coeficiente={coeficiente} /> : <DadosEntrada entradaDados={receberDados} /> }
+    </div>
   )
 
 }

@@ -1,0 +1,67 @@
+:root {
+    --color-font-h3: #616161;
+}
+
+#metragem-individual {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+#dados-para-calculo {
+    display: grid;
+    grid-template-columns: 8rem 8rem;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+#dados-para-calculo h3 {
+    margin: 0.5rem 0;
+    font-size: 0.7rem;
+    color: var(--color-font-h3);
+}
+
+
+#inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#inputs #entradaValor {
+    align-self: center;
+    text-align: center;
+    padding: 0.5rem 0.3rem;
+    border: none;
+    border-radius: 20px;
+    width: 90vw;
+    max-width: 25rem;
+}
+
+#inputs h4 {
+    margin-top: 1rem;
+}
+
+#radios {
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-columns: 4rem 4rem 5rem;
+    justify-content: center;
+    width: 25rem;
+
+}
+
+.radio-inputs {
+    display: flex;
+    align-items: center;
+    width: 5rem;
+    font-size: 0.7rem;
+    margin: 0 0.5rem;
+}
+
+.radio-inputs input {
+    width: 1.5rem;
+}
