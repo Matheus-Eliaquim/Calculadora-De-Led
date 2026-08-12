@@ -1,7 +1,7 @@
 // Importando componentes e hooks necessários
 import Button from './Button.jsx' // Componente de botão personalizado
-import TabelasVisualisacao from './TabelasVisualisacao.jsx' // Componente de tabelas (não está sendo usado neste código)
 import { useState, useEffect } from 'react' // Hooks do React para estado e efeitos colaterais
+import TabelaDeMetros from './TabelaDeMetros.jsx'
 import './InputMetros.css' // Estilos CSS específicos para este componente
 
 // Componente principal que recebe propriedades (props) de configuração
@@ -17,6 +17,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
     const [valor, settValor] = useState("") // Estado para armazenar o valor digitado pelo usuário (metragem)
     const [distancia, settDistancia] = useState("") // Estado para armazenar a distância escolhida nos rádios
     const [fonteQTD, settFonteQTD] = useState("") // Estado para armazenar a quantidade de fontes calculadas
+    const perf = perfil
 
     // Hook useEffect: executa sempre que "valor" ou "distancia" mudam
     // Serve para calcular em tempo real a quantidade de fontes necessárias
@@ -95,6 +96,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                 {/* Botão que chama a função de cálculo */}
                 <Button id='iniciar-calculo' text='Calcular' action={btnCalcular} />
             </div>
+            <TabelaDeMetros valor={valor}  perfil={perf}  qtdFonte={fonteQTD} potenciaFonte={fontePotencia}/>  
         </div>
     )
 }

@@ -52,6 +52,7 @@ const DadosEntrada = ({ entradaDados }) => {
             </form>
 
             <Button id="save" text="Salvar Configurações" action={savedDados} />
+                                
         </div>
     )
 }
