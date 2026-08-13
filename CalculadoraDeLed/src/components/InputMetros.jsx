@@ -15,7 +15,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
     // Estados internos do componente
     const [fontePotencia, settFontePotencia] = useState("") // Estado para armazenar a potência da fonte (não está sendo usado)
     const [valor, settValor] = useState("") // Estado para armazenar o valor digitado pelo usuário (metragem)
-    const [distancia, settDistancia] = useState("") // Estado para armazenar a distância escolhida nos rádios
+    const [distancia, settDistancia] = useState("5") // Estado para armazenar a distância escolhida nos rádios
     const [fonteQTD, settFonteQTD] = useState("") // Estado para armazenar a quantidade de fontes calculadas
     const perf = perfil
 
@@ -25,6 +25,15 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
         if (valor && distancia) { // Só calcula se ambos tiverem valor
             const qtd = settFonteQTD(Math.ceil(valor / distancia)) // Divide o valor pela distância e arredonda para cima
         }
+
+        if (valor && fonteQTD && potencia && coeficiente) {
+            const watsParcial = ((Number(valor) * potencia)/fonteQTD)
+            const coeficienteReal = (coeficiente/100)+1
+            const watsReal = (watsParcial * coeficienteReal)
+            settFontePotencia((watsReal.toFixed(0)))
+        }
+
+
     })
 
     // Função que trata o evento de pressionar uma tecla no input
@@ -32,6 +41,8 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
         if (e.key === "Enter") { // Se a tecla pressionada for "Enter"
             console.log(distancia, valor, fonteQTD) // Mostra os valores atuais no console
             settValor("") // Limpa o campo de valor após pressionar Enter
+            settFontePotencia("")
+            settFonteQTD("")
         }
     }
 
