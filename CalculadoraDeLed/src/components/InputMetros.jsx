@@ -25,16 +25,18 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
         if (valor && distancia) { // Só calcula se ambos tiverem valor
             const qtd = settFonteQTD(Math.ceil(valor / distancia)) // Divide o valor pela distância e arredonda para cima
         }
+    }, [valor, distancia])
 
+    useEffect(() => {
         if (valor && fonteQTD && potencia && coeficiente) {
-            const watsParcial = ((Number(valor) * potencia)/fonteQTD)
-            const coeficienteReal = (coeficiente/100)+1
+            const watsParcial = ((Number(valor) * potencia) / fonteQTD)
+            const coeficienteReal = (coeficiente / 100) + 1
             const watsReal = (watsParcial * coeficienteReal)
             settFontePotencia((watsReal.toFixed(0)))
         }
+    }, [valor, fonteQTD, potencia, coeficiente])
 
 
-    })
 
     // Função que trata o evento de pressionar uma tecla no input
     const handleKeydown = (e) => {
@@ -107,7 +109,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                 {/* Botão que chama a função de cálculo */}
                 <Button id='iniciar-calculo' text='Calcular' action={btnCalcular} />
             </div>
-            <TabelaDeMetros valor={valor}  perfil={perf}  qtdFonte={fonteQTD} potenciaFonte={fontePotencia}/>  
+            <TabelaDeMetros valor={valor} perfil={perf} qtdFonte={fonteQTD} potenciaFonte={fontePotencia} />
         </div>
     )
 }
