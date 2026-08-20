@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div>
-    {invalid > 0 ? <InputMetros  potencia={potencia} rolo={rolo} perfil={perfil} coeficiente={coeficiente} /> : <DadosEntrada entradaDados={receberDados} /> }
+    {invalid > 0 ? <InputMetros id='input-metros' potencia={potencia} rolo={rolo} perfil={perfil} coeficiente={coeficiente} /> : <DadosEntrada entradaDados={receberDados} /> }
     </div>
   )
 

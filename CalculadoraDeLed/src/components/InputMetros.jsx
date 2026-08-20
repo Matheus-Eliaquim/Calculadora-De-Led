@@ -23,7 +23,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
     // Serve para calcular em tempo real a quantidade de fontes necessárias
     useEffect(() => {
         if (valor && distancia) { // Só calcula se ambos tiverem valor
-            const qtd = settFonteQTD(Math.ceil(valor / distancia)) // Divide o valor pela distância e arredonda para cima
+            settFonteQTD(Math.ceil(valor / distancia)) // Divide o valor pela distância e arredonda para cima
         }
     }, [valor, distancia])
 
@@ -102,7 +102,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                                 checked={distancia === "1000"}
                                 onClick={handleDist}
                             />
-                            01 Fonte
+                            Fonte unica
                         </label>
                     </div>
                 </div>

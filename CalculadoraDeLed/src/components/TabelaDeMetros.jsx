@@ -49,7 +49,7 @@ const TabelaDeMetros = ({ valor, qtdFonte, potenciaFonte, perfil }) => {
     <div>
       {/* Exibe os valores calculados e recebidos em formato de texto */}
       <p>
-        {valor} | {barrasInteiras}x{Number(perf).toFixed(2)}m | {Number(sobra).toFixed(2)}m | {qtdFonte}x{potenciaFonte}W
+        {valor}m | {barrasInteiras}x{Number(perf).toFixed(2)}m | {Number(sobra).toFixed(2)}m | {qtdFonte}x{potenciaFonte}W
       </p>
     </div>
   )
