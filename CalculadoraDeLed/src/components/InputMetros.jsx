@@ -3,6 +3,7 @@ import Button from './Button.jsx' // Componente de botão personalizado
 import { useState, useEffect } from 'react' // Hooks do React para estado e efeitos colaterais
 import TabelaDeMetros from './TabelaDeMetros.jsx'
 import './InputMetros.css' // Estilos CSS específicos para este componente
+import './responsividade.css'
 
 // Componente principal que recebe propriedades (props) de configuração
 const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {

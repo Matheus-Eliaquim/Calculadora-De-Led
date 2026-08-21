@@ -8,10 +8,10 @@
 
 body {
   background-color: black;
-  color: azure;
-  height: 100vh;  
+  height: 100vh;
+  max-width: 100%;
+  overflow: hidden;
   align-content: center;
+  justify-self: center;
   margin: 0;
 }
-
-

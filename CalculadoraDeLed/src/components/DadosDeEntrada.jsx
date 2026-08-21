@@ -2,6 +2,7 @@
 import './DadosDeEntrada.css'
 import { useState } from 'react'
 import Button from './Button.jsx'
+import './responsividade.css'
 
 
 

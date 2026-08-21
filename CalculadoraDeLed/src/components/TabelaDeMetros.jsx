@@ -1,4 +1,6 @@
 import { useState, useEffect, useEffectEvent } from 'react'
+import "./TabelaDeMetros.css"
+import './responsividade.css'
 
 
 const TabelaDeMetros = ({ valor, qtdFonte, potenciaFonte, perfil }) => {
@@ -46,10 +48,10 @@ const TabelaDeMetros = ({ valor, qtdFonte, potenciaFonte, perfil }) => {
 
  
   return (
-    <div>
+    <div className='container'>
       {/* Exibe os valores calculados e recebidos em formato de texto */}
-      <p>
-        {valor}m | {barrasInteiras}x{Number(perf).toFixed(2)}m | {Number(sobra).toFixed(2)}m | {qtdFonte}x{potenciaFonte}W
+      <p id="valores-calculados">
+        Entrada: {valor}m | Barras inteiras: {barrasInteiras}x{Number(perf).toFixed(2)}m | Sobras: {Number(sobra).toFixed(2)}m | Fontes: {qtdFonte}x{potenciaFonte}W
       </p>
     </div>
   )

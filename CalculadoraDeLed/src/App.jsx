@@ -1,7 +1,5 @@
 import './App.css'
 import DadosEntrada from './components/DadosDeEntrada.jsx'
-import TabelasFitasPerfis from './components/TabelasFitasPerfis.jsx'
-import TabelasFontesTotais from './components/TabelasFontesTotais.jsx'
 import InputMetros from './components/InputMetros.jsx'
 import { useState } from 'react'
 
