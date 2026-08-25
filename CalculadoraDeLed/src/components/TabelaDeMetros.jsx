@@ -8,11 +8,11 @@ const TabelaDeMetros = ({ valor, qtdFonte, potenciaFonte, perfil }) => {
 
   const perf = perfil
 
- 
-  const [valorNovo, setValorNovo] = useState("")    
-  const [barrasInteiras, setBarrasInteiras] = useState(0) 
-  const [barrasTotais, setBarrasTotais] = useState(0)    
-  const [sobra, setSobra] = useState(0)               
+  const [linhas, setLinhas] = useState([]) //estado que vai armazenar todas as linhas criadas
+  const [valorNovo, setValorNovo] = useState("")
+  const [barrasInteiras, setBarrasInteiras] = useState(0)
+  const [barrasTotais, setBarrasTotais] = useState(0)
+  const [sobra, setSobra] = useState(0)
 
   // Função para calcular quantas barras inteiras cabem no valor e qual sobra
   const calcularBarras = (valor, perfil) => {
@@ -36,6 +36,17 @@ const TabelaDeMetros = ({ valor, qtdFonte, potenciaFonte, perfil }) => {
     setSobra(resto)
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      addLinha()
+    }
+  }
+
+  //variavel usada pra adicionar o valor das novas linhas a tabela
+  const addLinha = () => {
+    setLinhas((prev) => [...prev, valor, qtdFonte, potenciaFonte, perf, barrasInteiras])
+  }
+
   //recalcula as barras sempre que valorNovo ou perf mudarem
   useEffect(() => {
     calcularBarras(valorNovo, perf)
@@ -46,16 +57,18 @@ const TabelaDeMetros = ({ valor, qtdFonte, potenciaFonte, perfil }) => {
     setValorNovo(valor)
   }, [valor])
 
- 
+
   return (
     <div className='container'>
       {/* Exibe os valores calculados e recebidos em formato de texto */}
-      <tr id='tabela-entradas'>
-        <th>Entradas</th>
-        <th>Barras de {Number(perf).toFixed(2)}m</th>
-        <th>Sobras</th>
-        <th>Fontes</th>
-      </tr>
+      <table id='tabela-entradas'>
+        <tr>
+          <th>Entradas</th>
+          <th>Barras de {Number(perf).toFixed(2)}m</th>
+          <th>Sobras</th>
+          <th>Fontes</th>
+        </tr>
+      </table>
       <p id="valores-calculados">
         Entrada: {valor}m | Barras inteiras: {barrasInteiras}x{Number(perf).toFixed(2)}m | Sobras: {Number(sobra).toFixed(2)}m | Fontes: {qtdFonte}x{potenciaFonte}W
       </p>
