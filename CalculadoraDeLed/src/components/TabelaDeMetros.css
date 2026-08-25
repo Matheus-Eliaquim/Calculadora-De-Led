@@ -3,3 +3,11 @@
     color: rgb(250, 239, 93);
     text-align: center;
 }
+
+#tabela-entradas {
+    color: white;
+}
+
+#tabela-entradas th {
+    padding: 0 1rem;
+}

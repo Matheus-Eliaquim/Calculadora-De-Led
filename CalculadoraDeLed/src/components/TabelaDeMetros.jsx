@@ -50,6 +50,12 @@ const TabelaDeMetros = ({ valor, qtdFonte, potenciaFonte, perfil }) => {
   return (
     <div className='container'>
       {/* Exibe os valores calculados e recebidos em formato de texto */}
+      <tr id='tabela-entradas'>
+        <th>Entradas</th>
+        <th>Barras de {Number(perf).toFixed(2)}m</th>
+        <th>Sobras</th>
+        <th>Fontes</th>
+      </tr>
       <p id="valores-calculados">
         Entrada: {valor}m | Barras inteiras: {barrasInteiras}x{Number(perf).toFixed(2)}m | Sobras: {Number(sobra).toFixed(2)}m | Fontes: {qtdFonte}x{potenciaFonte}W
       </p>
