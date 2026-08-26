@@ -66,3 +66,27 @@
 .radio-inputs input {
     width: 1.5rem;
 }
+
+#valores-calculados {
+    font-size: 1rem;
+    color: rgb(250, 239, 93);
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#tabela-entradas {
+    color: white;
+    border-bottom: 2px solid rgb(131, 131, 131);
+}
+
+#tabela-entradas th {
+    padding: 0 1rem;
+}
+
+#tabela-entradas td {
+    text-align: center;
+}
+
+#button-div {
+    justify-self: center;
+}
