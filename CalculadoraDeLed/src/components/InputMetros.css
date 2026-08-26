@@ -2,14 +2,15 @@
     --color-font-h3: #616161;
 }
 
-#metragem-individual {
+/* Container principal */
+.dados-de-input {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
+    height: 100vh;
+    position: static;
 }
 
+/* Cabeçalho com dados para cálculo */
 #dados-para-calculo {
     display: grid;
     grid-template-columns: 8rem 8rem;
@@ -24,7 +25,16 @@
     color: var(--color-font-h3);
 }
 
+/* Área de metragem individual */
+#metragem-individual {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
 
+/* Inputs */
 #inputs {
     display: flex;
     flex-direction: column;
@@ -46,13 +56,13 @@
     margin-top: 1rem;
 }
 
+/* Radios */
 #radios {
     margin-top: 0.5rem;
     display: grid;
     grid-template-columns: 4rem 4rem 5rem;
     justify-content: center;
     width: 25rem;
-
 }
 
 .radio-inputs {
@@ -67,13 +77,7 @@
     width: 1.5rem;
 }
 
-#valores-calculados {
-    font-size: 1rem;
-    color: rgb(250, 239, 93);
-    text-align: center;
-    margin-top: 2rem;
-}
-
+/* Tabela */
 #tabela-entradas {
     color: white;
     border-bottom: 2px solid rgb(131, 131, 131);
@@ -87,6 +91,7 @@
     text-align: center;
 }
 
+/* Div do botão */
 #button-div {
-    justify-self: center;
+    text-align: center;
 }

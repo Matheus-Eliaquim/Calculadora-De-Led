@@ -148,16 +148,16 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                                 ))}
                             </tbody>
                         </table>
+                        <div id='button-div'>
+                            {/* Botão de cálculo (não faz nada além de prevenir reload) */}
+                            <Button id="iniciar-calculo" text="Calcular" action={(e) => e.preventDefault()} />
+                        </div>
                     </div>
                     {/* fecha container */}
                 </div>
                 {/* fecha inputs */}
             </div>
             {/* fecha metragem individual */}
-            <div id='button-div'>
-                {/* Botão de cálculo (não faz nada além de prevenir reload) */}
-                <Button id="iniciar-calculo" text="Calcular" action={(e) => e.preventDefault()} />
-            </div>
         </div>
     );
 };
