@@ -13,6 +13,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
     const [fontePotencia, setFontePotencia] = useState('') // Potência de cada fonte calculada
     const [linhasTabela, setLinhasTabela] = useState([]) // Lista de linhas que serão exibidas na tabela
     const [fonte200, setFonte200] = useState(false); // estado para saber se fonte única está ativa
+
     const fontes = {
         fonte18W: 0,
         fonte24W: 0,
@@ -122,7 +123,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                                 checked={!fonte200 && distancia === '5'}
                                 onChange={(e) => {
                                     setDistancia(e.target.value)
-                                    setFonteUnica(false)
+                                    setFonte200(false)
                                 }}
                             />
                             5m
@@ -135,7 +136,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                                 checked={!fonte200 && distancia === '7'}
                                 onChange={(e) => {
                                     setDistancia(e.target.value)
-                                    setFonteUnica(false)
+                                    setFonte200(false)
                                 }}
                             />
                             7m
