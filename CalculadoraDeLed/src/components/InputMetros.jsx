@@ -1,47 +1,67 @@
 // Importa hooks do React e componentes externos
-import { useState, useEffect } from 'react';
-import Button from './Button.jsx'; // Componente de botão personalizado
-import './InputMetros.css'; // Estilos específicos para este componente
-import './responsividade.css'; // Estilos de responsividade
+import { useState, useEffect } from 'react'
+import Button from './Button.jsx' // Componente de botão personalizado
+import './InputMetros.css' // Estilos específicos para este componente
+import './responsividade.css' // Estilos de responsividade
 
 // Componente principal que recebe propriedades de configuração
 const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
     // Estados internos do componente
-    const [valor, setValor] = useState(''); // Valor digitado pelo usuário (metragem)
-    const [distancia, setDistancia] = useState('5'); // Espaçamento entre fontes (default 5m)
-    const [fonteQTD, setFonteQTD] = useState(''); // Quantidade de fontes calculadas
-    const [fontePotencia, setFontePotencia] = useState(''); // Potência de cada fonte calculada
-    const [linhasTabela, setLinhasTabela] = useState([]); // Lista de linhas que serão exibidas na tabela
+    const [valor, setValor] = useState('') // Valor digitado pelo usuário (metragem)
+    const [distancia, setDistancia] = useState('5') // Espaçamento entre fontes (default 5m)
+    const [fonteQTD, setFonteQTD] = useState('') // Quantidade de fontes calculadas
+    const [fontePotencia, setFontePotencia] = useState('') // Potência de cada fonte calculada
+    const [linhasTabela, setLinhasTabela] = useState([]) // Lista de linhas que serão exibidas na tabela
+    const [fonte200, setFonte200] = useState(false); // estado para saber se fonte única está ativa
+    const fontes = {
+        fonte18W: 0,
+        fonte24W: 0,
+        fonte36W: 0,
+        fonte48W: 0,
+        fonte60W: 0,
+        fonte72W: 0,
+        fonte100W: 0,
+        fonte150W: 0,
+        fonte200W: 0,
+    }
 
     const perf = Number(perfil); // Converte perfil recebido via props para número
 
     // useEffect: calcula quantidade de fontes sempre que "valor" ou "distancia" mudam
     useEffect(() => {
+        if (fontePotencia === '200') {
+            setFonteQTD(Math.ceil((valor * potencia) / fontePotencia))
+            return
+        }
         if (valor && distancia) {
             // Divide o valor pela distância e arredonda para cima
-            setFonteQTD(Math.ceil(valor / distancia));
+            setFonteQTD(Math.ceil(valor / distancia))
         }
-    }, [valor, distancia]);
+    }, [valor, distancia])
 
     // useEffect: calcula a potência da fonte sempre que dependências mudam
     useEffect(() => {
+
+        if (fonte200) return;
+
         if (valor && fonteQTD && potencia && coeficiente) {
             // Calcula potência parcial
-            const watsParcial = (Number(valor) * potencia) / fonteQTD;
+            const watsParcial = (Number(valor) * potencia) / fonteQTD
             // Aplica coeficiente de segurança
-            const coeficienteReal = coeficiente / 100 + 1;
-            const watsReal = watsParcial * coeficienteReal;
+            const coeficienteReal = coeficiente / 100 + 1
+            const watsReal = watsParcial * coeficienteReal
             // Atualiza estado com potência arredondada
-            setFontePotencia(watsReal.toFixed(0));
+            setFontePotencia(watsReal.toFixed(0))
         }
-    }, [valor, fonteQTD, potencia, coeficiente]);
+
+    }, [valor, fonteQTD, potencia, coeficiente])
 
     // Função chamada ao apertar Enter no input
     const handleKeydown = (e) => {
         if (e.key === 'Enter' && valor) {
-            const va = Number(valor); // Converte valor digitado para número
-            const inteiras = Math.floor(va / perf); // Quantidade de barras inteiras
-            const resto = va % perf; // Sobra da divisão
+            const va = Number(valor) // Converte valor digitado para número
+            const inteiras = Math.floor(va / perf) // Quantidade de barras inteiras
+            const resto = va % perf // Sobra da divisão
 
             // Adiciona nova linha na tabela com os cálculos
             setLinhasTabela((prev) => [
@@ -54,19 +74,18 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                     qtdFonte: fonteQTD,
                     potenciaFonte: fontePotencia,
                 },
-            ]);
-
-            // Limpa os campos após adicionar a linha
-            setValor('');
-            setFontePotencia('');
-            setFonteQTD('');
+            ])
+            setValor('')
         }
-    };
+    }
 
     // Função para atualizar o espaçamento entre fontes (quando usuário seleciona rádio)
     const handleDist = (e) => {
-        setDistancia(e.target.value);
-    };
+        setDistancia(e.target.value)
+    }
+
+    //função para calcular corretamente a potencia das fontes
+
 
     // JSX que define a interface do componente
     return (
@@ -100,8 +119,11 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                                 type="radio"
                                 value="5"
                                 name="fonts"
-                                checked={distancia === '5'}
-                                onChange={handleDist}
+                                checked={!fonte200 && distancia === '5'}
+                                onChange={(e) => {
+                                    setDistancia(e.target.value)
+                                    setFonteUnica(false)
+                                }}
                             />
                             5m
                         </label>
@@ -110,20 +132,26 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                                 type="radio"
                                 value="7"
                                 name="fonts"
-                                checked={distancia === '7'}
-                                onChange={handleDist}
+                                checked={!fonte200 && distancia === '7'}
+                                onChange={(e) => {
+                                    setDistancia(e.target.value)
+                                    setFonteUnica(false)
+                                }}
                             />
                             7m
                         </label>
                         <label className="radio-inputs">
                             <input
                                 type="radio"
-                                value="1000"
+                                value="200"
                                 name="fonts"
-                                checked={distancia === '1000'}
-                                onChange={handleDist}
+                                checked={fonte200}
+                                onChange={() => {
+                                    setFonte200(true)
+                                    setFontePotencia('200')
+                                }}
                             />
-                            Fonte única
+                            Fonte de 200W
                         </label>
                     </div>
                     {/* Tabela que exibe as linhas adicionadas */}
