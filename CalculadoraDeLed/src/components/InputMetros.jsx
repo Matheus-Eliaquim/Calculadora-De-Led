@@ -8,14 +8,15 @@ import './responsividade.css' // Estilos de responsividade
 const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
     // Estados internos do componente
     const [valor, setValor] = useState('') // Valor digitado pelo usuário (metragem)
+    const [totalMetros, setTotalMetros] = useState(0)
     const [distancia, setDistancia] = useState('5') // Espaçamento entre fontes (default 5m)
-    const [fonteQTD, setFonteQTD] = useState('') // Quantidade de fontes calculadas
-    const [fontePotencia, setFontePotencia] = useState('') // Potência de cada fonte calculada
+    const [fonteQTD, setFonteQTD] = useState(0) // Quantidade de fontes calculadas
+    const [fontePotencia, setFontePotencia] = useState(0) // Potência de cada fonte calculada
     const [linhasTabela, setLinhasTabela] = useState([]) // Lista de linhas que serão exibidas na tabela
-    const [fonte200, setFonte200] = useState(false); // estado para saber se fonte única está ativa
+    const [fonte200, setFonte200] = useState(false); // estado para saber se a opção apenas fontes de 200w está ativa
     const [erro, setErro] = useState('') // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
 
-    const fontes = {
+    const [fontes, setFontes] = useState({
         fonte18W: 0,
         fonte24W: 0,
         fonte36W: 0,
@@ -25,6 +26,50 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
         fonte100W: 0,
         fonte150W: 0,
         fonte200W: 0,
+    })
+
+    function contarFontes(fontePotencia) {
+        if (fontePotencia <= 18) {
+            fontes.fonte18W += fonteQTD
+        } else if (fontePotencia > 18 && fontePotencia <= 24) {
+            fontes.fonte24W = fontes.fonte24W + fonteQTD
+        } else if (fontePotencia > 24 && fontePotencia <= 36) {
+            fontes.fonte36W = fontes.fonte36W + fonteQTD
+        } else if (fontePotencia > 36 && fontePotencia <= 48) {
+            fontes.fonte48W = fontes.fonte48W + fonteQTD
+        } else if (fontePotencia > 48 && fontePotencia <= 60) {
+            fontes.fonte60W = fontes.fonte60W + fonteQTD
+        } else if (fontePotencia > 60 && fontePotencia <= 72) {
+            fontes.fonte72W = fontes.fonte72W + fonteQTD
+        } else if (fontePotencia > 72 && fontePotencia <= 100) {
+            fontes.fonte100W = fontes.fonte100W + fonteQTD
+        } else if (fontePotencia > 100 && fontePotencia <= 150) {
+            fontes.fonte150W = fontes.fonte150W + fonteQTD
+        } else if (fontePotencia > 150 && fontePotencia <= 200) {
+            fontes.fonte200W = fontes.fonte200W + fonteQTD
+        }   
+    }
+
+    function arredondarPotencia (fontePotencia) {
+        if (fontePotencia <= 18) {
+            setFontePotencia(18)
+        } else if (fontePotencia > 18 && fontePotencia <= 24) {
+            setFontePotencia(24)
+        } else if (fontePotencia > 24 && fontePotencia <= 36) {
+            setFontePotencia(36)
+        } else if (fontePotencia > 36 && fontePotencia <= 48) {
+            setFontePotencia(48)
+        } else if (fontePotencia > 48 && fontePotencia <= 60) {
+            setFontePotencia(60)
+        } else if (fontePotencia > 60 && fontePotencia <= 72) {
+            setFontePotencia(72)
+        } else if (fontePotencia > 72 && fontePotencia <=100) {
+            setFontePotencia(100)
+        } else if (fontePotencia > 100 && fontePotencia <= 150) {
+            setFontePotencia(150)
+        } else if (fontePotencia > 150 && fontePotencia <= 200) {
+            setFontePotencia(200)
+        }
     }
 
     const perf = Number(perfil); // Converte perfil recebido via props para número
@@ -54,6 +99,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
             const watsReal = watsParcial * coeficienteReal
             // Atualiza estado com potência arredondada
             setFontePotencia(watsReal.toFixed(0))
+            arredondarPotencia(watsReal)            
         }
 
     }, [valor, fonteQTD, potencia, coeficiente])
@@ -77,6 +123,8 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                     potenciaFonte: fontePotencia,
                 },
             ])
+            setTotalMetros((prev) => prev + va)
+            contarFontes(fontePotencia)
             setValor('')
         }
     }
@@ -87,13 +135,13 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
 
         //verifica se ha virgula 
         if (input.includes(',')) {
-            setErro('Valor invalido!')            
+            setErro('Valor invalido!')
             return
         }
 
         //verifica se o numero é valido
         if (input && isNaN(Number(input))) {
-            setErro('Valor invalido!')            
+            setErro('Valor invalido!')
             return
         }
 
@@ -136,7 +184,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                     <div id='erro'>
                         {erro && <p style={{ color: 'red' }}>{erro}</p>}
                     </div>
-                    
+
                     <h4>Espaçamento por Fonte</h4>
                     <div id="radios">
                         {/* Opções de espaçamento entre fontes */}
@@ -204,7 +252,11 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                         </table>
                         <div id='button-div'>
                             {/* Botão de cálculo (não faz nada além de prevenir reload) */}
-                            <Button id="iniciar-calculo" text="Calcular" action={(e) => e.preventDefault()} />
+                            <Button id="iniciar-calculo" text="Calcular" action={(e) => {
+                                e.preventDefault() 
+                                console.log(fontes)
+                                console.log(totalMetros + " metros")
+                                console.log((totalMetros/rolo) + " rolos de " + rolo + "m")}} />
                         </div>
                     </div>
                     {/* fecha container */}
