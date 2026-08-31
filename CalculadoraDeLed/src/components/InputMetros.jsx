@@ -13,6 +13,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
     const [fontePotencia, setFontePotencia] = useState('') // Potência de cada fonte calculada
     const [linhasTabela, setLinhasTabela] = useState([]) // Lista de linhas que serão exibidas na tabela
     const [fonte200, setFonte200] = useState(false); // estado para saber se fonte única está ativa
+    const [erro, setErro] = useState('') // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
 
     const fontes = {
         fonte18W: 0,
@@ -80,6 +81,26 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
         }
     }
 
+    //função utilizada para verificar se "," está sendo utilizado como separador decimal
+    const handleChange = (e) => {
+        const input = e.target.value
+
+        //verifica se ha virgula 
+        if (input.includes(',')) {
+            setErro('Valor invalido!')            
+            return
+        }
+
+        //verifica se o numero é valido
+        if (input && isNaN(Number(input))) {
+            setErro('Valor invalido!')            
+            return
+        }
+
+        setErro('')
+        setValor(input)
+    } // fecha o handle change
+
     // Função para atualizar o espaçamento entre fontes (quando usuário seleciona rádio)
     const handleDist = (e) => {
         setDistancia(e.target.value)
@@ -107,11 +128,15 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                         type="text"
                         id="entradaValor"
                         name="metragem"
-                        placeholder="digite o tamanho em metros. EX: 12,00"
+                        placeholder="digite o tamanho em metros. EX: 12.00"
                         value={valor}
-                        onChange={(e) => setValor(e.target.value)} // Atualiza estado ao digitar
+                        onChange={handleChange} // Atualiza estado ao digitar
                         onKeyDown={handleKeydown} // Adiciona linha ao apertar Enter
                     />
+                    <div id='erro'>
+                        {erro && <p style={{ color: 'red' }}>{erro}</p>}
+                    </div>
+                    
                     <h4>Espaçamento por Fonte</h4>
                     <div id="radios">
                         {/* Opções de espaçamento entre fontes */}
