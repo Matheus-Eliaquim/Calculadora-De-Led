@@ -5,9 +5,9 @@ import {data} from './data/data.js'
 import './App.css'
 
 function App() {
-  const [imc, settImc] = useState("")
-  const [info, settInfo] = useState("")
-  const [infoClass, settInfoClass] = useState("")
+  const [imc, setImc] = useState("")
+  const [info, setInfo] = useState("")
+  const [infoClass, setInfoClass] = useState("")
 
   const calcImc = (e, heightUser, weightUser) => {
     e.preventDefault()    
@@ -18,12 +18,12 @@ function App() {
 
     const imcResult = (weightFloat / (heightFloat * heightFloat)).toFixed(1)
 
-    settImc(imcResult)
+    setImc(imcResult)
 
     data.forEach((item) => {
       if (imcResult >= item.min && imcResult <= item.max) {
-        settInfo(item.info)
-        settInfoClass(item.infoClass)
+        setInfo(item.info)
+        setInfoClass(item.infoClass)
       }
     })
   }
@@ -31,9 +31,9 @@ function App() {
   const resetTable = (e) => {
     e.preventDefault()
 
-    settImc("")
-    settInfo("")
-    settInfoClass("")
+    setImc("")
+    setInfo("")
+    setInfoClass("")
   }
 
   return (
