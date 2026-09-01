@@ -28,6 +28,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
         fonte200W: 0,
     })
 
+    //função utilizada para contar quantas fontes de cada potencia serão utilizadas
     function contarFontes(fontePotencia) {
         if (fontePotencia <= 18) {
             fontes.fonte18W += fonteQTD
@@ -50,6 +51,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
         }   
     }
 
+    //função utilizada para arredondar a potencia de uma fonte para os padrões de uso do usuario
     function arredondarPotencia (fontePotencia) {
         if (fontePotencia <= 18) {
             setFontePotencia(18)
@@ -76,6 +78,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
 
     // useEffect: calcula quantidade de fontes sempre que "valor" ou "distancia" mudam
     useEffect(() => {
+        //caso a opção fontes de 200W esteja ativa, utiliza a potencia da fonte para calcular quantas fontes serão usadas
         if (fontePotencia === '200') {
             setFonteQTD(Math.ceil((valor * potencia) / fontePotencia))
             return
