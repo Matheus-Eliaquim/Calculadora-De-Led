@@ -6,7 +6,7 @@ import './responsividade.css' // Estilos de responsividade
 import RelatorioFinal from './RelatorioFinal.jsx'
 
 // Componente principal que recebe propriedades de configuração
-const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
+const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) => {
     // Estados internos do componente
     const [valor, setValor] = useState('') // Valor digitado pelo usuário (metragem)
     const [totalMetros, setTotalMetros] = useState(0)
@@ -16,6 +16,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
     const [linhasTabela, setLinhasTabela] = useState([]) // Lista de linhas que serão exibidas na tabela
     const [fonte200, setFonte200] = useState(false); // estado para saber se a opção apenas fontes de 200w está ativa
     const [erro, setErro] = useState('') // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
+    const [abrirRelatorio, setAbrirRelatorio] = useState(false)
 
     const [fontes, setFontes] = useState({
         fonte18W: 0,
@@ -32,7 +33,10 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
     //função utilizada para contar quantas fontes de cada potencia serão utilizadas
     function contarFontes(fontePotencia) {
         if (fontePotencia <= 18) {
-            fontes.fonte18W += fonteQTD
+            setFontes(prev => ({
+                ...prev,
+                fonte18W: prev.fonte18W + fonteQTD
+            }))
         } else if (fontePotencia > 18 && fontePotencia <= 24) {
             fontes.fonte24W = fontes.fonte24W + fonteQTD
         } else if (fontePotencia > 24 && fontePotencia <= 36) {
@@ -158,8 +162,6 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
         setDistancia(e.target.value)
     }
 
-    //função para calcular corretamente a potencia das fontes
-
 
     // JSX que define a interface do componente
     return (
@@ -258,19 +260,16 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                             {/* Botão de cálculo (não faz nada além de prevenir reload) */}
                             <Button id="iniciar-calculo" text="Calcular" action={(e) => {
                                 e.preventDefault()
-                                console.log(fontes)
-                                console.log(totalMetros + " metros")
-                                console.log((totalMetros / rolo) + " rolos de " + rolo + "m")
-                            }} />
-                        </div>
-                        {/*fecha button-div */}
-                        <div id='relatorioFinal'> 
-                            <RelatorioFinal
-                                fontes={fontes}
-                                rolo={rolo}
-                                totalMetros={totalMetros}
+                                receberRelatorio({
+                                    totalMetros,
+                                    fontes,
+                                    abrirRelatorio: true
+                                })
+                            }
+                            }
                             />
                         </div>
+                        {/*fecha button-div */}
                     </div>
                     {/* fecha container */}
                 </div>
