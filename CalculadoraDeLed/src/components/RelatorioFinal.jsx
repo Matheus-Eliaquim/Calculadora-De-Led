@@ -11,6 +11,7 @@ const RelatorioFinal = ({ fontes, rolo, totalMetros }) => {
     const fonte48 = fontes.fonte48W
     const fonte36 = fontes.fonte36W
     const fonte24 = fontes.fonte24W
+    const fonte18 = fontes.fonte18W
 
 
     return (
@@ -28,8 +29,6 @@ const RelatorioFinal = ({ fontes, rolo, totalMetros }) => {
                 {fonte24 > 0 && (<p style={{ display: "block" }}> Fontes de 24W: {fonte24}</p>)}
                 {fonte18 > 0 && (<p style={{ display: "block" }}> Fontes de 18W: {fonte18}</p>)}
             </div>
-
-            <Button />
 
         </div>
     )

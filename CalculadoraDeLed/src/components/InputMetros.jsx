@@ -38,21 +38,45 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) 
                 fonte18W: prev.fonte18W + fonteQTD
             }))
         } else if (fontePotencia > 18 && fontePotencia <= 24) {
-            fontes.fonte24W = fontes.fonte24W + fonteQTD
+            setFontes(prev => ({
+                ...prev,
+                fonte24W: prev.fonte24W + fonteQTD
+            }))
         } else if (fontePotencia > 24 && fontePotencia <= 36) {
-            fontes.fonte36W = fontes.fonte36W + fonteQTD
+             setFontes(prev => ({
+                ...prev,
+                fonte36W: prev.fonte36W + fonteQTD
+            }))
         } else if (fontePotencia > 36 && fontePotencia <= 48) {
-            fontes.fonte48W = fontes.fonte48W + fonteQTD
+             setFontes(prev => ({
+                ...prev,
+                fonte48W: prev.fonte48W + fonteQTD
+            }))
         } else if (fontePotencia > 48 && fontePotencia <= 60) {
-            fontes.fonte60W = fontes.fonte60W + fonteQTD
+             setFontes(prev => ({
+                ...prev,
+                fonte60W: prev.fonte60W + fonteQTD
+            }))
         } else if (fontePotencia > 60 && fontePotencia <= 72) {
-            fontes.fonte72W = fontes.fonte72W + fonteQTD
+             setFontes(prev => ({
+                ...prev,
+                fonte72W: prev.fonte72W + fonteQTD
+            }))
         } else if (fontePotencia > 72 && fontePotencia <= 100) {
-            fontes.fonte100W = fontes.fonte100W + fonteQTD
+             setFontes(prev => ({
+                ...prev,
+                fonte100W: prev.fonte100W + fonteQTD
+            }))
         } else if (fontePotencia > 100 && fontePotencia <= 150) {
-            fontes.fonte150W = fontes.fonte150W + fonteQTD
+             setFontes(prev => ({
+                ...prev,
+                fonte150W: prev.fonte150W + fonteQTD
+            }))
         } else if (fontePotencia > 150 && fontePotencia <= 200) {
-            fontes.fonte200W = fontes.fonte200W + fonteQTD
+             setFontes(prev => ({
+                ...prev,
+                fonte200W: prev.fonte200W + fonteQTD
+            }))
         }
     }
 
@@ -265,8 +289,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) 
                                     fontes,
                                     abrirRelatorio: true
                                 })
-                            }
-                            }
+                            }}
                             />
                         </div>
                         {/*fecha button-div */}

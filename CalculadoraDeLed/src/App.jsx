@@ -17,13 +17,14 @@ function App() {
   const [abrirRelatorio, setAbrirRelatorio] = useState(false)
 
   const receberDados = ({ potencia, rolo, perfil, coeficiente }) => {
-    settPotencia(potencia);
-    settRolo(rolo);
-    settPerfil(perfil);
-    settCoeficiente(coeficiente);
+    settPotencia(Number(potencia));
+    settRolo(Number(rolo));
+    settPerfil(Number(perfil));
+    settCoeficiente(Number(coeficiente));
   }
 
   const receberRelatorio = ({ totalMetros, fontes, abrirRelatorio }) => {
+    console.log("o relatorio é" + abrirRelatorio)
     setTotalMetros(totalMetros)
     setTotalFontes(fontes)
     setAbrirRelatorio(abrirRelatorio)
