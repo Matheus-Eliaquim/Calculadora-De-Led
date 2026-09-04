@@ -3,7 +3,6 @@ import './RelatorioFinal.css' // Estilos do componente
 
 const RelatorioFinal = ({ fontes, rolo, totalMetros }) => {
 
-    const fontesValidas = Object.entries(fontes).filter(([_, qtd]) => qtd > 0)
     const fonte200 = fontes.fonte200W
     const fonte150 = fontes.fonte150W
     const fonte100 = fontes.fonte100W
@@ -16,11 +15,18 @@ const RelatorioFinal = ({ fontes, rolo, totalMetros }) => {
 
     return (
         <div id='relatorio-final'>
-            <p>Fontes: {fontes.fonte200W}</p>
-            <p>Rolos: {Math.ceil(totalMetros / rolo)} Rolos</p>
-            <p>Metragem total: {totalMetros}</p>
-
-           
+            <div>
+                {fonte200 > 0 && (<p style={{display: "block"}}> Fontes de 200W: {fonte200}-Un.</p>)}
+                {fonte150 > 0 && (<p style={{display: "block"}}> Fontes de 150W: {fonte150}-Un.</p>)}
+                {fonte100 > 0 && (<p style={{display: "block"}}> Fontes de 100W: {fonte100}-Un.</p>)}
+                {fonte72 > 0 && (<p style={{display: "block"}}> Fontes de 72W: {fonte72}-Un.</p>)}
+                {fonte60 > 0 && (<p style={{display: "block"}}> Fontes de 60W: {fonte60}-Un.</p>)}
+                {fonte48 > 0 && (<p style={{display: "block"}}> Fontes de 48W: {fonte48}-Un.</p>)}
+                {fonte36 > 0 && (<p style={{display: "block"}}> Fontes de 36W: {fonte36}-Un.</p>)}
+                {fonte24 > 0 && (<p style={{display: "block"}}> Fontes de 24W: {fonte24}-Un.</p>)}
+            </div>
+            <p>Rolos de {rolo}m: {(Math.ceil(totalMetros / rolo).toFixed(2))} Rolos</p>
+            <p>Metragem total: {totalMetros}m</p>
         </div>
     )
 }
