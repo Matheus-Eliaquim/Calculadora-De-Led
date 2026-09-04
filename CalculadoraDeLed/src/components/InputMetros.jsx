@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Button from './Button.jsx' // Componente de botão personalizado
 import './InputMetros.css' // Estilos específicos para este componente
 import './responsividade.css' // Estilos de responsividade
+import RelatorioFinal from './RelatorioFinal.jsx'
 
 // Componente principal que recebe propriedades de configuração
 const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
@@ -48,11 +49,11 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
             fontes.fonte150W = fontes.fonte150W + fonteQTD
         } else if (fontePotencia > 150 && fontePotencia <= 200) {
             fontes.fonte200W = fontes.fonte200W + fonteQTD
-        }   
+        }
     }
 
     //função utilizada para arredondar a potencia de uma fonte para os padrões de uso do usuario
-    function arredondarPotencia (fontePotencia) {
+    function arredondarPotencia(fontePotencia) {
         if (fontePotencia <= 18) {
             setFontePotencia(18)
         } else if (fontePotencia > 18 && fontePotencia <= 24) {
@@ -65,7 +66,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
             setFontePotencia(60)
         } else if (fontePotencia > 60 && fontePotencia <= 72) {
             setFontePotencia(72)
-        } else if (fontePotencia > 72 && fontePotencia <=100) {
+        } else if (fontePotencia > 72 && fontePotencia <= 100) {
             setFontePotencia(100)
         } else if (fontePotencia > 100 && fontePotencia <= 150) {
             setFontePotencia(150)
@@ -92,7 +93,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
     // useEffect: calcula a potência da fonte sempre que dependências mudam
     useEffect(() => {
 
-        if (fonte200) return;
+        if (fonte200) return
 
         if (valor && fonteQTD && potencia && coeficiente) {
             // Calcula potência parcial
@@ -102,7 +103,7 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
             const watsReal = watsParcial * coeficienteReal
             // Atualiza estado com potência arredondada
             setFontePotencia(watsReal.toFixed(0))
-            arredondarPotencia(watsReal)            
+            arredondarPotencia(watsReal)
         }
 
     }, [valor, fonteQTD, potencia, coeficiente])
@@ -256,10 +257,19 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
                         <div id='button-div'>
                             {/* Botão de cálculo (não faz nada além de prevenir reload) */}
                             <Button id="iniciar-calculo" text="Calcular" action={(e) => {
-                                e.preventDefault() 
+                                e.preventDefault()
                                 console.log(fontes)
                                 console.log(totalMetros + " metros")
-                                console.log((totalMetros/rolo) + " rolos de " + rolo + "m")}} />
+                                console.log((totalMetros / rolo) + " rolos de " + rolo + "m")
+                            }} />
+                        </div>
+                        {/*fecha button-div */}
+                        <div id='relatorioFinal'> 
+                            <RelatorioFinal
+                                fontes={fontes}
+                                rolo={rolo}
+                                totalMetros={totalMetros}
+                            />
                         </div>
                     </div>
                     {/* fecha container */}
@@ -268,8 +278,8 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente }) => {
             </div>
             {/* fecha metragem individual */}
         </div>
-    );
-};
+    )
+}
 
 // Exporta o componente para ser usado em outros arquivos
-export default InputMetros;
+export default InputMetros
