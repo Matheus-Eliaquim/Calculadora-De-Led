@@ -14,7 +14,7 @@ function App() {
   const [totalMetros, setTotalMetros] = useState(0)
   const [totalFontes, setTotalFontes] = useState([])
   const invalid = [potencia, rolo, perfil, coeficiente].some(v => Number(v) > 0)
-  const [abrirRelatorio, setAbrirRelatorio] = useState(false)
+  const [verRelatorio, setVerRelatorio] = useState(false)
 
   const receberDados = ({ potencia, rolo, perfil, coeficiente }) => {
     settPotencia(Number(potencia));
@@ -27,7 +27,8 @@ function App() {
     console.log("o relatorio é" + abrirRelatorio)
     setTotalMetros(totalMetros)
     setTotalFontes(fontes)
-    setAbrirRelatorio(Boolean(abrirRelatorio))
+    setVerRelatorio(Boolean(abrirRelatorio))
+    console.log("o relatorio é" + abrirRelatorio)
   }
 
 
@@ -36,7 +37,7 @@ function App() {
     <div>
       {invalid > 0 ?
         (
-          abrirRelatorio === true ?
+          verRelatorio === true ?
             (
               <RelatorioFinal
                 fontes={totalFontes}

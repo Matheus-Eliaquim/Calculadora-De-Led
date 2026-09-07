@@ -8,14 +8,14 @@ import RelatorioFinal from './RelatorioFinal.jsx'
 // Componente principal que recebe propriedades de configuração
 const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) => {
     // Estados internos do componente
-    const [valor, setValor] = useState('') // Valor digitado pelo usuário (metragem)
+    const [valor, setValor] = useState("") // Valor digitado pelo usuário (metragem)
     const [totalMetros, setTotalMetros] = useState(0)
-    const [distancia, setDistancia] = useState('5') // Espaçamento entre fontes (default 5m)
+    const [distancia, setDistancia] = useState("5") // Espaçamento entre fontes (default 5m)
     const [fonteQTD, setFonteQTD] = useState(0) // Quantidade de fontes calculadas
     const [fontePotencia, setFontePotencia] = useState(0) // Potência de cada fonte calculada
     const [linhasTabela, setLinhasTabela] = useState([]) // Lista de linhas que serão exibidas na tabela
     const [fonte200, setFonte200] = useState(false); // estado para saber se a opção apenas fontes de 200w está ativa
-    const [erro, setErro] = useState('') // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
+    const [erro, setErro] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
     const [abrirRelatorio, setAbrirRelatorio] = useState(false)
 
     const [fontes, setFontes] = useState({

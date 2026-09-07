@@ -1,23 +1,26 @@
 import './responsividade.css' // Estilos de responsividade
 import './RelatorioFinal.css' // Estilos do componente
 
-const RelatorioFinal = ({ fontes, rolo, totalMetros }) => {
+const RelatorioFinal = ({ fontes = {}, rolo = 0, totalMetros = 0 }) => {
 
-    const fonte200 = fontes.fonte200W
-    const fonte150 = fontes.fonte150W
-    const fonte100 = fontes.fonte100W
-    const fonte72 = fontes.fonte72W
-    const fonte60 = fontes.fonte60W
-    const fonte48 = fontes.fonte48W
-    const fonte36 = fontes.fonte36W
-    const fonte24 = fontes.fonte24W
-    const fonte18 = fontes.fonte18W
+    const fonte200 = fontes.fonte200W || 0
+    const fonte150 = fontes.fonte150W || 0
+    const fonte100 = fontes.fonte100W || 0
+    const fonte72 = fontes.fonte72W || 0
+    const fonte60 = fontes.fonte60W || 0
+    const fonte48 = fontes.fonte48W || 0
+    const fonte36 = fontes.fonte36W || 0 
+    const fonte24 = fontes.fonte24W || 0
+    const fonte18 = fontes.fonte18W || 0
+
+    const rolos = rolo > 0 ? Math.ceil(totalMetros / rolo) : 0
+    const metragem = Number(totalMetros)
 
 
     return (
         <div id='relatorio-final'>
-            <p>Rolos de {rolo}m: {(Math.ceil(totalMetros / rolo))} Rolos</p>
-            <p>Metragem total: {totalMetros}m</p>
+            <p>Rolos de {rolo}m: {rolos} Rolos</p>
+            <p>Metragem total: {metragem.toFixed(2)}m</p>
             <div>
                 {fonte200 > 0 && (<p style={{ display: "block" }}> Fontes de 200W: {(fonte200)}</p>)}
                 {fonte150 > 0 && (<p style={{ display: "block" }}> Fontes de 150W: {fonte150}</p>)}
