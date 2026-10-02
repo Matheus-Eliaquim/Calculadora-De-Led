@@ -13,8 +13,14 @@ function App() {
   return (
     <div id="initial">
       <div id="buttons">
-        <Button text="Calculadora de fita led" />
-        <Button text="Calculadora de perfil" />
+        <Button text="Calculadora de fita led" action={(e) => {
+          e.preventDefault()
+          setAbrir_calculadora(true)
+        }} />
+        <Button text="Calculadora de perfil" action={(e) => {
+          e.preventDefault()
+          setAbrir_perfil(true)
+        }} />
       </div>
       {abrir_calculadora === true ? (<CalculadoraDeLed />) : null}
       {abrir_perfil === true ? (<CalculadoraDePerfil />) : null}
