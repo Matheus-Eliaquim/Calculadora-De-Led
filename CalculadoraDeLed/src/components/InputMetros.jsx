@@ -6,7 +6,7 @@ import './responsividade.css' // Estilos de responsividade
 import RelatorioFinal from './RelatorioFinal.jsx'
 
 // Componente principal que recebe propriedades de configuração
-const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) => {
+const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
     // Estados internos do componente
     const [valor, setValor] = useState("") // Valor digitado pelo usuário (metragem)
     const [totalMetros, setTotalMetros] = useState(0)
@@ -173,11 +173,6 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) 
         setErro('')
         setValor(input)
     } // fecha o handle change
-
-    // Função para atualizar o espaçamento entre fontes (quando usuário seleciona rádio)
-    const handleDist = (e) => {
-        setDistancia(e.target.value)
-    }
 
 
     // JSX que define a interface do componente
