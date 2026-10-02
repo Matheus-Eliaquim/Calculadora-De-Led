@@ -103,8 +103,6 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) 
         }
     }
 
-    const perf = Number(perfil); // Converte perfil recebido via props para número
-
     // useEffect: calcula quantidade de fontes sempre que "valor" ou "distancia" mudam
     useEffect(() => {
         //caso a opção fontes de 200W esteja ativa, utiliza a potencia da fonte para calcular quantas fontes serão usadas
@@ -140,17 +138,12 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) 
     const handleKeydown = (e) => {
         if (e.key === 'Enter' && valor) {
             const va = Number(valor) // Converte valor digitado para número
-            const inteiras = Math.floor(va / perf) // Quantidade de barras inteiras
-            const resto = va % perf // Sobra da divisão
 
             // Adiciona nova linha na tabela com os cálculos
             setLinhasTabela((prev) => [
                 ...prev,
                 {
                     valor: va,
-                    perf: perf,
-                    barrasInteiras: inteiras,
-                    resto: resto,
                     qtdFonte: fonteQTD,
                     potenciaFonte: fontePotencia,
                 },
@@ -194,7 +187,6 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) 
             <header id="dados-para-calculo">
                 <h3>Potencia da fita: {potencia}W/m</h3>
                 <h3>Rolo de fita: {rolo}m</h3>
-                <h3>Barra de perfil: {perfil}m</h3>
                 <h3>Coeficiente de segurança: {coeficiente}%</h3>
             </header>
 
@@ -264,8 +256,6 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) 
                             <thead>
                                 <tr>
                                     <th>Entradas</th>
-                                    <th>Barras de {perf.toFixed(2)}m</th>
-                                    <th>Sobras</th>
                                     <th>Fontes</th>
                                 </tr>
                             </thead>
@@ -273,8 +263,6 @@ const InputMetros = ({ potencia, rolo, perfil, coeficiente, receberRelatorio }) 
                                 {linhasTabela.map((linha, index) => (
                                     <tr key={index}>
                                         <td>{Number(linha.valor).toFixed(2)}m</td>
-                                        <td>{linha.barrasInteiras}x{Number(linha.perf).toFixed(2)}m</td>
-                                        <td>{Number(linha.resto).toFixed(2)}m</td>
                                         <td>{linha.qtdFonte}x{linha.potenciaFonte}W</td>
                                     </tr>
                                 ))}

@@ -1,7 +1,7 @@
 import './responsividade.css' // Estilos de responsividade
 import './RelatorioFinal.css' // Estilos do componente
 
-const RelatorioFinal = ({ fontes = {}, rolo = 0, totalMetros = 0 }) => {
+const RelatorioFinal = ({ fontes = {}, rolo, totalMetros}) => {
 
     const fonte200 = fontes.fonte200W || 0
     const fonte150 = fontes.fonte150W || 0

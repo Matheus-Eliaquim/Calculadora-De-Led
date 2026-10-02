@@ -10,8 +10,7 @@ const DadosEntrada = ({ entradaDados }) => {
 
     // Declaração dos estados locais para armazenar os valores dos campos do formulário
     const [potencia, settPotencia] = useState("")       
-    const [rolo, settRolo] = useState("")              
-    const [perfil, settPerfil] = useState("")           
+    const [rolo, settRolo] = useState("")                        
     const [coeficiente, settCoeficiente] = useState("") 
 
     {/* Funções para manipular os dados digitados nos inputs */ }
@@ -22,9 +21,6 @@ const DadosEntrada = ({ entradaDados }) => {
     // Atualiza o estado rolo com o valor digitado
     const handleRolo = (e) => settRolo(e.target.value)
 
-    // Atualiza o estado perfil com o valor digitado
-    const handlePerfil = (e) => settPerfil(e.target.value)
-
     // Atualiza o estado coeficiente com o valor digitado
     const handleCoeficiente = (e) => settCoeficiente(e.target.value)
 
@@ -34,7 +30,7 @@ const DadosEntrada = ({ entradaDados }) => {
         e.preventDefault() // Evita o comportamento padrão do formulário (recarregar a página)
 
         // Chama a função recebida via props passando os valores dos estados
-        entradaDados({ potencia, rolo, perfil, coeficiente })
+        entradaDados({ potencia, rolo, coeficiente })
     }
 
     // Estrutura JSX que renderiza o formulário e o botão
@@ -61,18 +57,6 @@ const DadosEntrada = ({ entradaDados }) => {
                         name='roloDeFita'
                         placeholder='5'
                         onChange={handleRolo}
-                        className="dados-iniciais"
-                    />
-                </label>
-
-                {/* Campo de entrada para tamanho do perfil */}
-                <label className="divisao">
-                    <span>Tamanho do perfil (Metros): <span className="obrigatorio">*</span> </span>
-                    <input
-                        type="text"
-                        name='perfil'
-                        placeholder='3'
-                        onChange={handlePerfil}
                         className="dados-iniciais"
                     />
                 </label>
