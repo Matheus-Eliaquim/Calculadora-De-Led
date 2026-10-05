@@ -4,29 +4,42 @@ import Button from './components/Button.jsx'
 import CalculadoraDeLed from './CalculadoraDeLed.jsx'
 import CalculadoraDePerfil from './CalculadoraDePerfil.jsx'
 
-
-
 function App() {
-  const [abrir_perfil, setAbrir_perfil] = useState(false)
-  const [abrir_calculadora, setAbrir_calculadora] = useState(false)
+  // Estado que guarda qual opção foi selecionada
+  // Pode ser "led", "perfil" ou null (nenhuma selecionada)
+  const [opcaoSelecionada, setOpcaoSelecionada] = useState(null)
 
   return (
     <div id="initial">
-      <div id="buttons">
-        <Button text="Calculadora de fita led" action={(e) => {
-          e.preventDefault()
-          setAbrir_calculadora(true)
-        }} />
-        <Button text="Calculadora de perfil" action={(e) => {
-          e.preventDefault()
-          setAbrir_perfil(true)
-        }} />
-      </div>
-      {abrir_calculadora === true ? (<CalculadoraDeLed />) : null}
-      {abrir_perfil === true ? (<CalculadoraDePerfil />) : null}
+      {/* Se nenhuma opção foi selecionada, mostra os botões */}
+      {opcaoSelecionada === null && (
+        <div id="buttons">
+          {/* Botão para abrir a calculadora de fita led */}
+          <Button 
+            text="Calculadora de fita led" 
+            action={(e) => {
+              e.preventDefault()
+              // Define que a opção escolhida foi "led"
+              setOpcaoSelecionada("led")
+            }} 
+          />
+          {/* Botão para abrir a calculadora de perfil */}
+          <Button 
+            text="Calculadora de perfil" 
+            action={(e) => {
+              e.preventDefault()
+              // Define que a opção escolhida foi "perfil"
+              setOpcaoSelecionada("perfil")
+            }} 
+          />
+        </div>
+      )}
+
+      {/* Renderiza apenas o componente escolhido */}
+      {opcaoSelecionada === "led" && <CalculadoraDeLed />}
+      {opcaoSelecionada === "perfil" && <CalculadoraDePerfil />}
     </div>
   )
-
 }
 
 export default App
