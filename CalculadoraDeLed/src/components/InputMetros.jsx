@@ -4,6 +4,7 @@ import Button from './Button.jsx' // Componente de botão personalizado
 import './InputMetros.css' // Estilos específicos para este componente
 import './responsividade.css' // Estilos de responsividade
 import RelatorioFinal from './RelatorioFinal.jsx'
+import { avaliarExpressao } from '../utils/avaliarExpressao.js'
 
 // Componente principal que recebe propriedades de configuração
 const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
@@ -17,6 +18,16 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
     const [fonte200, setFonte200] = useState(false); // estado para saber se a opção apenas fontes de 200w está ativa
     const [erro, setErro] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
     const [abrirRelatorio, setAbrirRelatorio] = useState(false)
+
+    // Resultado numérico da expressão, utilizado nos cálculos de metragem e fontes
+    let valorCalculado = null
+    if (valor.trim()) {
+        try {
+            valorCalculado = avaliarExpressao(valor)
+        } catch {
+            valorCalculado = null
+        }
+    }
 
     const [fontes, setFontes] = useState({
         fonte18W: 0,
@@ -106,24 +117,24 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
     // useEffect: calcula quantidade de fontes sempre que "valor" ou "distancia" mudam
     useEffect(() => {
         //caso a opção fontes de 200W esteja ativa, utiliza a potencia da fonte para calcular quantas fontes serão usadas
-        if (fontePotencia === '200') {
-            setFonteQTD(Math.ceil((valor * potencia) / fontePotencia))
+        if (fontePotencia === '200' && valorCalculado !== null) {
+            setFonteQTD(Math.ceil((valorCalculado * potencia) / fontePotencia))
             return
         }
-        if (valor && distancia) {
+        if (valorCalculado !== null && distancia) {
             // Divide o valor pela distância e arredonda para cima
-            setFonteQTD(Math.ceil(valor / distancia))
+            setFonteQTD(Math.ceil(valorCalculado / distancia))
         }
-    }, [valor, distancia])
+    }, [valorCalculado, distancia, fontePotencia, potencia])
 
     // useEffect: calcula a potência da fonte sempre que dependências mudam
     useEffect(() => {
 
         if (fonte200) return
 
-        if (valor && fonteQTD && potencia && coeficiente) {
+        if (valorCalculado !== null && fonteQTD && potencia && coeficiente) {
             // Calcula potência parcial
-            const watsParcial = (Number(valor) * potencia) / fonteQTD
+            const watsParcial = (valorCalculado * potencia) / fonteQTD
             // Aplica coeficiente de segurança
             const coeficienteReal = coeficiente / 100 + 1
             const watsReal = watsParcial * coeficienteReal
@@ -132,12 +143,16 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
             arredondarPotencia(watsReal)
         }
 
-    }, [valor, fonteQTD, potencia, coeficiente])
+    }, [valorCalculado, fonteQTD, potencia, coeficiente, fonte200])
 
     // Função chamada ao apertar Enter no input
     const handleKeydown = (e) => {
         if (e.key === 'Enter' && valor) {
-            const va = Number(valor) // Converte valor digitado para número
+            if (valorCalculado === null) {
+                setErro('Expressão inválida!')
+                return
+            }
+            const va = valorCalculado
 
             // Adiciona nova linha na tabela com os cálculos
             setLinhasTabela((prev) => [
@@ -158,14 +173,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
     const handleChange = (e) => {
         const input = e.target.value
 
-        //verifica se ha virgula 
-        if (input.includes(',')) {
-            setErro('Valor invalido!')
-            return
-        }
-
-        //verifica se o numero é valido
-        if (input && isNaN(Number(input))) {
+        if (!/^[\d.+*\-\s]*$/.test(input)) {
             setErro('Valor invalido!')
             return
         }
@@ -193,7 +201,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
                         type="text"
                         id="entradaValor"
                         name="metragem"
-                        placeholder="digite o tamanho em metros. EX: 12.00"
+                        placeholder="metragem ou expressão. Ex: 3*1.50"
                         value={valor}
                         onChange={handleChange} // Atualiza estado ao digitar
                         onKeyDown={handleKeydown} // Adiciona linha ao apertar Enter
