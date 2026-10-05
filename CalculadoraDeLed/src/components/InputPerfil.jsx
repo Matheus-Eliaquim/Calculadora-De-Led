@@ -1,14 +1,32 @@
 import './InputPerfil.css'
+import Button from './Button.jsx'
 
-const InputPerfil = (metragem) => {
+const InputPerfil = () => {
     return (
 
-        <div>
-            <header id="header-perfil">
-                <h3>Metragem do perfil: {metragem}m</h3>
-            </header>
+        <>
+            <div>
+                <form >
+                    <label className="form-label">
+                        <span>Tamanho do perfil: (m)<span id="required">*</span></span>
+                        <input
+                            type="text"
+                            name="metragem"
+                            placeholder="EX: 2.50"
+                            id="input-metragem" />
+                    </label>
+                </form>
 
-        </div>
+                <Button
+                    id="save"
+                    text="Salvar Configurações"
+                    
+                />
+
+            </div>
+
+
+        </>
     )
 }
 
