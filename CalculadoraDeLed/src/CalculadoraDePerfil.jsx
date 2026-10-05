@@ -1,8 +1,11 @@
-import React from 'react'
+import InputPerfil from "./components/InputPerfil.jsx"
 
 const CalculadoraDePerfil = () => {
   return (
-    <div>CalculadoraDePerfil</div>
+    <div>
+      <p>Descrição do perfil</p>
+    </div>
+
   )
 }
 
