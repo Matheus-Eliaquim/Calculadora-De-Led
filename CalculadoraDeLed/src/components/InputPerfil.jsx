@@ -2,13 +2,18 @@ import './InputPerfil.css'
 import { useState } from 'react'
 import Button from './Button.jsx'
 
-const InputPerfil = ({enviarRelatorio}) => {
+const InputPerfil = ({ enviarRelatorio }) => {
 
     const [metragem, setMetragem] = useState(0)
-    const handleMetragem = (e) => setMetragem(e.target.value)
+    const handleMetragem = (e) => {
+        
+        enviarRelatorio(true)
+        setMetragem(e.target.value)
+    }
     const preventEnter = (e) => {
         if (e.key === "Enter") {
             e.preventDefault()
+
         }
     }
 
@@ -32,8 +37,8 @@ const InputPerfil = ({enviarRelatorio}) => {
 
                 <Button
                     id="save"
-                    text="Salvar Configurações"
-                    action={metragem}
+                    text="Salvar Configurações"                    
+                    action={() => handleMetragem}
 
                 />
 
