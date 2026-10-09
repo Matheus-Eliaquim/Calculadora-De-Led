@@ -1,16 +1,20 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import "./TabelaPerfil.css"
+import Button from "./Button.jsx"
 
 const TabelaPerfil = ({ metragem }) => {
 
     const [valorDigitado, setValorDigitado] = useState("") //estado usado para capturar o valor digitado
     const heighPerf = Number(metragem)//constante usada para transformar o valor recebido via props em numero
     const totalPerfs = Math.floor(valorDigitado / heighPerf) //calcula quantas barras inteiras serão utilizadas
-    const sobraInitial = valorDigitado % heighPerf //calcula a sobra do valor digitado
+    const sobraInitial = Number((valorDigitado % heighPerf).toFixed(2)) //calcula a sobra do valor digitado
     const [linhasTabelaPerf, setLinhasTabelaPerf] = useState([]) // Lista de linhas que serão exibidas na tabela
     const [erro, setErro] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
+    const [sobras, setSobras] = useState([]) //array para armazenar todas as sobras
+    const [perfsSobras, setPerfsSobras] = useState(0)
 
+    //função para disparar uma ação ao apertar enter
     const handleKeydownPerf = (e) => {
         if (e.key === "Enter" && valorDigitado) {
             if (valorDigitado === null) {
@@ -26,13 +30,47 @@ const TabelaPerfil = ({ metragem }) => {
                     sobras: sobraInitial,
                 },
             ])
+            setSobras((prev) => [...prev, sobraInitial])
             setValorDigitado("")
         }
     }
 
+    //atualização de estado para verificar se o array está sendo armazenado com os valores corretos
+    useEffect(() => {
+        setPerfsSobras(calculandoSobras())
+        console.log(sobras)
+    }, [sobras])
+
+    //função para capturar o valor digitado
     const handleChangePerf = (e) => {
         setValorDigitado(e.target.value)
     }
+
+    function calculandoSobras() {
+        let sobrasCopy = [...sobras].map(s => Number(s.toFixed(2)))
+        let perfs = 0
+
+        while (sobrasCopy.length > 0) {
+            let soma = 0
+
+            for (let i = 0; i < sobrasCopy.length; i++) {
+                if ((soma + sobrasCopy[i]) <= heighPerf) {
+                    soma += sobrasCopy[i]
+                    sobrasCopy.splice(i, 1)
+                    i--
+                }
+            }
+
+            if (soma > 0 && soma <= heighPerf) {
+                perfs++
+            } else {
+                break
+            }
+        }
+
+        return perfs
+    }
+
 
     return (
         <div>
@@ -69,6 +107,16 @@ const TabelaPerfil = ({ metragem }) => {
                         ))}
                     </tbody>
                 </table>
+
+                <Button
+                    id="iniciar-calculo"
+                    text="Calcular"
+                    action={(e) => {
+                        e.preventDefault()
+                        calculandoSobras()
+                        console.log(perfsSobras)
+                    }}
+                />
             </div>
 
 
