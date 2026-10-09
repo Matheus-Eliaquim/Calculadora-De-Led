@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import "./TabelaPerfil.css"
 import Button from "./Button.jsx"
 
-const TabelaPerfil = ({ metragem }) => {
+const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes }) => {
 
     const [valorDigitado, setValorDigitado] = useState("") //estado usado para capturar o valor digitado
     const heighPerf = Number(metragem)//constante usada para transformar o valor recebido via props em numero
@@ -13,6 +13,8 @@ const TabelaPerfil = ({ metragem }) => {
     const [erro, setErro] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
     const [sobras, setSobras] = useState([]) //array para armazenar todas as sobras
     const [perfsSobras, setPerfsSobras] = useState(0)
+    const [perfilInteriros, setPerfisInteiros] = useState(0)
+    
 
     //função para disparar uma ação ao apertar enter
     const handleKeydownPerf = (e) => {
@@ -30,6 +32,7 @@ const TabelaPerfil = ({ metragem }) => {
                     sobras: sobraInitial,
                 },
             ])
+            setPerfisInteiros((prev) => prev + totalPerfs)            
             setSobras((prev) => [...prev, sobraInitial])
             setValorDigitado("")
         }
@@ -37,8 +40,9 @@ const TabelaPerfil = ({ metragem }) => {
 
     //atualização de estado para verificar se o array está sendo armazenado com os valores corretos
     useEffect(() => {
-        setPerfsSobras(calculandoSobras())
+        setPerfsSobras(calculandoSobras()) //mantem o estado de perfSobras atualizado
         console.log(sobras)
+        console.log(perfilInteriros)
     }, [sobras])
 
     //função para capturar o valor digitado
@@ -66,11 +70,9 @@ const TabelaPerfil = ({ metragem }) => {
             } else {
                 break
             }
-        }
-
+        }        
         return perfs
     }
-
 
     return (
         <div>
@@ -112,9 +114,11 @@ const TabelaPerfil = ({ metragem }) => {
                     id="iniciar-calculo"
                     text="Calcular"
                     action={(e) => {
-                        e.preventDefault()
+                        e.preventDefault()                        
                         calculandoSobras()
-                        console.log(perfsSobras)
+                        enviarTrue("relatorio")
+                        barrasInteiras(perfilInteriros)
+                        barrasCortes(perfsSobras)                       
                     }}
                 />
             </div>

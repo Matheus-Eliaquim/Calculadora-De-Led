@@ -15,7 +15,7 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
     }
 
     const openTab = () => {
-        enviarRelatorio(true)
+        enviarRelatorio("tabela")
         enviarMetragem(Number(metragem))
     }
 

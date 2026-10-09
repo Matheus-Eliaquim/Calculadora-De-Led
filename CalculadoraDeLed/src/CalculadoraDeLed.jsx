@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 
 
-function App() {
+function CalculadoraDeLed() {
   const [potencia, settPotencia] = useState(0)
   const [rolo, settRolo] = useState(0)
   const [perfil, settPerfil] = useState(0)
@@ -66,4 +66,4 @@ function App() {
 
 }
 
-export default App
+export default CalculadoraDeLed
