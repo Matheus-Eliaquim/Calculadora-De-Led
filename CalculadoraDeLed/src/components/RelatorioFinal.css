@@ -8,10 +8,18 @@
 }
 
 #relatorio-final h3 {
+    text-align: center;
     margin-top: 1rem;
+    font-size: 1.2rem;
+    color: rgb(190, 188, 27);
 }
 
 #relatorio-final h1 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
+    color: rgb(190, 188, 27);
+}
+
+#relatorio-final section {
+    text-align: left;
 }

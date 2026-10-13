@@ -19,6 +19,7 @@ const RelatorioFinal = ({ fontes = {}, rolo, totalMetros}) => {
 
     return (
         <div id='relatorio-final'>
+            <h1> Relatório Final de Fitas e Fontes </h1>
             <p>Rolos de {rolo}m: {rolos} Rolos</p>
             <p>Metragem total: {metragem.toFixed(2)}m</p>
             <div>
