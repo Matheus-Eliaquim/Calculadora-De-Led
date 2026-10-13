@@ -6,3 +6,12 @@
     border-radius: 20px;
     padding: 1.5rem;
 }
+
+#relatorio-final h3 {
+    margin-top: 1rem;
+}
+
+#relatorio-final h1 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}

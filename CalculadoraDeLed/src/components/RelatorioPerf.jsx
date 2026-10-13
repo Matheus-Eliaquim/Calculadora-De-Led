@@ -1,22 +1,30 @@
-const RelatorioPerf = ({perfisInteiros, perfisCortes, combinacoesSobras}) => {
-  
+import './responsividade.css' // Estilos de responsividade
+import './RelatorioFinal.css' // Estilos do componente
+
+const RelatorioPerf = ({ perfisInteiros, perfisCortes, combinacoesSobras }) => {
+
   const inteiros = perfisInteiros
   const cortados = perfisCortes
 
+  // Retorna a estrutura JSX que será renderizada na tela
   return (
-    <div>
-      <p style={{color: "white"}}> {inteiros} Barras inteiras </p>
-      <p style={{color: "white"}}> {cortados} Barras para corte </p>
-      <p style={{color: "white"}}> Total de barras: {inteiros + cortados}</p>
+    <div id='relatorio-final'>
+      <h1> Relatório Final de Perfis </h1>
+      <p> {inteiros} Barras inteiras </p>
+      <p> {cortados} Barras para corte </p>
+      <h4> Total de barras: {inteiros + cortados}</h4>
       {combinacoesSobras.length > 0 && (
         <section>
-          <h3 style={{color: "white"}}>Combinações das sobras</h3>
+          <h3>Combinações das sobras</h3>
+          {/* Percorre o array combinacoesSobras e renderiza cada combinação */}
           {combinacoesSobras.map((combinacao, index) => {
             const total = combinacao.reduce((soma, sobra) => soma + sobra, 0)
 
+            // Calcula o total da soma das sobras dentro da combinação
             return (
-              <p style={{color: "white"}} key={index}>
-                Barra de corte {index + 1}: {combinacao.map(sobra => `${sobra.toFixed(2)}m`).join(" + ")} = {total.toFixed(2)}m
+              <p key={index}>
+                 {/* Mostra o número do corte e os valores das sobras formatados em metros */}
+                Corte {index + 1}: {combinacao.map(sobra => `${sobra.toFixed(2)}m`).join(" + ")} = {total.toFixed(2)}m
               </p>
             )
           })}

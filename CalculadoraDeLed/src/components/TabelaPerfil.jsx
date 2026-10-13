@@ -13,7 +13,7 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
     const [erro, setErro] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
     const [sobras, setSobras] = useState([]) //array para armazenar todas as sobras
     const [perfilInteriros, setPerfisInteiros] = useState(0)
-    
+
 
     //função para disparar uma ação ao apertar enter
     const handleKeydownPerf = (e) => {
@@ -31,7 +31,7 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
                     sobras: sobraInitial,
                 },
             ])
-            setPerfisInteiros((prev) => prev + totalPerfs)            
+            setPerfisInteiros((prev) => prev + totalPerfs)
             setSobras((prev) => [...prev, sobraInitial])
             setValorDigitado("")
         }
@@ -43,31 +43,53 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
     }
 
     function calculandoSobras() {
+        // Define o limite máximo permitido (altura do perfil em centímetros).
+        // Multiplica por 100 para trabalhar com inteiros e evitar problemas de precisão com decimais.
         const limite = Math.round(heighPerf * 100)
+
+        // Cria uma cópia do array de sobras:
+        // - Multiplica cada sobra por 100 e arredonda para inteiro.
+        // - Filtra apenas valores positivos (descarta sobras nulas ou negativas).
         const sobrasCopy = sobras
             .map(sobra => Math.round(sobra * 100))
             .filter(sobra => sobra > 0)
+
+        // Array que vai armazenar todas as combinações encontradas
         const combinacoes = []
 
+        // Enquanto ainda houver sobras disponíveis para combinar
         while (sobrasCopy.length > 0) {
-            let soma = 0
-            const combinacao = []
+            let soma = 0               // Acumulador da soma da combinação atual
+            const combinacao = []      // Array para guardar os elementos da combinação
 
+            // Percorre as sobras disponíveis
             for (let i = 0; i < sobrasCopy.length; i++) {
+                // Se adicionar a sobra atual não ultrapassar o limite
                 if (soma + sobrasCopy[i] <= limite) {
+                    // Atualiza a soma
                     soma += sobrasCopy[i]
+
+                    // Remove a sobra do array original e adiciona na combinação
                     combinacao.push(sobrasCopy.splice(i, 1)[0])
+
+                    // Como o array foi modificado (um item removido), decrementa o índice
+                    // para não pular o próximo elemento
                     i--
                 }
             }
 
+            // Se não conseguiu formar nenhuma combinação, interrompe o loop
             if (combinacao.length === 0) break
-            combinacoes.push(combinacao.map(sobra => sobra / 100))
-        }        
 
+            // Adiciona a combinação encontrada ao array de combinações
+            // Convertendo novamente para metros (dividindo por 100)
+            combinacoes.push(combinacao.map(sobra => sobra / 100))
+        }
+
+        // Retorna todas as combinações calculadas
         return combinacoes
     }
-
+    
     return (
         <div>
 
@@ -108,7 +130,7 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
                     id="iniciar-calculo"
                     text="Calcular"
                     action={(e) => {
-                        e.preventDefault()                        
+                        e.preventDefault()
                         const combinacoes = calculandoSobras()
                         enviarTrue("relatorio")
                         barrasInteiras(perfilInteriros)
