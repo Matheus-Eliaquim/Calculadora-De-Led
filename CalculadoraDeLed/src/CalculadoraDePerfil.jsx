@@ -8,6 +8,7 @@ const CalculadoraDePerfil = () => {
   const [receberNumero, setReceberNumero] = useState(0)
   const [barrasInteiras, setBarrasInteiras] = useState(0)
   const [barrasCortadas, setBarrasCortadas] = useState(0)
+  const [combinacoesSobras, setCombinacoesSobras] = useState([])
 
   const mudarTela = (tela) => setOpenPerfil(tela)
   const number = (valor) => setReceberNumero(valor)
@@ -17,7 +18,11 @@ const CalculadoraDePerfil = () => {
   return (
     <div>
       {openPerfil === "relatorio" && (
-        <RelatorioPerf perfisInteiros={barrasInteiras} perfisCortes= {barrasCortadas} />
+        <RelatorioPerf
+          perfisInteiros={barrasInteiras}
+          perfisCortes={barrasCortadas}
+          combinacoesSobras={combinacoesSobras}
+        />
       )}
 
       {openPerfil === "input" && (
@@ -33,6 +38,7 @@ const CalculadoraDePerfil = () => {
           enviarTrue={mudarTela} 
           barrasInteiras={barrasI}
           barrasCortes={barrasC}
+          enviarCombinacoes={setCombinacoesSobras}
         />
       )}
     </div>
