@@ -1,4 +1,4 @@
-import './InputPerfil.css'
+import './DadosDeEntrada.css'
 import { useState } from 'react'
 import Button from './Button.jsx'
 
@@ -22,15 +22,15 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
     return (
 
         <>
-            <div>
-                <form >
-                    <label className="form-label">
-                        <span>Tamanho do perfil: (m)<span id="required">*</span></span>
+            <div className="container">
+                <form className="form-geral">
+                    <label className="divisao">
+                        <span>Tamanho do perfil: (m)<span className="obrigatorio">*</span></span>
                         <input
                             type="text"
                             name="metragem"
                             placeholder="EX: 2.50"
-                            id="input-metragem"
+                            className="dados-iniciais"
                             onChange={handleMetragem}
                             onKeyDown={preventEnter}
                         />

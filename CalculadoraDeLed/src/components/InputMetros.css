@@ -13,7 +13,7 @@
 /* Cabeçalho com dados para cálculo */
 #dados-para-calculo {
     display: grid;
-    grid-template-columns: 8rem 8rem;
+    grid-template-columns: 8rem;
     text-align: center;
     justify-content: center;
     margin-bottom: 2rem;

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import "./TabelaPerfil.css"
+import './InputMetros.css' // Estilos específicos para este componente
 import Button from "./Button.jsx"
 
 const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarCombinacoes }) => {
@@ -89,15 +89,15 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
         // Retorna todas as combinações calculadas
         return combinacoes
     }
-    
-    return (
-        <div>
 
-            <p>Perfil de {metragem.toFixed(2)}m</p>
-            <div id='inputsPerfil'>
+    return (
+        <div className="dados-de-input">
+
+            <header id="dados-para-calculo"><h3>Perfil de {metragem.toFixed(2)}m</h3></header>
+            <div id="inputs">
                 <input
                     type="text"
-                    id="entradaPerf"
+                    id="entradaValor"
                     name="metragem"
                     placeholder="metragem. Ex:1.50"
                     value={valorDigitado}
@@ -106,7 +106,7 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
                 />
             </div>
 
-            <div>
+            <div className="container">
                 <table id="tabela-entradas">
                     <thead>
                         <tr>
@@ -126,21 +126,22 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
                     </tbody>
                 </table>
 
-                <Button
-                    id="iniciar-calculo"
-                    text="Calcular"
-                    action={(e) => {
-                        e.preventDefault()
-                        const combinacoes = calculandoSobras()
-                        enviarTrue("relatorio")
-                        barrasInteiras(perfilInteriros)
-                        barrasCortes(combinacoes.length)
-                        enviarCombinacoes(combinacoes)
-                    }}
-                />
+                <div id='button-div'>
+                    <Button
+                        id="iniciar-calculo"
+                        text="Calcular"
+                        action={(e) => {
+                            e.preventDefault()
+                            const combinacoes = calculandoSobras()
+                            enviarTrue("relatorio")
+                            barrasInteiras(perfilInteriros)
+                            barrasCortes(combinacoes.length)
+                            enviarCombinacoes(combinacoes)
+                        }}
+                    />
+                </div>
+
             </div>
-
-
 
         </div>
     )

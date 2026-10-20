@@ -15,22 +15,24 @@ function App() {
       {opcaoSelecionada === null && (
         <div id="buttons">
           {/* Botão para abrir a calculadora de fita led */}
-          <Button 
-            text="Calculadora de fita led" 
+          <Button
+            id="button-initial01"
+            text="Calculadora de fita led"
             action={(e) => {
               e.preventDefault()
               // Define que a opção escolhida foi "led"
               setOpcaoSelecionada("led")
-            }} 
+            }}
           />
           {/* Botão para abrir a calculadora de perfil */}
-          <Button 
-            text="Calculadora de perfil" 
+          <Button
+            id="button-initial02"
+            text="Calculadora de perfil"
             action={(e) => {
               e.preventDefault()
               // Define que a opção escolhida foi "perfil"
               setOpcaoSelecionada("perfil")
-            }} 
+            }}
           />
         </div>
       )}

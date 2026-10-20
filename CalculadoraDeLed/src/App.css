@@ -4,3 +4,7 @@
     align-items: center;
 }
 
+#button-initial01, #button-initial02 {
+    min-width: 15rem;
+}
+
