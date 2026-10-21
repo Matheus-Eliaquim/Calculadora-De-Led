@@ -2,7 +2,7 @@ import React from 'react'
 
 const InitialPokedex = () => {
   return (
-    <div>InitialPokedex</div>
+    <div>InitialPokedexx</div>
   )
 }
 
