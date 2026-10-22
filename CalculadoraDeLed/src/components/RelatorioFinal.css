@@ -23,3 +23,7 @@
 #relatorio-final section {
     text-align: left;
 }
+
+button-closed {
+    align-items: end;
+}

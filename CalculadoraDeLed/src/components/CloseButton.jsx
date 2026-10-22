@@ -1,12 +1,19 @@
 import React from 'react'
+import './CloseButton.css'
+import './responsividade.css'
 
-const CloseButton = (id, action) => {
-    
+const CloseButton = ({id, action}) => {
+
     const handleAction = (e) => action(e)
 
     return (
-        <div>
-            <button id={id} onClick={handleAction} > X </button>
+        <div id="divClose"> 
+            <button
+                id={id}
+                onClick={handleAction}
+            >
+                X
+            </button>
         </div>
     )
 }
