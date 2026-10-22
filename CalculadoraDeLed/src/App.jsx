@@ -4,6 +4,7 @@ import Button from './components/Button.jsx'
 import CalculadoraDeLed from './CalculadoraDeLed.jsx'
 import CalculadoraDePerfil from './CalculadoraDePerfil.jsx'
 
+
 function App() {
   // Estado que guarda qual opção foi selecionada
   // Pode ser "led", "perfil" ou null (nenhuma selecionada)

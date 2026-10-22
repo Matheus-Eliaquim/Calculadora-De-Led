@@ -1,37 +1,42 @@
 import './responsividade.css' // Estilos de responsividade
 import './RelatorioFinal.css' // Estilos do componente
+import CloseButton from './CloseButton.jsx'
 
-const RelatorioFinal = ({ fontes = {}, rolo, totalMetros}) => {
+const RelatorioFinal = ({ fontes = {}, rolo, totalMetros, close }) => {
 
-    const fonte200 = fontes.fonte200W || 0
-    const fonte150 = fontes.fonte150W || 0
-    const fonte100 = fontes.fonte100W || 0
-    const fonte72 = fontes.fonte72W || 0
-    const fonte60 = fontes.fonte60W || 0
-    const fonte48 = fontes.fonte48W || 0
-    const fonte36 = fontes.fonte36W || 0 
-    const fonte24 = fontes.fonte24W || 0
-    const fonte18 = fontes.fonte18W || 0
-
-    const rolos = rolo > 0 ? Math.ceil(totalMetros / rolo) : 0
-    const metragem = Number(totalMetros)
-
+    const potencias = [200, 150, 100, 72, 60, 48, 36, 24, 18]
+    const metragem = Number(totalMetros) || 0
+    const tamanhoRolo = Number(rolo) || 0
+    const rolos = tamanhoRolo > 0 ? Math.ceil(totalMetros / tamanhoRolo) : 0
 
     return (
         <div id='relatorio-final'>
-            <h1> Relatório Final de Fitas e Fontes </h1>
-            <p>Rolos de {rolo}m: {rolos} Rolos</p>
+            <CloseButton
+                id="button-closed"                
+                action={(e) => {
+                    e.preventDefault()
+                    close(false)
+                }} />
+            <h1> Relatório Final de Fita Led </h1>
+            <p>Rolos de {tamanhoRolo}m: {rolos} Rolos</p>
             <p>Metragem total: {metragem.toFixed(2)}m</p>
             <div>
-                {fonte200 > 0 && (<p style={{ display: "block" }}> Fontes de 200W: {(fonte200)}</p>)}
-                {fonte150 > 0 && (<p style={{ display: "block" }}> Fontes de 150W: {fonte150}</p>)}
-                {fonte100 > 0 && (<p style={{ display: "block" }}> Fontes de 100W: {fonte100}</p>)}
-                {fonte72 > 0 && (<p style={{ display: "block" }}> Fontes de 72W: {fonte72}</p>)}
-                {fonte60 > 0 && (<p style={{ display: "block" }}> Fontes de 60W: {fonte60}</p>)}
-                {fonte48 > 0 && (<p style={{ display: "block" }}> Fontes de 48W: {fonte48}</p>)}
-                {fonte36 > 0 && (<p style={{ display: "block" }}> Fontes de 36W: {fonte36}</p>)}
-                {fonte24 > 0 && (<p style={{ display: "block" }}> Fontes de 24W: {fonte24}</p>)}
-                {fonte18 > 0 && (<p style={{ display: "block" }}> Fontes de 18W: {fonte18}</p>)}
+                <h1> Relatório Final de Fontes </h1>
+
+                 {potencias.map((potencia) => {
+                    const quantidade = Number(fontes[`fonte${potencia}W`]) || 0
+
+                    if (quantidade <= 0) {
+                        return null
+                    }
+
+                    return (
+                        <p key={potencia}>
+                            Fontes de {potencia}W: {quantidade}
+                        </p>
+                    )
+                })}
+              
             </div>
 
         </div>

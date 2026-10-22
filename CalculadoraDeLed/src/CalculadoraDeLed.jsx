@@ -33,34 +33,37 @@ function CalculadoraDeLed() {
 
   return (
     <div>
-      {invalid > 0 ?
-        (
-          verRelatorio === true ?
-            (
-              <RelatorioFinal
-                fontes={totalFontes}
-                rolo={rolo}
-                totalMetros={totalMetros}
-              />
-            )
-            :
-            (
-              <InputMetros
-                id='input-metros'
-                potencia={potencia}
-                rolo={rolo}
-                perfil={perfil}
-                coeficiente={coeficiente}
-                receberRelatorio={receberRelatorio} />
-            )
-        )
-        :
-        (
-          <DadosEntrada
-            entradaDados={receberDados} />
-        )
+        {!invalid ? (
+            <DadosEntrada
+                entradaDados={receberDados}
+            />
+        ) : (
+            <>
+                <div
+                    style={{
+                        display: verRelatorio ? 'none' : 'block'
+                    }}
+                >
+                    <InputMetros
+                        id="input-metros"
+                        potencia={potencia}
+                        rolo={rolo}
+                        perfil={perfil}
+                        coeficiente={coeficiente}
+                        receberRelatorio={receberRelatorio}
+                    />
+                </div>
 
-      }
+                {verRelatorio && (
+                    <RelatorioFinal
+                        fontes={totalFontes}
+                        rolo={rolo}
+                        totalMetros={totalMetros}
+                        close={setVerRelatorio}
+                    />
+                )}
+            </>
+        )}
     </div>
   )
 
