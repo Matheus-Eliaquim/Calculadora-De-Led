@@ -1,76 +1,8 @@
-/*
- * ============================================================
- * FUNÇÕES PARA VALIDAÇÃO E CÁLCULO DE EXPRESSÕES MATEMÁTICAS
- * ============================================================
- *
- * OPERADORES PERMITIDOS NO CÁLCULO:
- *
- *   +  Soma
- *   *  Multiplicação
- *
- *
- * OPERADORES QUE PODEM SER DIGITADOS,
- * MAS NÃO PODEM SER CALCULADOS:
- *
- *   -  Subtração
- *   /  Divisão
- *
- *
- * CARACTERE PROIBIDO DURANTE A DIGITAÇÃO:
- *
- *   ,  Vírgula
- *
- *
- * Para números decimais deve ser utilizado ponto:
- *
- *   Correto:
- *   2.5
- *
- *   Incorreto:
- *   2,5
- *
- *
- * EXEMPLOS:
- *
- *   10+5      -> válido
- *   10*5      -> válido
- *   10+2.5    -> válido
- *
- *   10-5      -> pode digitar, mas dá erro ao calcular
- *   10/5      -> pode digitar, mas dá erro ao calcular
- *
- *   10,5      -> erro durante a digitação
- */
 
-
-/*
- * ============================================================
- * FUNÇÃO 1 - VALIDAR DURANTE A DIGITAÇÃO
- * ============================================================
- *
- * Esta função deve ser utilizada no onChange do input.
- *
- * IMPORTANTE:
- *
- * Durante a digitação, queremos bloquear SOMENTE a vírgula.
- *
- * Portanto:
- *
- *   10-5   -> permitido digitar
- *   10/5   -> permitido digitar
- *   10,5   -> inválido imediatamente
- *
- *
- * Retorno:
- *
- *   true  -> existe algum valor inválido durante a digitação
- *   false -> o usuário pode continuar digitando normalmente
- */
 export function validarExpressaoDigitada(expressao) {
 
     /*
-     * Verifica se o valor recebido realmente é uma string.
-     *
+     * Verifica se o valor recebido realmente é uma string.     
      * Caso não seja uma string, consideramos o valor inválido.
      */
     if (typeof expressao !== 'string') {
@@ -78,63 +10,23 @@ export function validarExpressaoDigitada(expressao) {
     }
 
     /*
-     * Durante a digitação, SOMENTE a vírgula é inválida.
-     *
+     * Durante a digitação, SOMENTE a vírgula é inválida.     
      * O caractere "-" NÃO é verificado aqui.
-     * O caractere "/" NÃO é verificado aqui.
-     *
-     * Isso permite que o usuário digite:
-     *
+     * O caractere "/" NÃO é verificado aqui.     
+     * Isso permite que o usuário digite:     
      * 10-5
-     * 10/5
-     *
+     * 10/5     
      * normalmente.
      */
     return expressao.includes(',')
 }
 
 
-/*
- * ============================================================
- * FUNÇÃO 2 - AVALIAR A EXPRESSÃO
- * ============================================================
- *
- * Esta função deve ser chamada SOMENTE quando o usuário
- * tentar calcular a expressão.
- *
- *
- * Aceita:
- *
- *   +
- *   *
- *
- * Rejeita:
- *
- *   -
- *   /
- *   ,
- *
- *
- * Exemplos:
- *
- *   avaliarExpressao("10+5")
- *   -> 15
- *
- *   avaliarExpressao("10*5")
- *   -> 50
- *
- *   avaliarExpressao("10-5")
- *   -> Expressão inválida.
- *
- *   avaliarExpressao("10/5")
- *   -> Expressão inválida.
- */
+
 export function avaliarExpressao(expressao) {
 
     /*
-     * ========================================================
      * 1. VERIFICA O TIPO DO VALOR RECEBIDO
-     * ========================================================
      */
 
     if (typeof expressao !== 'string') {
@@ -143,16 +35,10 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
-     * 2. REMOVE ESPAÇOS DAS EXTREMIDADES
-     * ========================================================
-     *
-     * Exemplo:
-     *
-     * "   10+5   "
-     *
-     * passa a ser:
-     *
+     * 2. REMOVE ESPAÇOS DAS EXTREMIDADES     
+     * Exemplo:     
+     * "   10+5   "     
+     * passa a ser:     
      * "10+5"
      */
 
@@ -160,9 +46,7 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
      * 3. VERIFICA SE A EXPRESSÃO ESTÁ VAZIA
-     * ========================================================
      */
 
     if (expressao.length === 0) {
@@ -171,27 +55,16 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
-     * 4. REJEITA SUBTRAÇÃO E DIVISÃO
-     * ========================================================
-     *
-     * IMPORTANTE:
-     *
-     * "-" e "/" podem ser digitados normalmente no input.
-     *
+     * 4. REJEITA SUBTRAÇÃO E DIVISÃO     
+     * IMPORTANTE:     
+     * "-" e "/" podem ser digitados normalmente no input.     
      * Porém, quando o usuário clicar em CALCULAR,
-     * esta parte da função fará a validação.
-     *
-     * Portanto:
-     *
-     * 10-5
-     *
-     * e:
-     *
-     * 10/5
-     *
-     * resultarão em:
-     *
+     * esta parte da função fará a validação.     
+     * Portanto:     
+     * 10-5     
+     * e:     
+     * 10/5     
+     * resultarão em:     
      * "Expressão inválida."
      */
 
@@ -204,10 +77,7 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
-     * 5. REJEITA VÍRGULA
-     * ========================================================
-     *
+     * 5. REJEITA VÍRGULA     
      * Embora normalmente a vírgula já seja detectada
      * durante a digitação, fazemos novamente a verificação
      * por segurança.
@@ -219,20 +89,13 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
-     * 6. LISTA DE TOKENS
-     * ========================================================
-     *
-     * Aqui serão armazenados os números e operadores.
-     *
-     * Exemplo:
-     *
-     * Expressão:
-     *
-     * 10+5*2
-     *
-     * Tokens:
-     *
+
+     * 6. LISTA DE TOKENS     
+     * Aqui serão armazenados os números e operadores.     
+     * Exemplo:     
+     * Expressão:     
+     * 10+5*2     
+     * Tokens:     
      * [
      *   10,
      *   "+",
@@ -244,7 +107,6 @@ export function avaliarExpressao(expressao) {
 
     const tokens = []
 
-
     /*
      * Posição atual durante a leitura da expressão.
      */
@@ -252,24 +114,17 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
      * 7. PERCORRE TODA A EXPRESSÃO
-     * ========================================================
      */
 
     while (posicao < expressao.length) {
 
         /*
-         * ----------------------------------------------------
+
          * IGNORA ESPAÇOS
-         * ----------------------------------------------------
-         *
-         * Permite, por exemplo:
-         *
-         * 10 + 5
-         *
-         * em vez de obrigar:
-         *
+         * Permite, por exemplo:         
+         * 10 + 5         
+         * em vez de obrigar:         
          * 10+5
          */
 
@@ -288,21 +143,15 @@ export function avaliarExpressao(expressao) {
 
 
         /*
-         * ----------------------------------------------------
-         * IDENTIFICA NÚMEROS
-         * ----------------------------------------------------
-         *
-         * Esta expressão regular aceita:
-         *
+
+         * IDENTIFICA NÚMEROS         
+         * Esta expressão regular aceita:         
          * 10
          * 2.5
          * 3.0
          * .75
-         * 10.
-         *
-         *
-         * Não aceita:
-         *
+         * 10.        
+         * Não aceita:         
          * 2,5
          */
 
@@ -318,10 +167,8 @@ export function avaliarExpressao(expressao) {
         if (numero) {
 
             /*
-             * Converte o texto encontrado para Number.
-             *
-             * Exemplo:
-             *
+             * Converte o texto encontrado para Number.             
+             * Exemplo:             
              * "10"  -> 10
              * "2.5" -> 2.5
              */
@@ -362,17 +209,14 @@ export function avaliarExpressao(expressao) {
 
 
         /*
-         * ====================================================
          * 8. IDENTIFICA OPERADORES
-         * ====================================================
          */
 
         const operador = expressao[posicao]
 
 
         /*
-         * Os únicos operadores válidos para cálculo são:
-         *
+         * Os únicos operadores válidos para cálculo são:         
          * +
          * *
          */
@@ -405,12 +249,8 @@ export function avaliarExpressao(expressao) {
 
 
         /*
-         * ====================================================
-         * 9. QUALQUER OUTRO CARACTERE É INVÁLIDO
-         * ====================================================
-         *
-         * Exemplos:
-         *
+         * 9. QUALQUER OUTRO CARACTERE É INVÁLIDO         
+         * Exemplos:         
          * abc
          * (
          * )
@@ -424,9 +264,7 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
      * 10. VERIFICA SE EXISTEM TOKENS
-     * ========================================================
      */
 
     if (tokens.length === 0) {
@@ -442,17 +280,12 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
-     * 11. FUNÇÃO PARA LER UM NÚMERO
-     * ========================================================
-     *
+
+     * 11. FUNÇÃO PARA LER UM NÚMERO     
      * Sempre que precisamos de um número,
      * esta função verifica se realmente existe um número
-     * naquela posição.
-     *
-     *
-     * Isso também impede expressões como:
-     *
+     * naquela posição.   
+     * Isso também impede expressões como:     
      * +10
      * *10
      * 10+
@@ -495,22 +328,13 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
-     * 12. FUNÇÃO PARA PROCESSAR MULTIPLICAÇÃO
-     * ========================================================
-     *
-     * A multiplicação possui prioridade sobre a soma.
-     *
-     * Exemplo:
-     *
-     * 2+3*4
-     *
-     * Primeiro:
-     *
-     * 3*4 = 12
-     *
-     * Depois:
-     *
+     * 12. FUNÇÃO PARA PROCESSAR MULTIPLICAÇÃO     
+     * A multiplicação possui prioridade sobre a soma.     
+     * Exemplo:     
+     * 2+3*4     
+     * Primeiro:     
+     * 3*4 = 12     
+     * Depois:     
      * 2+12 = 14
      */
 
@@ -554,18 +378,14 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
      * 13. CALCULA O PRIMEIRO TERMO
-     * ========================================================
      */
 
     let resultado = lerTermo()
 
 
     /*
-     * ========================================================
      * 14. PROCESSA AS SOMAS RESTANTES
-     * ========================================================
      */
 
     while (indice < tokens.length) {
@@ -578,8 +398,7 @@ export function avaliarExpressao(expressao) {
 
 
         /*
-         * Neste ponto, somente "+" pode aparecer.
-         *
+         * Neste ponto, somente "+" pode aparecer.         
          * A multiplicação já foi processada em lerTermo().
          */
 
@@ -611,9 +430,7 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
      * 15. VERIFICA SE O RESULTADO É VÁLIDO
-     * ========================================================
      */
 
     if (!Number.isFinite(resultado)) {
@@ -622,9 +439,7 @@ export function avaliarExpressao(expressao) {
 
 
     /*
-     * ========================================================
      * 16. RETORNA O RESULTADO FINAL
-     * ========================================================
      */
 
     return resultado
