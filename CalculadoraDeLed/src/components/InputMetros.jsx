@@ -171,16 +171,30 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
 
     //função utilizada para verificar se "," está sendo utilizado como separador decimal
     const handleChange = (e) => {
-        const input = e.target.value
 
-        if (!/^[\d.+*\-\s]*$/.test(input)) {
-            setErro('Valor invalido!')
-            return
-        }
+    const input = e.target.value
 
-        setErro('')
-        setValor(input)
-    } // fecha o handle change
+    // Vírgula não é aceita como separador decimal
+    if (input.includes(',')) {
+        setErro('Valor inválido!')
+        return
+    }
+
+    // Permite números, ponto, operadores e espaços
+    const caracteresPermitidos = /^[0-9.+*/\s-]*$/
+
+    // Bloqueia caracteres não permitidos
+    if (!caracteresPermitidos.test(input)) {
+        setErro('Valor inválido!')
+        return
+    }
+
+    // Atualiza o valor do input
+    setValor(input)
+
+    // Remove mensagens de erro
+    setErro('')
+}
 
 
     // JSX que define a interface do componente
