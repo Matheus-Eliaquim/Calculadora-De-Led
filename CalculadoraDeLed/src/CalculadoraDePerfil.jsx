@@ -17,28 +17,33 @@ const CalculadoraDePerfil = () => {
 
   return (
     <div>
+      {openPerfil === "input" && (
+        <InputPerfil
+          enviarRelatorio={mudarTela}
+          enviarMetragem={number}
+        />
+      )}
+
+      <div
+        style={{
+          display: openPerfil === "tabela" ? "block" : "none"
+        }}
+      >
+        <TabelaPerfil
+          metragem={receberNumero}
+          enviarTrue={mudarTela}
+          barrasInteiras={barrasI}
+          barrasCortes={barrasC}
+          enviarCombinacoes={setCombinacoesSobras}
+        />
+      </div>
+
       {openPerfil === "relatorio" && (
         <RelatorioPerf
           perfisInteiros={barrasInteiras}
           perfisCortes={barrasCortadas}
           combinacoesSobras={combinacoesSobras}
-        />
-      )}
-
-      {openPerfil === "input" && (
-        <InputPerfil 
-          enviarRelatorio={mudarTela} 
-          enviarMetragem={number} 
-        />
-      )}
-
-      {openPerfil === "tabela" && (
-        <TabelaPerfil 
-          metragem={receberNumero} 
-          enviarTrue={mudarTela} 
-          barrasInteiras={barrasI}
-          barrasCortes={barrasC}
-          enviarCombinacoes={setCombinacoesSobras}
+          close={setOpenPerfil}
         />
       )}
     </div>

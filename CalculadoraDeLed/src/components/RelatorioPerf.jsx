@@ -1,7 +1,8 @@
 import './responsividade.css' // Estilos de responsividade
 import './RelatorioFinal.css' // Estilos do componente
+import Button from './Button.jsx'
 
-const RelatorioPerf = ({ perfisInteiros, perfisCortes, combinacoesSobras }) => {
+const RelatorioPerf = ({ perfisInteiros, perfisCortes, combinacoesSobras, close }) => {
 
   const inteiros = perfisInteiros
   const cortados = perfisCortes
@@ -23,13 +24,20 @@ const RelatorioPerf = ({ perfisInteiros, perfisCortes, combinacoesSobras }) => {
             // Calcula o total da soma das sobras dentro da combinação
             return (
               <p key={index}>
-                 {/* Mostra o número do corte e os valores das sobras formatados em metros */}
+                {/* Mostra o número do corte e os valores das sobras formatados em metros */}
                 Corte {index + 1}: {combinacao.map(sobra => `${sobra.toFixed(2)}m`).join(" + ")} = {total.toFixed(2)}m
               </p>
             )
           })}
         </section>
       )}
+      <Button
+        id="button-closed"
+        text="Voltar"
+        action={(e) => {
+          e.preventDefault()
+          close("tabela")
+        }} />
     </div>
   )
 }
