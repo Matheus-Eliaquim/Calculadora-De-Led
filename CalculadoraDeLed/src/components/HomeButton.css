@@ -25,5 +25,5 @@
 
 #divClose button:active {
     transform: scale(0.85);
-    color: var(--color-font02);
+    color: var(--color-click);
 }
