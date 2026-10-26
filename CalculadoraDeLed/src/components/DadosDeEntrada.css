@@ -48,4 +48,10 @@
     text-align: center;
 }
 
-
+#home02 {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    right: 12rem;
+    top: 1rem;
+}

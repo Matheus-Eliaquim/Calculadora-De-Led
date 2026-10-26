@@ -27,3 +27,10 @@
 button-closed {
     align-items: end;
 }
+
+#home03 {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    right: 9rem;
+}

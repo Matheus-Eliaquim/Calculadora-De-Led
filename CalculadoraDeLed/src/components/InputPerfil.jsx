@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Button from './Button.jsx'
 import HomeButton from './HomeButton.jsx'
 
-const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
+const InputPerfil = ({ enviarRelatorio, enviarMetragem, back }) => {
 
     const [metragem, setMetragem] = useState("")
 
@@ -18,6 +18,7 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
         if (!/^\d*\.?\d*$/.test(valor)) return
 
         setMetragem(valor)
+        setErroPerf("")
     }
 
     // Impede o envio pelo Enter
@@ -44,7 +45,7 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
         <>
 
         <div id='home'>
-            <HomeButton action= {() => enviarRelatorio("tabela")} />
+            <HomeButton action= {() => back(null)} />
         </div>
             
             

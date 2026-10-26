@@ -3,8 +3,9 @@ import { useState } from 'react'
 import './InputMetros.css' // Estilos específicos para este componente
 import './responsividade.css' // Estilos de responsividade
 import Button from "./Button.jsx"
+import HomeButton from './HomeButton.jsx'
 
-const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarCombinacoes }) => {
+const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarCombinacoes, back }) => {
 
     const [valorDigitado, setValorDigitado] = useState("") //estado usado para capturar o valor digitado
     const heighPerf = Number(metragem)//constante usada para transformar o valor recebido via props em numero
@@ -91,7 +92,7 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
 
             return
         }
-    
+
         // Entrada sem multiplicação
 
         const valorNumerico = Number(valor)
@@ -208,6 +209,11 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
     return (
 
         <>
+
+            <div id='home02'>
+                <HomeButton action={() => back(null)} />
+            </div>
+
             <div className="erro02">
                 {erroPerf2 && (<span>{erroPerf2}</span>)}
             </div>

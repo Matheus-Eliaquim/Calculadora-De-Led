@@ -3,7 +3,7 @@ import TabelaPerfil from './components/TabelaPerfil.jsx'
 import InputPerfil from "./components/InputPerfil.jsx"
 import RelatorioPerf from './components/RelatorioPerf.jsx'
 
-const CalculadoraDePerfil = () => {
+const CalculadoraDePerfil = ({back}) => {
   const [openPerfil, setOpenPerfil] = useState("input")
   const [receberNumero, setReceberNumero] = useState(0)
   const [barrasInteiras, setBarrasInteiras] = useState(0)
@@ -21,6 +21,7 @@ const CalculadoraDePerfil = () => {
         <InputPerfil
           enviarRelatorio={mudarTela}
           enviarMetragem={number}
+          back= {back}
         />
       )}
 
@@ -35,6 +36,7 @@ const CalculadoraDePerfil = () => {
           barrasInteiras={barrasI}
           barrasCortes={barrasC}
           enviarCombinacoes={setCombinacoesSobras}
+          back= {back}
         />
       </div>
 
@@ -44,6 +46,7 @@ const CalculadoraDePerfil = () => {
           perfisCortes={barrasCortadas}
           combinacoesSobras={combinacoesSobras}
           close={setOpenPerfil}
+          back= {back}
         />
       )}
     </div>

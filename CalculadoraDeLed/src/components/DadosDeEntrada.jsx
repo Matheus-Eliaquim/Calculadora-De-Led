@@ -1,9 +1,9 @@
-import './DadosDeEntrada.css'
 import { useState } from 'react'
 import Button from './Button.jsx'
+import './DadosDeEntrada.css'
 import './responsividade.css'
 
-const DadosEntrada = ({ entradaDados }) => {
+const DadosEntrada = ({ entradaDados, back }) => {
     // Valores dos campos
     const [potencia, setPotencia] = useState("")
     const [rolo, setRolo] = useState("")

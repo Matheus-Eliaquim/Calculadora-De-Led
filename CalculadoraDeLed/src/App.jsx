@@ -39,8 +39,8 @@ function App() {
       )}
 
       {/* Renderiza apenas o componente escolhido */}
-      {opcaoSelecionada === "led" && <CalculadoraDeLed />}
-      {opcaoSelecionada === "perfil" && <CalculadoraDePerfil />}
+      {opcaoSelecionada === "led" && <CalculadoraDeLed back={setOpcaoSelecionada} />}
+      {opcaoSelecionada === "perfil" && <CalculadoraDePerfil back={setOpcaoSelecionada} />}
     </div>
   )
 }
