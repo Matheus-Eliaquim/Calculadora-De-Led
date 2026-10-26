@@ -1,6 +1,6 @@
 :root {
     --color-click: #555555;
-    --color-font: #fdfdfd;
+    --color-font02: #979797;
     --color-back-ground: rgb(0, 95, 0);
 }
 
@@ -10,15 +10,12 @@
 }
 
 #divClose button {
-    position: relative;
-    text-transform: uppercase;
-    /* deixa o texto em caixa alta */
     font-weight: bolder;
     margin: 0;
     padding: 0;
     cursor: pointer;
     background-color: transparent;
-    color: var(--color-font);
+    color: var(--color-font02);
     border: none;
 }
 
@@ -26,6 +23,7 @@
     cursor: pointer;
 }
 
-#divClose:active {
-    transform: scale(0.95);
+#divClose button:active {
+    transform: scale(0.85);
+    color: var(--color-font02);
 }

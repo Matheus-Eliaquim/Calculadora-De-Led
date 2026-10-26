@@ -111,3 +111,10 @@
     width: 14rem;
     text-align: center;
 }
+
+#home {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    right: 6rem;
+}

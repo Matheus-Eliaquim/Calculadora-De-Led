@@ -1,6 +1,7 @@
 import './DadosDeEntrada.css'
 import { useState } from 'react'
 import Button from './Button.jsx'
+import HomeButton from './HomeButton.jsx'
 
 const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
 
@@ -42,6 +43,11 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
     return (
         <>
 
+        <div id='home'>
+            <HomeButton action= {() => enviarRelatorio("tabela")} />
+        </div>
+            
+            
             <div className="erro">
                 {erroPerf && (<span>{erroPerf}</span>)}
             </div>
