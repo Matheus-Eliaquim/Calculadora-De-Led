@@ -1,5 +1,6 @@
 :root {
     --color-font-h3: #616161;
+    --color-erro: red;
 }
 
 /* Container principal */
@@ -17,6 +18,8 @@
     text-align: center;
     justify-content: center;
     margin-bottom: 2rem;
+    height: 7rem;
+    align-content: center;
 }
 
 #dados-para-calculo h3 {
@@ -93,5 +96,18 @@
 
 /* Div do botão */
 #button-div {
+    text-align: center;
+}
+
+.erro02 {
+    position: relative;
+    inset: 7.5rem 0 0 -7rem;
+    justify-self: center;
+    color: var(--color-erro)
+}
+
+.erro02 span {
+    position: absolute;
+    width: 14rem;
     text-align: center;
 }

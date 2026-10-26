@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import Button from './Button.jsx' // Componente de botão personalizado
 import './InputMetros.css' // Estilos específicos para este componente
 import './responsividade.css' // Estilos de responsividade
-import RelatorioFinal from './RelatorioFinal.jsx'
 import { avaliarExpressao } from '../utils/avaliarExpressao.js'
 
 // Componente principal que recebe propriedades de configuração
@@ -16,7 +15,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
     const [fontePotencia, setFontePotencia] = useState(0) // Potência de cada fonte calculada
     const [linhasTabela, setLinhasTabela] = useState([]) // Lista de linhas que serão exibidas na tabela
     const [fonte200, setFonte200] = useState(false); // estado para saber se a opção apenas fontes de 200w está ativa
-    const [erro, setErro] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
+    const [erroLed, setErroLed] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
     const [abrirRelatorio, setAbrirRelatorio] = useState(false)
 
     // Resultado numérico da expressão, utilizado nos cálculos de metragem e fontes
@@ -54,37 +53,37 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
                 fonte24W: prev.fonte24W + fonteQTD
             }))
         } else if (fontePotencia > 24 && fontePotencia <= 36) {
-             setFontes(prev => ({
+            setFontes(prev => ({
                 ...prev,
                 fonte36W: prev.fonte36W + fonteQTD
             }))
         } else if (fontePotencia > 36 && fontePotencia <= 48) {
-             setFontes(prev => ({
+            setFontes(prev => ({
                 ...prev,
                 fonte48W: prev.fonte48W + fonteQTD
             }))
         } else if (fontePotencia > 48 && fontePotencia <= 60) {
-             setFontes(prev => ({
+            setFontes(prev => ({
                 ...prev,
                 fonte60W: prev.fonte60W + fonteQTD
             }))
         } else if (fontePotencia > 60 && fontePotencia <= 72) {
-             setFontes(prev => ({
+            setFontes(prev => ({
                 ...prev,
                 fonte72W: prev.fonte72W + fonteQTD
             }))
         } else if (fontePotencia > 72 && fontePotencia <= 100) {
-             setFontes(prev => ({
+            setFontes(prev => ({
                 ...prev,
                 fonte100W: prev.fonte100W + fonteQTD
             }))
         } else if (fontePotencia > 100 && fontePotencia <= 150) {
-             setFontes(prev => ({
+            setFontes(prev => ({
                 ...prev,
                 fonte150W: prev.fonte150W + fonteQTD
             }))
         } else if (fontePotencia > 150 && fontePotencia <= 200) {
-             setFontes(prev => ({
+            setFontes(prev => ({
                 ...prev,
                 fonte200W: prev.fonte200W + fonteQTD
             }))
@@ -148,8 +147,9 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
     // Função chamada ao apertar Enter no input
     const handleKeydown = (e) => {
         if (e.key === 'Enter' && valor) {
+
             if (valorCalculado === null) {
-                setErro('Expressão inválida!')
+                setErroLed('Expressão inválida!')
                 return
             }
             const va = valorCalculado
@@ -172,139 +172,147 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
     //função utilizada para verificar se "," está sendo utilizado como separador decimal
     const handleChange = (e) => {
 
-    const input = e.target.value
+        const input = e.target.value
 
-    // Vírgula não é aceita como separador decimal
-    if (input.includes(',')) {
-        setErro('Valor inválido!')
-        return
+        // Vírgula não é aceita como separador decimal
+        if (input.includes(',')) {
+            setErroLed('Valor inválido!')
+            return
+        }
+
+        // Permite números, ponto, operadores e espaços
+        const caracteresPermitidos = /^[0-9.+*/\s-]*$/
+
+        // Bloqueia caracteres não permitidos
+        if (!caracteresPermitidos.test(input)) {
+            setErro('Valor inválido!')
+            return
+        }
+
+        // Atualiza o valor do input
+        setValor(input)
+
+        // Remove mensagens de erro
+        setErroLed('')
     }
-
-    // Permite números, ponto, operadores e espaços
-    const caracteresPermitidos = /^[0-9.+*/\s-]*$/
-
-    // Bloqueia caracteres não permitidos
-    if (!caracteresPermitidos.test(input)) {
-        setErro('Valor inválido!')
-        return
-    }
-
-    // Atualiza o valor do input
-    setValor(input)
-
-    // Remove mensagens de erro
-    setErro('')
-}
 
 
     // JSX que define a interface do componente
     return (
-        <div className="dados-de-input">
-            {/* Cabeçalho com informações recebidas via props */}
-            <header id="dados-para-calculo">
-                <h3>Potencia da fita: {potencia}W/m</h3>
-                <h3>Rolo de fita: {rolo}m</h3>
-                <h3>Coeficiente de segurança: {coeficiente}%</h3>
-            </header>
-
-            {/* Área de entrada de dados */}
-            <div id="metragem-individual">
-                <div id="inputs">
-                    {/* Campo de texto para digitar metragem */}
-                    <input
-                        type="text"
-                        id="entradaValor"
-                        name="metragem"
-                        placeholder="metragem ou expressão. Ex: 3*1.50"
-                        value={valor}
-                        onChange={handleChange} // Atualiza estado ao digitar
-                        onKeyDown={handleKeydown} // Adiciona linha ao apertar Enter
-                    />
-                    <div id='erro'>
-                        {erro && <p style={{ color: 'red' }}>{erro}</p>}
-                    </div>
-
-                    <h4>Espaçamento por Fonte</h4>
-                    <div id="radios">
-                        {/* Opções de espaçamento entre fontes */}
-                        <label className="radio-inputs">
-                            <input
-                                type="radio"
-                                value="5"
-                                name="fonts"
-                                checked={!fonte200 && distancia === '5'}
-                                onChange={(e) => {
-                                    setDistancia(e.target.value)
-                                    setFonte200(false)
-                                }}
-                            />
-                            5m
-                        </label>
-                        <label className="radio-inputs">
-                            <input
-                                type="radio"
-                                value="7"
-                                name="fonts"
-                                checked={!fonte200 && distancia === '7'}
-                                onChange={(e) => {
-                                    setDistancia(e.target.value)
-                                    setFonte200(false)
-                                }}
-                            />
-                            7m
-                        </label>
-                        <label className="radio-inputs">
-                            <input
-                                type="radio"
-                                value="200"
-                                name="fonts"
-                                checked={fonte200}
-                                onChange={() => {
-                                    setFonte200(true)
-                                    setFontePotencia('200')
-                                }}
-                            />
-                            Fonte de 200W
-                        </label>
-                    </div>
-                    {/* Tabela que exibe as linhas adicionadas */}
-                    <div className="container">
-                        <table id="tabela-entradas">
-                            <thead>
-                                <tr>
-                                    <th>Entradas</th>
-                                    <th>Fontes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {linhasTabela.map((linha, index) => (
-                                    <tr key={index}>
-                                        <td>{Number(linha.valor).toFixed(2)}m</td>
-                                        <td>{linha.qtdFonte}x{linha.potenciaFonte}W</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                        <div id='button-div'>
-                            {/* Botão de cálculo (não faz nada além de prevenir reload) */}
-                            <Button id="iniciar-calculo" text="Calcular" action={(e) => {
-                                e.preventDefault()
-                                receberRelatorio({
-                                    totalMetros,
-                                    fontes,
-                                    abrirRelatorio: true
-                                })
-                            }}
-                            />
-                        </div>
-                        {/*fecha button-div */}
-                    </div>
-                    {/* fecha container */}
-                </div>
-                {/* fecha inputs */}
+        <>
+            <div className="erro02">
+                {erroLed && <span>{erroLed}</span>}
             </div>
-            {/* fecha metragem individual */}
-        </div>
+
+            <div className="dados-de-input">
+                {/* Cabeçalho com informações recebidas via props */}
+                <header id="dados-para-calculo">
+                    <h3>Potencia da fita: {potencia}W/m</h3>
+                    <h3>Rolo de fita: {rolo}m</h3>
+                    <h3>Coeficiente de segurança: {coeficiente}%</h3>
+                </header>
+
+
+
+                {/* Área de entrada de dados */}
+                <div id="metragem-individual">
+
+
+
+                    <div id="inputs">
+                        {/* Campo de texto para digitar metragem */}
+                        <input
+                            type="text"
+                            id="entradaValor"
+                            name="metragem"
+                            placeholder="metragem ou expressão. Ex: 3*1.50"
+                            value={valor}
+                            onChange={handleChange} // Atualiza estado ao digitar
+                            onKeyDown={handleKeydown} // Adiciona linha ao apertar Enter
+                        />
+
+                        <h4>Espaçamento por Fonte</h4>
+                        <div id="radios">
+                            {/* Opções de espaçamento entre fontes */}
+                            <label className="radio-inputs">
+                                <input
+                                    type="radio"
+                                    value="5"
+                                    name="fonts"
+                                    checked={!fonte200 && distancia === '5'}
+                                    onChange={(e) => {
+                                        setDistancia(e.target.value)
+                                        setFonte200(false)
+                                    }}
+                                />
+                                5m
+                            </label>
+                            <label className="radio-inputs">
+                                <input
+                                    type="radio"
+                                    value="7"
+                                    name="fonts"
+                                    checked={!fonte200 && distancia === '7'}
+                                    onChange={(e) => {
+                                        setDistancia(e.target.value)
+                                        setFonte200(false)
+                                    }}
+                                />
+                                7m
+                            </label>
+                            <label className="radio-inputs">
+                                <input
+                                    type="radio"
+                                    value="200"
+                                    name="fonts"
+                                    checked={fonte200}
+                                    onChange={() => {
+                                        setFonte200(true)
+                                        setFontePotencia('200')
+                                    }}
+                                />
+                                Fonte de 200W
+                            </label>
+                        </div>
+                        {/* Tabela que exibe as linhas adicionadas */}
+                        <div className="container">
+                            <table id="tabela-entradas">
+                                <thead>
+                                    <tr>
+                                        <th>Entradas</th>
+                                        <th>Fontes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {linhasTabela.map((linha, index) => (
+                                        <tr key={index}>
+                                            <td>{Number(linha.valor).toFixed(2)}m</td>
+                                            <td>{linha.qtdFonte}x{linha.potenciaFonte}W</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div id='button-div'>
+                                {/* Botão de cálculo (não faz nada além de prevenir reload) */}
+                                <Button id="iniciar-calculo" text="Calcular" action={(e) => {
+                                    e.preventDefault()
+                                    receberRelatorio({
+                                        totalMetros,
+                                        fontes,
+                                        abrirRelatorio: true
+                                    })
+                                }}
+                                />
+                            </div>
+                            {/*fecha button-div */}
+                        </div>
+                        {/* fecha container */}
+                    </div>
+                    {/* fecha inputs */}
+                </div>
+                {/* fecha metragem individual */}
+            </div>
+        </>
     )
 }
 

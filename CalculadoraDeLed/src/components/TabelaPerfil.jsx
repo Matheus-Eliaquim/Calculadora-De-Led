@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import './InputMetros.css' // Estilos específicos para este componente
+import './responsividade.css' // Estilos de responsividade
 import Button from "./Button.jsx"
 
 const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarCombinacoes }) => {
@@ -10,36 +11,150 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
     const totalPerfs = Math.floor(valorDigitado / heighPerf) //calcula quantas barras inteiras serão utilizadas
     const sobraInitial = Number((valorDigitado % heighPerf).toFixed(2)) //calcula a sobra do valor digitado
     const [linhasTabelaPerf, setLinhasTabelaPerf] = useState([]) // Lista de linhas que serão exibidas na tabela
-    const [erro, setErro] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
+    const [erroPerf2, setErroPerf2] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
     const [sobras, setSobras] = useState([]) //array para armazenar todas as sobras
     const [perfilInteriros, setPerfisInteiros] = useState(0)
 
 
     //função para disparar uma ação ao apertar enter
     const handleKeydownPerf = (e) => {
-        if (e.key === "Enter" && valorDigitado) {
-            if (valorDigitado === null) {
-                setErro('Expressão inválida!')
+        if (e.key !== "Enter" || !valorDigitado) return
+
+        const valor = valorDigitado.trim()
+
+        // Verifica se existe multiplicação
+        if (valor.includes('*')) {
+
+            const partes = valor.split('*')
+
+            // A expressão precisa ter exatamente duas partes
+            if (partes.length !== 2) {
+                setErroPerf2('Expressão inválida!')
                 return
             }
-            // Adiciona nova linha na tabela com os cálculos
+
+            const quantidade = Number(partes[0])
+            const medida = Number(partes[1])
+
+            // Verifica se os valores são números válidos
+            if (
+                !Number.isFinite(quantidade) ||
+                !Number.isFinite(medida) ||
+                quantidade <= 0 ||
+                medida <= 0
+            ) {
+                setErroPerf2('Expressão inválida!')
+                return
+            }
+
+            // A quantidade precisa ser um número inteiro
+            if (!Number.isInteger(quantidade)) {
+                setErroPerf2('Expressão inválida!')
+                return
+            }
+
+            // Cria as novas linhas
+            const novasLinhas = Array.from(
+                { length: quantidade },
+                () => ({
+                    valor: medida,
+                    qtdPerf: Math.floor(medida / heighPerf),
+                    sobras: Number((medida % heighPerf).toFixed(2)),
+                })
+            )
+
+            // Adiciona as novas linhas à tabela
             setLinhasTabelaPerf((prev) => [
                 ...prev,
-                {
-                    valor: valorDigitado,
-                    qtdPerf: totalPerfs,
-                    sobras: sobraInitial,
-                },
+                ...novasLinhas
             ])
-            setPerfisInteiros((prev) => prev + totalPerfs)
-            setSobras((prev) => [...prev, sobraInitial])
+
+            // Soma a quantidade de perfis inteiros
+            const novosPerfisInteiros = novasLinhas.reduce(
+                (total, linha) => total + linha.qtdPerf,
+                0
+            )
+
+            setPerfisInteiros(
+                (prev) => prev + novosPerfisInteiros
+            )
+
+            // Adiciona cada sobra individualmente
+            setSobras((prev) => [
+                ...prev,
+                ...novasLinhas.map(linha => linha.sobras)
+            ])
+
+            // Limpa o input e a mensagem
             setValorDigitado("")
+            setErroPerf2("")
+
+            return
         }
+    
+        // Entrada sem multiplicação
+
+        const valorNumerico = Number(valor)
+
+        // Verifica se é um número válido
+        if (!Number.isFinite(valorNumerico) || valorNumerico <= 0) {
+            setErroPerf2('Expressão inválida!')
+            return
+        }
+
+        const qtdPerf = Math.floor(valorNumerico / heighPerf)
+
+        const sobra = Number(
+            (valorNumerico % heighPerf).toFixed(2)
+        )
+
+        setLinhasTabelaPerf((prev) => [
+            ...prev,
+            {
+                valor: valorNumerico,
+                qtdPerf: qtdPerf,
+                sobras: sobra,
+            },
+        ])
+
+        setPerfisInteiros(
+            (prev) => prev + qtdPerf
+        )
+
+        setSobras((prev) => [
+            ...prev,
+            sobra
+        ])
+
+        setValorDigitado("")
+        setErroPerf2("")
     }
 
     //função para capturar o valor digitado
     const handleChangePerf = (e) => {
-        setValorDigitado(e.target.value)
+
+        const input = e.target.value
+
+        // Vírgula não é aceita como separador decimal
+        if (input.includes(',')) {
+            setErroPerf2('Valor inválido!')
+            return
+        }
+
+        // Permite números, ponto, operadores e espaços
+        const caracteresPermitidos = /^[0-9.+*/\s-]*$/
+
+        // Bloqueia caracteres não permitidos
+        if (!caracteresPermitidos.test(input)) {
+            setErroPerf2('Valor inválido!')
+            return
+        }
+
+        // Atualiza o valor do input
+        setValorDigitado(input)
+
+        // Remove mensagens de erro
+        setErroPerf2('')
     }
 
     function calculandoSobras() {
@@ -91,59 +206,65 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
     }
 
     return (
-        <div className="dados-de-input">
 
-            <header id="dados-para-calculo"><h3>Perfil de {metragem.toFixed(2)}m</h3></header>
-            <div id="inputs">
-                <input
-                    type="text"
-                    id="entradaValor"
-                    name="metragem"
-                    placeholder="metragem. Ex:1.50"
-                    value={valorDigitado}
-                    onChange={handleChangePerf}
-                    onKeyDown={handleKeydownPerf}
-                />
+        <>
+            <div className="erro02">
+                {erroPerf2 && (<span>{erroPerf2}</span>)}
             </div>
 
-            <div className="container">
-                <table id="tabela-entradas">
-                    <thead>
-                        <tr>
-                            <th>Entradas</th>
-                            <th>Barras</th>
-                            <th>Sobra</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {linhasTabelaPerf.map((linha, index) => (
-                            <tr key={index}>
-                                <td>{Number(linha.valor).toFixed(2)}m</td>
-                                <td>{linha.qtdPerf}x{metragem.toFixed(2)}m</td>
-                                <td>{Number(linha.sobras).toFixed(2)}m</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-                <div id='button-div'>
-                    <Button
-                        id="iniciar-calculo"
-                        text="Calcular"
-                        action={(e) => {
-                            e.preventDefault()
-                            const combinacoes = calculandoSobras()
-                            enviarTrue("relatorio")
-                            barrasInteiras(perfilInteriros)
-                            barrasCortes(combinacoes.length)
-                            enviarCombinacoes(combinacoes)
-                        }}
+            <div className="dados-de-input">
+                <header id="dados-para-calculo"><h3>Perfil de {metragem.toFixed(2)}m</h3></header>
+                <div id="inputs">
+                    <input
+                        type="text"
+                        id="entradaValor"
+                        name="metragem"
+                        placeholder="metragem. Ex:1.50"
+                        value={valorDigitado}
+                        onChange={handleChangePerf}
+                        onKeyDown={handleKeydownPerf}
                     />
                 </div>
 
-            </div>
+                <div className="container">
+                    <table id="tabela-entradas">
+                        <thead>
+                            <tr>
+                                <th>Entradas</th>
+                                <th>Barras</th>
+                                <th>Sobra</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {linhasTabelaPerf.map((linha, index) => (
+                                <tr key={index}>
+                                    <td>{Number(linha.valor).toFixed(2)}m</td>
+                                    <td>{linha.qtdPerf}x{metragem.toFixed(2)}m</td>
+                                    <td>{Number(linha.sobras).toFixed(2)}m</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
 
-        </div>
+                    <div id='button-div'>
+                        <Button
+                            id="iniciar-calculo"
+                            text="Calcular"
+                            action={(e) => {
+                                e.preventDefault()
+                                const combinacoes = calculandoSobras()
+                                enviarTrue("relatorio")
+                                barrasInteiras(perfilInteriros)
+                                barrasCortes(combinacoes.length)
+                                enviarCombinacoes(combinacoes)
+                            }}
+                        />
+                    </div>
+
+                </div>
+
+            </div>
+        </>
     )
 }
 

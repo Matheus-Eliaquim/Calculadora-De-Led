@@ -7,7 +7,7 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
     const [metragem, setMetragem] = useState("")
 
     // Mensagens de erro  
-    const [erro, setErro] = useState("")
+    const [erroPerf, setErroPerf] = useState("")
 
     // Valida a metragem
     const handleMetragem = (e) => {
@@ -31,7 +31,7 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
 
         // Verifica se todos os campos foram preenchidos
         if (!metragem) {
-            setErro(!metragem ? "O campo Tamanho é obrigatorio!" : "")
+            setErroPerf(!metragem ? "O campo Tamanho é obrigatorio!" : "")
             return
         }
 
@@ -43,7 +43,7 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
         <>
 
             <div className="erro">
-                {erro && (<span>{erro}</span>)}
+                {erroPerf && (<span>{erroPerf}</span>)}
             </div>
 
             <div className="container">

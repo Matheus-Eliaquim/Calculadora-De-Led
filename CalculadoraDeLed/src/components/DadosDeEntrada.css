@@ -1,6 +1,6 @@
 :root {
     --color-form: #44444498;
-    --color-erro: red;
+
 }
 
 .container {
@@ -47,3 +47,5 @@
     width: 14rem;
     text-align: center;
 }
+
+
