@@ -21,6 +21,7 @@ const DadosEntrada = ({ entradaDados, back }) => {
         if (!/^\d*\.?\d*$/.test(valor)) return
 
         setPotencia(valor)
+        setErro("")
     }
 
     const handleRolo = (e) => {
@@ -30,6 +31,7 @@ const DadosEntrada = ({ entradaDados, back }) => {
         if (!/^\d*\.?\d*$/.test(valor)) return
 
         setRolo(valor)
+        setErro("")
     }
 
     const handleCoeficiente = (e) => {
@@ -39,6 +41,7 @@ const DadosEntrada = ({ entradaDados, back }) => {
         if (!/^\d*\.?\d*$/.test(valor)) return
 
         setCoeficiente(valor)
+        setErro("")
     }
 
     // Salva os dados
