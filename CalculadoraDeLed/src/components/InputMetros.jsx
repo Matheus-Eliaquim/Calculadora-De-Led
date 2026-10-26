@@ -181,11 +181,11 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
         }
 
         // Permite números, ponto, operadores e espaços
-        const caracteresPermitidos = /^[0-9.+*/\s-]*$/
+        const caracteresPermitidos = /^[0-9.+*]*$/
 
         // Bloqueia caracteres não permitidos
         if (!caracteresPermitidos.test(input)) {
-            setErro('Valor inválido!')
+            setErroLed('Valor inválido!')
             return
         }
 

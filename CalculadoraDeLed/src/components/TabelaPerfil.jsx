@@ -141,8 +141,8 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
             return
         }
 
-        // Permite números, ponto, operadores e espaços
-        const caracteresPermitidos = /^[0-9.+*/\s-]*$/
+        // Permite números e ponto
+        const caracteresPermitidos = /^[0-9.*]*$/
 
         // Bloqueia caracteres não permitidos
         if (!caracteresPermitidos.test(input)) {
