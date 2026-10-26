@@ -5,7 +5,7 @@ import './responsividade.css' // Estilos de responsividade
 import Button from "./Button.jsx"
 import HomeButton from './HomeButton.jsx'
 
-const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarCombinacoes, back }) => {
+const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarCombinacoes, back }) => {
 
     const [valorDigitado, setValorDigitado] = useState("") //estado usado para capturar o valor digitado
     const heighPerf = Number(metragem)//constante usada para transformar o valor recebido via props em numero
@@ -274,4 +274,4 @@ const TabelaPerfil = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, envi
     )
 }
 
-export default TabelaPerfil
+export default InputPerf

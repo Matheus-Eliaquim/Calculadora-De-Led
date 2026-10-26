@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 
 
-function CalculadoraDeLed(back) {
+function CalculadoraDeLed({back}) {
   const [potencia, settPotencia] = useState(0)
   const [rolo, settRolo] = useState(0)
   const [perfil, settPerfil] = useState(0)
@@ -36,6 +36,7 @@ function CalculadoraDeLed(back) {
         {!invalid ? (
             <DadosEntrada
                 entradaDados={receberDados}
+                back = {back}
             />
         ) : (
             <>
@@ -51,6 +52,7 @@ function CalculadoraDeLed(back) {
                         perfil={perfil}
                         coeficiente={coeficiente}
                         receberRelatorio={receberRelatorio}
+                        back = {back}
                     />
                 </div>
 
@@ -60,6 +62,7 @@ function CalculadoraDeLed(back) {
                         rolo={rolo}
                         totalMetros={totalMetros}
                         close={setVerRelatorio}
+                        back = {back}
                     />
                 )}
             </>

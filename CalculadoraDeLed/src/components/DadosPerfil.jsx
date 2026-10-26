@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Button from './Button.jsx'
 import HomeButton from './HomeButton.jsx'
 
-const InputPerfil = ({ enviarRelatorio, enviarMetragem, back }) => {
+const DadosPerfil = ({ enviarRelatorio, enviarMetragem, back }) => {
 
     const [metragem, setMetragem] = useState("")
 
@@ -83,4 +83,4 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem, back }) => {
     )
 }
 
-export default InputPerfil
+export default DadosPerfil

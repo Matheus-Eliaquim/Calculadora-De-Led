@@ -1,12 +1,13 @@
 // Importa hooks do React e componentes externos
 import { useState, useEffect } from 'react'
 import Button from './Button.jsx' // Componente de botão personalizado
+import HomeButton from './HomeButton.jsx'
 import './InputMetros.css' // Estilos específicos para este componente
 import './responsividade.css' // Estilos de responsividade
 import { avaliarExpressao } from '../utils/avaliarExpressao.js'
 
 // Componente principal que recebe propriedades de configuração
-const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
+const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) => {
     // Estados internos do componente
     const [valor, setValor] = useState("") // Valor digitado pelo usuário (metragem)
     const [totalMetros, setTotalMetros] = useState(0)
@@ -199,7 +200,14 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio }) => {
 
     // JSX que define a interface do componente
     return (
+
         <>
+
+            <div id='home02'>
+                <HomeButton action={() => back(null)} />
+            </div>
+
+
             <div className="erro02">
                 {erroLed && <span>{erroLed}</span>}
             </div>

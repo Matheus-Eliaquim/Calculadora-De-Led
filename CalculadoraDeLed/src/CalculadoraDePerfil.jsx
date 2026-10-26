@@ -1,6 +1,6 @@
 import { useState } from "react"
-import TabelaPerfil from './components/TabelaPerfil.jsx'
-import InputPerfil from "./components/InputPerfil.jsx"
+import InputPerf from './components/InputPerf.jsx'
+import DadosPerfil from "./components/DadosPerfil.jsx"
 import RelatorioPerf from './components/RelatorioPerf.jsx'
 
 const CalculadoraDePerfil = ({back}) => {
@@ -18,7 +18,7 @@ const CalculadoraDePerfil = ({back}) => {
   return (
     <div>
       {openPerfil === "input" && (
-        <InputPerfil
+        <DadosPerfil
           enviarRelatorio={mudarTela}
           enviarMetragem={number}
           back= {back}
@@ -30,7 +30,7 @@ const CalculadoraDePerfil = ({back}) => {
           display: openPerfil === "tabela" ? "block" : "none"
         }}
       >
-        <TabelaPerfil
+        <InputPerf
           metragem={receberNumero}
           enviarTrue={mudarTela}
           barrasInteiras={barrasI}

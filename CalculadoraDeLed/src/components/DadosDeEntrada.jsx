@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Button from './Button.jsx'
+import HomeButton from './HomeButton.jsx'
 import './DadosDeEntrada.css'
 import './responsividade.css'
 
@@ -60,6 +61,11 @@ const DadosEntrada = ({ entradaDados, back }) => {
 
     return (
         <>
+
+            <div id='home'>
+                <HomeButton action={() => back(null)} />
+            </div>
+
             <div className="erro">
                 {erro && (<span>{erro}</span>)}
             </div>
