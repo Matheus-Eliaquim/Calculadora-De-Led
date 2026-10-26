@@ -112,9 +112,10 @@
     text-align: center;
 }
 
-#home {
+#home02 {
     display: flex;
     justify-content: center;
     position: relative;
-    right: 6rem;
+    right: 12rem;
+    top: 1rem;
 }

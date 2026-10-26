@@ -13,6 +13,7 @@
     padding: 1.5rem;
     background: var(--color-form);
     border-radius: 20px;
+    min-width: 20rem;
 }
 
 .divisao {
@@ -48,10 +49,10 @@
     text-align: center;
 }
 
-#home02 {
+
+#home {
     display: flex;
     justify-content: center;
     position: relative;
-    right: 12rem;
-    top: 1rem;
+    right: 8rem;
 }
