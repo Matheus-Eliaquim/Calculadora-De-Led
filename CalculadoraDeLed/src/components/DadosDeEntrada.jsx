@@ -9,10 +9,8 @@ const DadosEntrada = ({ entradaDados }) => {
     const [rolo, setRolo] = useState("")
     const [coeficiente, setCoeficiente] = useState("")
 
-    // Mensagens de erro
-    const [erroPotencia, setErroPotencia] = useState("")
-    const [erroRolo, setErroRolo] = useState("")
-    const [erroCoeficiente, setErroCoeficiente] = useState("")
+    // Mensagens de erro  
+    const [erro, setErro] = useState("")
 
     // Valida a potência
     const handlePotencia = (e) => {
@@ -48,9 +46,7 @@ const DadosEntrada = ({ entradaDados }) => {
 
         // Verifica se todos os campos foram preenchidos
         if (!potencia || !rolo || !coeficiente) {
-            setErroPotencia(!potencia ? "Campo obrigatório!" : "")
-            setErroRolo(!rolo ? "Campo obrigatório!" : "")
-            setErroCoeficiente(!coeficiente ? "Campo obrigatório!" : "")
+            setErro(!coeficiente || !rolo || !potencia ? "Os campos Potencia, Tamanho, e Coenciente são obrigatorios!" : "")
             return
         }
 
@@ -63,77 +59,73 @@ const DadosEntrada = ({ entradaDados }) => {
     }
 
     return (
-        <div className="container">
-            <form className="form-geral">
+        <>
+            <div className="erro">
+                {erro && (<span>{erro}</span>)}
+            </div>
 
-                <label className="divisao">
-                    <span>
-                        Potencia da fita (W/metros):
-                        <span className="obrigatorio">*</span>
-                    </span>
+            <div className="container">
+                <form className="form-geral">
 
-                    <input
-                        type="text"
-                        name="potencia"
-                        placeholder="12"
-                        value={potencia}
-                        onChange={handlePotencia}
-                        className="dados-iniciais"
-                    />
+                    <label className="divisao">
+                        <span>
+                            Potencia da fita (W/metros):
+                            <span className="obrigatorio">*</span>
+                        </span>
 
-                    {erroPotencia && (
-                        <span className="erro">{erroPotencia}</span>
-                    )}
-                </label>
+                        <input
+                            type="text"
+                            name="potencia"
+                            placeholder="12"
+                            value={potencia}
+                            onChange={handlePotencia}
+                            className="dados-iniciais"
+                        />
 
-                <label className="divisao">
-                    <span>
-                        Tamanho do rolo de fita (Metros):
-                        <span className="obrigatorio">*</span>
-                    </span>
+                    </label>
 
-                    <input
-                        type="text"
-                        name="roloDeFita"
-                        placeholder="5"
-                        value={rolo}
-                        onChange={handleRolo}
-                        className="dados-iniciais"
-                    />
+                    <label className="divisao">
+                        <span>
+                            Tamanho do rolo de fita (Metros):
+                            <span className="obrigatorio">*</span>
+                        </span>
 
-                    {erroRolo && (
-                        <span className="erro">{erroRolo}</span>
-                    )}
-                </label>
+                        <input
+                            type="text"
+                            name="roloDeFita"
+                            placeholder="5"
+                            value={rolo}
+                            onChange={handleRolo}
+                            className="dados-iniciais"
+                        />
 
-                <label className="divisao">
-                    <span>
-                        Coeficiente de Segurança (%):
-                        <span className="obrigatorio">*</span>
-                    </span>
+                    </label>
 
-                    <input
-                        type="text"
-                        name="coeficiente"
-                        placeholder="20"
-                        value={coeficiente}
-                        onChange={handleCoeficiente}
-                        className="dados-iniciais"
-                    />
+                    <label className="divisao">
+                        <span>
+                            Coeficiente de Segurança (%):
+                            <span className="obrigatorio">*</span>
+                        </span>
 
-                    {erroCoeficiente && (
-                        <span className="erro">{erroCoeficiente}</span>
-                    )}
-                </label>
+                        <input
+                            type="text"
+                            name="coeficiente"
+                            placeholder="20"
+                            value={coeficiente}
+                            onChange={handleCoeficiente}
+                            className="dados-iniciais"
+                        />
+                    </label>
 
-            </form>
+                </form>
 
-            <Button
-                id="save"
-                text="Salvar Configurações"
-                action={savedDados}
-            />
-        </div>
+                <Button
+                    id="save"
+                    text="Salvar Configurações"
+                    action={savedDados}
+                />
+            </div>
+        </>
     )
 }
 

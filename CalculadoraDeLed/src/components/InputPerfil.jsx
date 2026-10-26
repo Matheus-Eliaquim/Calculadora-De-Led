@@ -6,6 +6,9 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
 
     const [metragem, setMetragem] = useState("")
 
+    // Mensagens de erro  
+    const [erro, setErro] = useState("")
+
     // Valida a metragem
     const handleMetragem = (e) => {
         const valor = e.target.value
@@ -25,12 +28,24 @@ const InputPerfil = ({ enviarRelatorio, enviarMetragem }) => {
 
     // Envia a metragem
     const openTab = () => {
+
+        // Verifica se todos os campos foram preenchidos
+        if (!metragem) {
+            setErro(!metragem ? "O campo Tamanho é obrigatorio!" : "")
+            return
+        }
+
         enviarRelatorio("tabela")
         enviarMetragem(Number(metragem))
     }
 
     return (
         <>
+
+            <div className="erro">
+                {erro && (<span>{erro}</span>)}
+            </div>
+
             <div className="container">
                 <form className="form-geral">
                     <label className="divisao">

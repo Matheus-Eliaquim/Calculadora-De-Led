@@ -1,5 +1,6 @@
 :root {
     --color-form: #44444498;
+    --color-erro: red;
 }
 
 .container {
@@ -34,3 +35,15 @@
     color: red;
 }
 
+.erro {
+    position: relative;
+    inset: -3.5rem 0 0 -6.5rem;
+    justify-self: center;
+    color: var(--color-erro)
+}
+
+.erro span {
+    position: absolute;
+    width: 14rem;
+    text-align: center;
+}
