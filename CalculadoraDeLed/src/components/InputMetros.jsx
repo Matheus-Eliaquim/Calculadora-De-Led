@@ -271,7 +271,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                                     <InfoOutlinedIcon
                                         fontSize="small"
                                         sx={{
-                                            color: 'white',
+                                            color: 'yellow',
                                             cursor: 'help'
                                         }}
                                     />
@@ -309,7 +309,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                                     <InfoOutlinedIcon
                                         fontSize="small"
                                         sx={{
-                                            color: 'white',
+                                            color: 'yellow',
                                             cursor: 'help'
                                         }}
                                     />

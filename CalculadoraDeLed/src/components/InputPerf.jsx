@@ -264,7 +264,7 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
                         <InfoOutlinedIcon
                             fontSize="small"
                             sx={{
-                                color: 'white',
+                                color: 'yellow',
                                 cursor: 'help'
                             }}
                         />

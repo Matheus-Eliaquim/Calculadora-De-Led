@@ -88,7 +88,7 @@ const DadosPerfil = ({ enviarRelatorio, enviarMetragem, back }) => {
                                     <InfoOutlinedIcon
                                         fontSize="small"
                                         sx={{
-                                            color: 'white',
+                                            color: 'yellow',
                                             cursor: 'help'
                                         }}
                                     />
