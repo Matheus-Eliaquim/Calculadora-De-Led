@@ -1,4 +1,4 @@
-# 🎶Calculadora de Led
+# 💡 Calculadora de Led 💡
 
 Este projeto visa a aplicação dos meus conhecimentos em **REACT**, servindo como prática para consolidar o aprendizado, também é utilizada como ferramenta pessoal de trabalho, facilitando calculos diarios que preciso fazer.
 
