@@ -3,6 +3,10 @@ import { useState } from 'react'
 import Button from './Button.jsx'
 import HomeButton from './HomeButton.jsx'
 
+//importando componentes do Material UI
+import Tooltip from '@mui/material/Tooltip'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+
 const DadosPerfil = ({ enviarRelatorio, enviarMetragem, back }) => {
 
     const [metragem, setMetragem] = useState("")
@@ -44,11 +48,11 @@ const DadosPerfil = ({ enviarRelatorio, enviarMetragem, back }) => {
     return (
         <>
 
-        <div id='home'>
-            <HomeButton action= {() => back(null)} />
-        </div>
-            
-            
+            <div id='home'>
+                <HomeButton action={() => back(null)} />
+            </div>
+
+
             <div className="erro">
                 {erroPerf && (<span>{erroPerf}</span>)}
             </div>
@@ -56,9 +60,40 @@ const DadosPerfil = ({ enviarRelatorio, enviarMetragem, back }) => {
             <div className="container">
                 <form className="form-geral">
                     <label className="divisao">
-                        <span>
-                            Tamanho do perfil: (m)
-                            <span className="obrigatorio">*</span>
+                        <span className="spanLabel">
+                            <span>
+                                Tamanho do perfil: (m)
+                                <span className="obrigatorio">*</span>
+                            </span>
+
+                            <span>
+                                <Tooltip
+                                    title={
+                                        "Informe o tamanho do perfil em numero inteiro ou decimal.\n" +
+                                        "Exemplo: 2 ou 2.00\n" +
+                                        "Use ponto para valores decimais.\n" +
+                                        "Exemplo: 2.50.\n" +
+                                        "Não é possível realizar operações aritméticas.\n" +
+                                        "Exemplo: 2+5, 5-2, 2*6, 6/2"
+                                    }
+                                    arrow
+                                    slotProps={{
+                                        tooltip: {
+                                            sx: {
+                                                whiteSpace: 'pre-line'
+                                            }
+                                        }
+                                    }}
+                                >
+                                    <InfoOutlinedIcon
+                                        fontSize="small"
+                                        sx={{
+                                            color: 'white',
+                                            cursor: 'help'
+                                        }}
+                                    />
+                                </Tooltip>
+                            </span>
                         </span>
 
                         <input

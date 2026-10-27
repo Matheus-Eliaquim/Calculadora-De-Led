@@ -5,6 +5,10 @@ import './responsividade.css' // Estilos de responsividade
 import Button from "./Button.jsx"
 import HomeButton from './HomeButton.jsx'
 
+//importando componentes do Material UI
+import Tooltip from '@mui/material/Tooltip'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+
 const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarCombinacoes, back }) => {
 
     const [valorDigitado, setValorDigitado] = useState("") //estado usado para capturar o valor digitado
@@ -221,16 +225,56 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
             <div className="dados-de-input">
                 <header id="dados-para-calculo"><h3>Perfil de {metragem.toFixed(2)}m</h3></header>
                 <div id="inputs">
+                    <span className='spanInput'>
                     <input
                         type="text"
                         id="entradaValor"
                         name="metragem"
-                        placeholder="metragem. Ex:1.50"
+                        placeholder="17.75"
                         value={valorDigitado}
                         onChange={handleChangePerf}
                         onKeyDown={handleKeydownPerf}
                     />
+
+                     <span>
+                    <Tooltip
+                        title={
+                            "1 - Informe o tamanho do segmento que será calculado em numeros decimais ou inteiros.\n" +
+                            "Exemplo: 17 ou 17.75\n" +
+                            "2 - Use ponto para valores decimais.\n" +
+                            "Exemplo: 11.50\n" +
+                            "3 - Não é possível realizar operações de adição, subtração e divisão\n" +
+                            "Exemplo: 5+2, 5-2, 6/2\n" +
+                            "4 - Operações de multiplicação funcionar de forma diferente, nessa operação o primeiro numero da multiplicação diz" + 
+                            " quantas vezes o segundo numero se repete\n" +
+                            "Exemplo: \n3*2 + enter \nEntrada= 2.00m, Barras= 0x3.00m, Sobras= 2.00m" +
+                            "\nEntrada= 2.00m, Barras= 0x3.00m, Sobras= 2.00m" +
+                            "\nEntrada= 2.00m, Barras= 0x3.00m, Sobras= 2.00m\n" +
+                            "5 - Para enviar o valor para calculo, basta pressionar a tecla enter\n"
+                        }
+                        arrow
+                        slotProps={{
+                            tooltip: {
+                                sx: {
+                                    whiteSpace: 'pre-line'
+                                }
+                            }
+                        }}
+                    >
+                        <InfoOutlinedIcon
+                            fontSize="small"
+                            sx={{
+                                color: 'white',
+                                cursor: 'help'
+                            }}
+                        />
+                    </Tooltip>
+                </span>
+                </span>
+
                 </div>
+
+               
 
                 <div className="container">
                     <table id="tabela-entradas">
