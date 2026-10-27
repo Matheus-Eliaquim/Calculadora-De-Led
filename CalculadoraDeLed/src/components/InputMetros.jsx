@@ -6,6 +6,10 @@ import './InputMetros.css' // Estilos específicos para este componente
 import './responsividade.css' // Estilos de responsividade
 import { avaliarExpressao } from '../utils/avaliarExpressao.js'
 
+//importando componentes do Material UI
+import Tooltip from '@mui/material/Tooltip'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+
 // Componente principal que recebe propriedades de configuração
 const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) => {
     // Estados internos do componente
@@ -229,17 +233,89 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
 
                     <div id="inputs">
                         {/* Campo de texto para digitar metragem */}
-                        <input
-                            type="text"
-                            id="entradaValor"
-                            name="metragem"
-                            placeholder="metragem ou expressão. Ex: 3*1.50"
-                            value={valor}
-                            onChange={handleChange} // Atualiza estado ao digitar
-                            onKeyDown={handleKeydown} // Adiciona linha ao apertar Enter
-                        />
+                        <span className='spanInput'>
 
-                        <h4>Espaçamento por Fonte</h4>
+                            <input
+                                type="text"
+                                id="entradaValor"
+                                name="metragem"
+                                placeholder="15.55"
+                                value={valor}
+                                onChange={handleChange} // Atualiza estado ao digitar
+                                onKeyDown={handleKeydown} // Adiciona linha ao apertar Enter
+                            />
+                            <span>
+                                <Tooltip
+                                    title={
+                                        "1 - Informe o tamanho do segmento que será calculado em numeros decimais ou inteiros.\n" +
+                                        "Exemplo: 12 ou 12.55\n" +
+                                        "2 - Use ponto para valores decimais.\n" +
+                                        "Exemplo: 11.50\n" +
+                                        "3 - Não é possível realizar operações de subtração e divisão\n" +
+                                        "Exemplo: 5-2, 6/2\n" +
+                                        "4 - Operações de multiplicação e adicção irão apresentar apenas o resultado da operação\n" +
+                                        "Exemplo: \n2+2+1 = 5\n 2*5 = 10\n" +
+                                        "5 - Para enviar o valor para calculo, basta pressionar a tecla enter\n" +
+                                        "Exemplo: 5.00 + Enter \n Entrada = 5.00\n Fontes = 01x100W\n" +
+                                        "Esse exemplo foi feito pensando que a fita led tem potencia de 15W/m"
+                                    }
+                                    arrow
+                                    slotProps={{
+                                        tooltip: {
+                                            sx: {
+                                                whiteSpace: 'pre-line'
+                                            }
+                                        }
+                                    }}
+                                >
+                                    <InfoOutlinedIcon
+                                        fontSize="small"
+                                        sx={{
+                                            color: 'white',
+                                            cursor: 'help'
+                                        }}
+                                    />
+                                </Tooltip>
+                            </span>
+
+                        </span>
+
+                        <h4 id='fontLedSpace'>Espaçamento por Fonte
+                            <span>
+                                <Tooltip
+                                    title={
+                                        "1 - O tamanho padrão para o calculo da distancia entre fontes é de 5.00 metros\n" +
+                                        "Para os exemplos será usada uma fita led com potencia de 15W/m e coeficiente de 20%\n" + 
+                                        "Exemplo: Entrada= 12.00m, Fontes= 03x72W \n" +
+                                        "2 - O segundo padrão que pode ser utilizado é de uma fonte a cada 7.00m\n" + 
+                                        "Exemplo: Entrada= 12.00m, Fontes= 02x150W \n" +
+                                        "3 - O terceiro padrão é utilizar apenas fontes de 200W, nesse padrão a potencia total do circuito \n" + 
+                                        "é divida por 200 potencia da fonte e são dimensionadas quantas fontes de 200 são necessarias para alimentar\n " + 
+                                        "o circuito em questão \n" + 
+                                        "Exemplo: Entrada= 100.00m, Fontes= 8x200W\n" +
+                                        "4 - Ao enviar tamanho do circuito para o calculo a distancia entre as fontes é enviada junto automaticamente\n" +
+                                        "5 - O valor da distancia entre as fontes pode ser alterado a qualquer momento, mas o valor enviado para o calculo não é alterado, \n" +
+                                        "ou seja, se você enviar um valor para o calculo e depois alterar a distancia entre as fontes, os valores ja enviado para o calculo não serão alterados\n"
+                                    }
+                                    arrow
+                                    slotProps={{
+                                        tooltip: {
+                                            sx: {
+                                                whiteSpace: 'pre-line'
+                                            }
+                                        }
+                                    }}
+                                >
+                                    <InfoOutlinedIcon
+                                        fontSize="small"
+                                        sx={{
+                                            color: 'white',
+                                            cursor: 'help'
+                                        }}
+                                    />
+                                </Tooltip>
+                            </span>
+                        </h4>
                         <div id="radios">
                             {/* Opções de espaçamento entre fontes */}
                             <label className="radio-inputs">

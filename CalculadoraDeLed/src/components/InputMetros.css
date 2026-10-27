@@ -57,6 +57,14 @@
 
 #inputs h4 {
     margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 13rem;
+}
+
+#fontLedSpace span{
+    display: flex;
 }
 
 /* Radios */
@@ -118,4 +126,11 @@
     position: relative;
     right: 12rem;
     top: 1rem;
+}
+
+.spanInput {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 27rem;
 }

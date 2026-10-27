@@ -5,6 +5,8 @@ import CalculadoraDeLed from './CalculadoraDeLed.jsx'
 import CalculadoraDePerfil from './CalculadoraDePerfil.jsx'
 
 
+
+
 function App() {
   // Estado que guarda qual opção foi selecionada
   // Pode ser "led", "perfil" ou null (nenhuma selecionada)
@@ -41,6 +43,7 @@ function App() {
       {/* Renderiza apenas o componente escolhido */}
       {opcaoSelecionada === "led" && <CalculadoraDeLed back={setOpcaoSelecionada} />}
       {opcaoSelecionada === "perfil" && <CalculadoraDePerfil back={setOpcaoSelecionada} />}
+
     </div>
   )
 }
