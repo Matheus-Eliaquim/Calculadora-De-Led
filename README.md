@@ -10,6 +10,7 @@ Este projeto visa a aplicação dos meus conhecimentos em **REACT**, servindo co
 - **CSS3** → Estilização de componentes e responsividade  
 - **REACT/JavaScript** → Estrutura principal do projeto, componentização
 - **Material UI** → Biblioteca de componentes para React
+- **IA(ChatGPT/Copilot)** → Sugestão de melhorias e compatibilização do projeto
 
 ---
 
