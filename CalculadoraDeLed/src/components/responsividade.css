@@ -1,35 +1,35 @@
-@media screen and (min-width: 319px) {
+@media screen and (max-width: 425px) {
 
-    body {
-        padding: 0 1rem;
-    }
-
-    body #tabela-entradas th {
-        padding: 0 .5rem;
+    *{
         font-size: 0.9rem;
     }
 
-    #inputs {
-        width: 100%;
-    }
-}
-
-@media screen and (min-width: 374px) {
-
-    body {
-        width: 100%;
-        padding: 0 1.5rem;
+    .container form {
+        min-width: 15rem;
     }
 
-    body #inputs #entradaValor {
-        width: 80vw;
+    div #home {
+        right: 6.5rem;
     }
-}
 
-@media screen and (min-width: 767px) {
-
-    body {
-        width: 100%;
-        padding: 0 1rem;
+    div .spanInput {
+        min-width: 16rem;
     }
+
+    div #home02 {
+        right: 8rem;
+    }
+
+    div #inputs #entradaValor {
+        max-width: 14rem;
+    }
+
+    div #relatorio-final {
+        max-width: 17rem;
+    }
+
+    div #home03 {
+        right: 7rem;
+    }
+
 }

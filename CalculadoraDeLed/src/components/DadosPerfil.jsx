@@ -1,4 +1,6 @@
+import './responsividade.css' // Estilos de responsividade
 import './DadosDeEntrada.css'
+
 import { useState } from 'react'
 import Button from './Button.jsx'
 import HomeButton from './HomeButton.jsx'
