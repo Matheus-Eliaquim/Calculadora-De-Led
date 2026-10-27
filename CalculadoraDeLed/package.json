@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "home": "https://github.com/Matheus-Eliaquim/Calculadora-De-Led",
+  "homepage": "https://github.com/Matheus-Eliaquim/Calculadora-De-Led",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
