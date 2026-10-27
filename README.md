@@ -25,7 +25,7 @@ Este projeto visa a aplicação dos meus conhecimentos em **REACT**, servindo co
 
 Este projeto é um laboratório pessoal, onde testo meus conhecimentos em React. À medida que adquiro novas habilidades e passo a conhecer a tecnologia de forma mais aprofundada, pretendo implementar mais funções para tornar a calculadora mais dinâmica e precisa.
 
-Quanto ao uso do projeto no meu dia a dia de trabalho, na versão atual ele já facilita bastante, realizando cálculos e contagens que antes eu precisava fazer manualmente ou em planilhas. No entanto, ainda não atende 100% das minhas necessidades, pois algumas etapas continuam sendo feitas manualmente. Isso ocorre porque ainda não possuo conhecimento suficiente para implementar tudo o que é necessário para automatizar completamente o meu processo de trabalho.
+No meu dia a dia de trabalho, o projeto já facilita bastante, realizando cálculos e contagens que antes eram feitos manualmente ou em planilhas. Na versão atual, consigo automatizar a rotina de cálculos, atuando apenas na revisão para garantir a precisão, já que ainda está em fase de testes. Pretendo realizar um teste fechado com um vendedor de confiança, acompanhando todo o processo de uso da calculadora. Esse teste tem como objetivo avaliar como um usuário interage com a interface e identificar melhorias para tornar a calculadora ainda mais intuitiva.
 
 ---
 
