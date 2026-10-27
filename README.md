@@ -30,9 +30,9 @@ Quanto ao uso do projeto no meu dia a dia de trabalho, na versão atual ele já 
 
 ## 🚀 Próximos Passos
 
-
-- Exclua valores que foram adicionados e que essa exclusão seja contabilizada no relatório.
-- Adicionar uma nova calculadora para perfis especiais, alguns fabricantes fazem perfis com medidas de 0.50m até 3.00m e isso possibilita calcular barras de perfil de forma mais efetiva e diminuir a quantidade de sobras. Essa parte precisa ser uma calculadora especial, pois nem todo fabricante faz dessa forma, a calculadora padrão de perfil atende ao que o mercado em sua maioria ja faz, mas a especifica vem para atender a demanda de um fabricante que tras novas possibilidades.
+- Melhorar a responsividade para dispositivos moveis. 
+- Permitir que o usuário exclua valores adicionados e garantir que essa exclusão seja registrada no relatório.
+- Adicionar uma nova calculadora para perfis especiais. Alguns fabricantes produzem perfis com medidas entre 0,50 m e 3,00 m, o que possibilita calcular barras de forma mais eficiente e reduzir a quantidade de sobras. Essa funcionalidade precisa ser uma calculadora específica, já que nem todos os fabricantes trabalham dessa maneira. A calculadora padrão de perfis atende ao que a maioria do mercado já pratica, mas a versão especial vem para suprir a demanda de fabricantes que oferecem novas possibilidades.
 
 ---
 
