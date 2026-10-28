@@ -31,7 +31,6 @@ No meu dia a dia de trabalho, o projeto já facilita bastante, realizando cálcu
 
 ## 🚀 Próximos Passos
 
-- Melhorar a responsividade para dispositivos moveis. 
 - Permitir que o usuário exclua valores adicionados e garantir que essa exclusão seja registrada no relatório.
 - Adicionar uma nova calculadora para perfis especiais. Alguns fabricantes produzem perfis com medidas entre 0,50 m e 3,00 m, o que possibilita calcular barras de forma mais eficiente e reduzir a quantidade de sobras. Essa funcionalidade precisa ser uma calculadora específica, já que nem todos os fabricantes trabalham dessa maneira. A calculadora padrão de perfis atende ao que a maioria do mercado já pratica, mas a versão especial vem para suprir a demanda de fabricantes que oferecem novas possibilidades.
 
