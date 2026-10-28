@@ -1,7 +1,7 @@
 import './responsividade.css' // Estilos de responsividade
 import './RelatorioFinal.css' // Estilos do componente
-import Button from './Button.jsx'
-import HomeButton from './HomeButton.jsx'
+import Button from './buttons/Button.jsx'
+import HomeButton from './buttons/HomeButton.jsx'
 
 const RelatorioFinal = ({ fontes = {}, rolo, totalMetros, close, back }) => {
 

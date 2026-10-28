@@ -1,5 +1,5 @@
 import './Button.css'
-import './responsividade.css'
+
 
 const Button = ({id, text, action}) => {
 

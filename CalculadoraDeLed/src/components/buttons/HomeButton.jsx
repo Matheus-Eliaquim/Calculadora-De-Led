@@ -1,6 +1,4 @@
-import React from 'react'
 import './HomeButton.css'
-import './responsividade.css'
 
 const HomeButton = ({ id, action }) => {
 

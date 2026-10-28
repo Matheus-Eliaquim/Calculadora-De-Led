@@ -1,6 +1,6 @@
-import DadosEntrada from './components/DadosDeEntrada.jsx'
-import InputMetros from './components/InputMetros.jsx'
-import RelatorioFinal from './components/RelatorioFinal.jsx'
+import DadosEntrada from './DadosDeEntrada.jsx'
+import InputMetros from './InputMetros.jsx'
+import RelatorioFinal from './RelatorioFinal.jsx'
 import { useState } from 'react'
 
 

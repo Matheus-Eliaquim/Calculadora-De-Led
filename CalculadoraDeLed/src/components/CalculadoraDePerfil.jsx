@@ -1,7 +1,7 @@
 import { useState } from "react"
-import InputPerf from './components/InputPerf.jsx'
-import DadosPerfil from "./components/DadosPerfil.jsx"
-import RelatorioPerf from './components/RelatorioPerf.jsx'
+import InputPerf from './InputPerf.jsx'
+import DadosPerfil from "./DadosPerfil.jsx"
+import RelatorioPerf from './RelatorioPerf.jsx'
 
 const CalculadoraDePerfil = ({back}) => {
   const [openPerfil, setOpenPerfil] = useState("input")

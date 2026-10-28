@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Button from './Button.jsx'
-import HomeButton from './HomeButton.jsx'
+import Button from './buttons/Button.jsx'
+import HomeButton from './buttons/HomeButton.jsx'
 import './DadosDeEntrada.css'
 import './responsividade.css'
 

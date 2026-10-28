@@ -2,8 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import './InputMetros.css' // Estilos específicos para este componente
 import './responsividade.css' // Estilos de responsividade
-import Button from "./Button.jsx"
-import HomeButton from './HomeButton.jsx'
+import Button from "./buttons/Button.jsx"
+import HomeButton from './buttons/HomeButton.jsx'
 
 //importando componentes do Material UI
 import Tooltip from '@mui/material/Tooltip'

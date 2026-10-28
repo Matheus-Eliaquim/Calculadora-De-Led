@@ -1,8 +1,8 @@
 import './App.css'
 import { useState } from 'react'
-import Button from './components/Button.jsx'
-import CalculadoraDeLed from './CalculadoraDeLed.jsx'
-import CalculadoraDePerfil from './CalculadoraDePerfil.jsx'
+import Button from './components/buttons/Button.jsx'
+import CalculadoraDeLed from './components/CalculadoraDeLed.jsx'
+import CalculadoraDePerfil from './components/CalculadoraDePerfil.jsx'
 
 
 
