@@ -273,7 +273,6 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
                 </span>
 
                 </div>
-
                
 
                 <div className="container">
@@ -299,7 +298,7 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
                     <div id='button-div'>
                         <Button
                             id="iniciar-calculo"
-                            text="Calcular"
+                            text="Abrir relatorio"
                             action={(e) => {
                                 e.preventDefault()
                                 const combinacoes = calculandoSobras()

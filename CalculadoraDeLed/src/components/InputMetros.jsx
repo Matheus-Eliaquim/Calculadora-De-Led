@@ -378,7 +378,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                             </table>
                             <div id='button-div'>
                                 {/* Botão de cálculo (não faz nada além de prevenir reload) */}
-                                <Button id="iniciar-calculo" text="Calcular" action={(e) => {
+                                <Button id="iniciar-calculo" text="Abrir relatorio" action={(e) => {
                                     e.preventDefault()
                                     receberRelatorio({
                                         totalMetros,
