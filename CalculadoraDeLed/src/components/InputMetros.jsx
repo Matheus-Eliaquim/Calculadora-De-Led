@@ -122,7 +122,8 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
     useEffect(() => {
         //caso a opção fontes de 200W esteja ativa, utiliza a potencia da fonte para calcular quantas fontes serão usadas
         if (fontePotencia === '200' && valorCalculado !== null) {
-            setFonteQTD(Math.ceil((valorCalculado * potencia) / fontePotencia))
+            const coeficienteReal = coeficiente / 100 + 1
+            setFonteQTD(Math.ceil(((valorCalculado * potencia)*coeficienteReal) / fontePotencia))
             return
         }
         if (valorCalculado !== null && distancia) {
