@@ -1,6 +1,6 @@
 #relatorio-final {
-    color: #fff;
-    background: var(--color-form);
+    color: var(--cor-texto-principal);
+    background: var(--cor-container);
     text-align: center;
     justify-self: center;
     border-radius: 20px;
@@ -11,13 +11,12 @@
     text-align: center;
     margin-top: 1rem;
     font-size: 1.2rem;
-    color: rgb(190, 188, 27);
+    color: var( --cor-destaque);
 }
 
 #relatorio-final h1 {
-    margin-bottom: 1rem;
     font-size: 1.5rem;
-    color: rgb(190, 188, 27);
+    color: var( --cor-destaque);;
 }
 
 #relatorio-final section {

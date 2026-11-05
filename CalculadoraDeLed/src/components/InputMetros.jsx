@@ -325,6 +325,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                             {/* Opções de espaçamento entre fontes */}
                             <label className="radio-inputs">
                                 <input
+                                    className='radios'
                                     type="radio"
                                     value="5"
                                     name="fonts"
@@ -338,6 +339,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                             </label>
                             <label className="radio-inputs">
                                 <input
+                                    className='radios'
                                     type="radio"
                                     value="7"
                                     name="fonts"
@@ -351,6 +353,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                             </label>
                             <label className="radio-inputs">
                                 <input
+                                    className='radios'
                                     type="radio"
                                     value="200"
                                     name="fonts"

@@ -16,13 +16,13 @@ const RelatorioPerf = ({ perfisInteiros, perfisCortes, combinacoesSobras, close,
       </div>
 
       <div id='relatorio-final'>
-        <h1> Relatório Final de Perfis </h1>
+        <h3> Relatório Final de Perfis </h3>
         <p> {inteiros} Barras inteiras </p>
         <p> {cortados} Barras para corte </p>
         <h4> Total de barras: {inteiros + cortados}</h4>
         {combinacoesSobras.length > 0 && (
           <section>
-            <h3>Combinações das sobras</h3>
+            <h3>Cortes e Sobras</h3>
             {/* Percorre o array combinacoesSobras e renderiza cada combinação */}
             {combinacoesSobras.map((combinacao, index) => {
               const total = combinacao.reduce((soma, sobra) => soma + sobra, 0)

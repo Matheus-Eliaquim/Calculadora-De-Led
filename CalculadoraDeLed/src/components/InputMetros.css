@@ -162,3 +162,21 @@
     justify-content: space-between;
     min-width: 27rem;
 }
+
+.radio-inputs {
+    cursor: pointer;
+}
+
+/* Estilo da bolinha */
+.radios {
+    accent-color: var(--cor-destaque);
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+.radio-inputs:hover .radios {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 4px var(--cor-destaque));
+}
+
