@@ -110,7 +110,7 @@ const DadosEntrada = ({ entradaDados, back }) => {
                                     <InfoOutlinedIcon
                                         fontSize="small"
                                         sx={{
-                                            color: 'yellow',
+                                            color: 'var(--cor-destaque)',
                                             cursor: 'help'
                                         }}
                                     />
@@ -156,7 +156,7 @@ const DadosEntrada = ({ entradaDados, back }) => {
                                     <InfoOutlinedIcon
                                         fontSize="small"
                                         sx={{
-                                            color: 'yellow',
+                                            color: 'var(--cor-destaque)',
                                             cursor: 'help'
                                         }}
                                     />
@@ -202,7 +202,7 @@ const DadosEntrada = ({ entradaDados, back }) => {
                                     <InfoOutlinedIcon
                                         fontSize="small"
                                         sx={{
-                                            color: 'yellow',
+                                            color: 'var(--cor-destaque)',
                                             cursor: 'help'
                                         }}
                                     />

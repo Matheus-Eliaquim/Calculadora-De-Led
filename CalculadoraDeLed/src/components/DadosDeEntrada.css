@@ -11,7 +11,6 @@
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
-    background: var(--color-form);
     border-radius: 20px;
     min-width: 20rem;
 }
@@ -20,7 +19,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: rgb(190, 188, 27);
+    color: var(--cor-texto-principal);
 }
 
 .divisao input {
@@ -60,4 +59,9 @@
 .spanLabel {
     display: flex;
     justify-content: space-between;
+}
+
+.dados-iniciais {  
+    background: var(--cor-campo);  
+    color: var(--cor-texto-principal);    
 }

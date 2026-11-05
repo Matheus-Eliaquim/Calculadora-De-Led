@@ -1,12 +1,14 @@
 :root {
     /* Fundos */
     --cor-fundo: #121212;
-    --cor-container: #202020;
+    --cor-container: #5e5e5e;
     --cor-campo: #303030;
+    
 
     /* Textos */
     --cor-texto-principal: #F1F1F1;
     --cor-texto-secundario: #A0A0A0;
+    
 
     /* Ações */
     --cor-botao: #176B20;

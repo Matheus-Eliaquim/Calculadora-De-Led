@@ -1,9 +1,3 @@
-:root {
-    --color-click: #555555;
-    --color-font02: #979797;
-    --color-back-ground: rgb(0, 95, 0);
-}
-
 #divClose {
     margin: 0;
     padding: 0;
@@ -15,7 +9,7 @@
     padding: 0;
     cursor: pointer;
     background-color: transparent;
-    color: var(--color-font02);
+    color: var(--cor-texto-secundario);
     border: none;
 }
 
@@ -25,5 +19,6 @@
 
 #divClose button:active {
     transform: scale(0.85);
-    color: var(--color-click);
+    transition: transform 0.25s ease;
+    color: var(--cor-container);
 }
