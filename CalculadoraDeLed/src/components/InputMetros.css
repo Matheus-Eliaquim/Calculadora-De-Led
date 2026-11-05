@@ -130,6 +130,24 @@
     color: var(--cor-destaque);
 }
 
+.remover-linha {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--cor-texto-principal);
+    cursor: pointer;
+}
+
+.remover-linha:hover {
+    color: var(--cor-erro);
+}
+
 /* Div do botão */
 #button-div {
     text-align: center;

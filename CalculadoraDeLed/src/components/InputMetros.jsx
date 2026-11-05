@@ -9,16 +9,41 @@ import { avaliarExpressao } from '../utils/avaliarExpressao.js'
 //importando componentes do Material UI
 import Tooltip from '@mui/material/Tooltip'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+
+const calcularFontes = (linhas) => linhas.reduce((fontesCalculadas, linha) => {
+    const potenciaFonte = Number(linha.potenciaFonte)
+    const potenciaPadrao = [18, 24, 36, 48, 60, 72, 100, 150, 200]
+        .find((potencia) => potenciaFonte <= potencia)
+
+    if (potenciaPadrao) {
+        const chaveFonte = `fonte${potenciaPadrao}W`
+        fontesCalculadas[chaveFonte] += Number(linha.qtdFonte) || 0
+    }
+
+    return fontesCalculadas
+}, {
+    fonte18W: 0,
+    fonte24W: 0,
+    fonte36W: 0,
+    fonte48W: 0,
+    fonte60W: 0,
+    fonte72W: 0,
+    fonte100W: 0,
+    fonte150W: 0,
+    fonte200W: 0,
+})
 
 // Componente principal que recebe propriedades de configuração
 const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) => {
     // Estados internos do componente
     const [valor, setValor] = useState("") // Valor digitado pelo usuário (metragem)
-    const [totalMetros, setTotalMetros] = useState(0)
     const [distancia, setDistancia] = useState("5") // Espaçamento entre fontes (default 5m)
     const [fonteQTD, setFonteQTD] = useState(0) // Quantidade de fontes calculadas
     const [fontePotencia, setFontePotencia] = useState(0) // Potência de cada fonte calculada
     const [linhasTabela, setLinhasTabela] = useState([]) // Lista de linhas que serão exibidas na tabela
+    const totalMetros = linhasTabela.reduce((total, linha) => total + Number(linha.valor), 0)
+    const fontes = calcularFontes(linhasTabela)
     const [fonte200, setFonte200] = useState(false); // estado para saber se a opção apenas fontes de 200w está ativa
     const [erroLed, setErroLed] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
     const [abrirRelatorio, setAbrirRelatorio] = useState(false)
@@ -30,68 +55,6 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
             valorCalculado = avaliarExpressao(valor)
         } catch {
             valorCalculado = null
-        }
-    }
-
-    const [fontes, setFontes] = useState({
-        fonte18W: 0,
-        fonte24W: 0,
-        fonte36W: 0,
-        fonte48W: 0,
-        fonte60W: 0,
-        fonte72W: 0,
-        fonte100W: 0,
-        fonte150W: 0,
-        fonte200W: 0,
-    })
-
-    //função utilizada para contar quantas fontes de cada potencia serão utilizadas
-    function contarFontes(fontePotencia) {
-        if (fontePotencia <= 18) {
-            setFontes(prev => ({
-                ...prev,
-                fonte18W: prev.fonte18W + fonteQTD
-            }))
-        } else if (fontePotencia > 18 && fontePotencia <= 24) {
-            setFontes(prev => ({
-                ...prev,
-                fonte24W: prev.fonte24W + fonteQTD
-            }))
-        } else if (fontePotencia > 24 && fontePotencia <= 36) {
-            setFontes(prev => ({
-                ...prev,
-                fonte36W: prev.fonte36W + fonteQTD
-            }))
-        } else if (fontePotencia > 36 && fontePotencia <= 48) {
-            setFontes(prev => ({
-                ...prev,
-                fonte48W: prev.fonte48W + fonteQTD
-            }))
-        } else if (fontePotencia > 48 && fontePotencia <= 60) {
-            setFontes(prev => ({
-                ...prev,
-                fonte60W: prev.fonte60W + fonteQTD
-            }))
-        } else if (fontePotencia > 60 && fontePotencia <= 72) {
-            setFontes(prev => ({
-                ...prev,
-                fonte72W: prev.fonte72W + fonteQTD
-            }))
-        } else if (fontePotencia > 72 && fontePotencia <= 100) {
-            setFontes(prev => ({
-                ...prev,
-                fonte100W: prev.fonte100W + fonteQTD
-            }))
-        } else if (fontePotencia > 100 && fontePotencia <= 150) {
-            setFontes(prev => ({
-                ...prev,
-                fonte150W: prev.fonte150W + fonteQTD
-            }))
-        } else if (fontePotencia > 150 && fontePotencia <= 200) {
-            setFontes(prev => ({
-                ...prev,
-                fonte200W: prev.fonte200W + fonteQTD
-            }))
         }
     }
 
@@ -172,8 +135,6 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                     potenciaFonte: fontePotencia,
                 },
             ])
-            setTotalMetros((prev) => prev + va)
-            contarFontes(fontePotencia)
             setValor('')
         }
     }
@@ -373,6 +334,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                                     <tr>
                                         <th>Entradas</th>
                                         <th>Fontes</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -380,6 +342,17 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                                         <tr key={index}>
                                             <td>{Number(linha.valor).toFixed(2)}m</td>
                                             <td>{linha.qtdFonte}x{linha.potenciaFonte}W</td>
+                                            <td>
+                                                <button
+                                                    type="button"
+                                                    className="remover-linha"
+                                                    aria-label={`Remover entrada ${index + 1}`}
+                                                    title="Remover entrada"
+                                                    onClick={() => setLinhasTabela((prev) => prev.filter((_, linhaIndex) => linhaIndex !== index))}
+                                                >
+                                                    <DeleteOutlineIcon fontSize="small" />
+                                                </button>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
