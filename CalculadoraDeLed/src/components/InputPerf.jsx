@@ -87,13 +87,6 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
                 ...novasLinhas
             ])
 
-            // Soma a quantidade de perfis inteiros
-            const novosPerfisInteiros = novasLinhas.reduce(
-                (total, linha) => total + linha.qtdPerf,
-                0
-            )
-
-
             // Limpa o input e a mensagem
             setValorDigitado("")
             setErroPerf2("")
@@ -114,7 +107,7 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
         const qtdPerf = Math.floor(valorNumerico / heighPerf)
 
         const sobra = Number(
-            (valorNumerico % heighPerf).toFixed(2)
+            Number((valorNumerico % heighPerf).toFixed(2))
         )
 
         setLinhasTabelaPerf((prev) => [
