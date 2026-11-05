@@ -23,6 +23,10 @@
     text-align: left;
 }
 
+#relatorio-final section p:hover{
+    color: var(--cor-destaque);
+}
+
 button-closed {
     align-items: end;
 }
