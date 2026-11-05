@@ -150,6 +150,9 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
 
     }, [valorCalculado, fonteQTD, potencia, coeficiente, fonte200])
 
+
+    
+
     // Função chamada ao apertar Enter no input
     const handleKeydown = (e) => {
         if (e.key === 'Enter' && valor) {

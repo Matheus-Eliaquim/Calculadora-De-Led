@@ -210,21 +210,6 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
         return combinacoes
     }
 
-    useEffect(() => {
-
-        const handleGlobalEnter = (e) => {
-            if (e.key === 'Enter') {
-                handleKeydownPerf(e)
-            }
-        }
-
-        window.addEventListener('keydown', handleGlobalEnter)
-
-
-        return () => {
-            window.removeEventListener('keydown', handleGlobalEnter)
-        }
-    }, [valorDigitado])
 
     return (
 
@@ -251,7 +236,7 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
                         placeholder="17.75"
                         value={valorDigitado}
                         onChange={handleChangePerf}
-                        
+                        onKeyDown= {handleKeydownPerf}                        
                     />
 
                      <span>
