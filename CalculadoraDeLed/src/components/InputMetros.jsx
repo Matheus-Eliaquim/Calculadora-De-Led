@@ -355,8 +355,6 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                                                     id={`remover-${linha.id}`}
                                                     action={() => removerLinha(linha.id)}                                                    
                                                 />
-
-
                                             </td>
                                         </tr>
                                     ))}

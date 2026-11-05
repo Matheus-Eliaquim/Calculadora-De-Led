@@ -1,29 +1,41 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import './InputMetros.css' // Estilos específicos para este componente
 import './responsividade.css' // Estilos de responsividade
 import Button from "./buttons/Button.jsx"
 import HomeButton from './buttons/HomeButton.jsx'
+import ButtonExc from './buttons/ButtonExc.jsx'
 
-//importando componentes do Material UI
+//importando componentes do Material UI 
 import Tooltip from '@mui/material/Tooltip'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
 const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarCombinacoes, back }) => {
 
     const [valorDigitado, setValorDigitado] = useState("") //estado usado para capturar o valor digitado
-    const heighPerf = Number(metragem)//constante usada para transformar o valor recebido via props em numero
-    const totalPerfs = Math.floor(valorDigitado / heighPerf) //calcula quantas barras inteiras serão utilizadas
-    const sobraInitial = Number((valorDigitado % heighPerf).toFixed(2)) //calcula a sobra do valor digitado
+    const heighPerf = Number(metragem)//constante usada para transformar o valor recebido via props em numero    
     const [linhasTabelaPerf, setLinhasTabelaPerf] = useState([]) // Lista de linhas que serão exibidas na tabela
     const [erroPerf2, setErroPerf2] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
-    const [sobras, setSobras] = useState([]) //array para armazenar todas as sobras
-    const [perfilInteriros, setPerfisInteiros] = useState(0)
+    const proximoIdPerf = useRef(0) //constante usada para dar um ID para linhas da tabela
 
+    //função utilizada para calcular quantidade de perfis inteiros através das linhas da tabela.
+    const perfisInteiros = linhasTabelaPerf.reduce(
+        (total, linha) => total + linha.qtdPerf,
+        0
+    )
+
+    // Função para remover uma linha
+    const removerLinhaPerf = (id) => {
+        setLinhasTabelaPerf((prev) =>
+            prev.filter((linha) => linha.id !== id)
+        )
+    }
 
     //função para disparar uma ação ao apertar enter
     const handleKeydownPerf = (e) => {
         if (e.key !== "Enter" || !valorDigitado) return
+
+        e.preventDefault()
 
         const valor = valorDigitado.trim()
 
@@ -52,7 +64,7 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
                 return
             }
 
-            // A quantidade precisa ser um número inteiro
+            // verifica se a quantidade de perfis é um numero inteiro
             if (!Number.isInteger(quantidade)) {
                 setErroPerf2('Expressão inválida!')
                 return
@@ -62,6 +74,7 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
             const novasLinhas = Array.from(
                 { length: quantidade },
                 () => ({
+                    id: proximoIdPerf.current++,
                     valor: medida,
                     qtdPerf: Math.floor(medida / heighPerf),
                     sobras: Number((medida % heighPerf).toFixed(2)),
@@ -80,15 +93,6 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
                 0
             )
 
-            setPerfisInteiros(
-                (prev) => prev + novosPerfisInteiros
-            )
-
-            // Adiciona cada sobra individualmente
-            setSobras((prev) => [
-                ...prev,
-                ...novasLinhas.map(linha => linha.sobras)
-            ])
 
             // Limpa o input e a mensagem
             setValorDigitado("")
@@ -116,20 +120,12 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
         setLinhasTabelaPerf((prev) => [
             ...prev,
             {
+                id: proximoIdPerf.current++,
                 valor: valorNumerico,
                 qtdPerf: qtdPerf,
                 sobras: sobra,
             },
-        ])
-
-        setPerfisInteiros(
-            (prev) => prev + qtdPerf
-        )
-
-        setSobras((prev) => [
-            ...prev,
-            sobra
-        ])
+        ])        
 
         setValorDigitado("")
         setErroPerf2("")
@@ -167,11 +163,9 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
         // Multiplica por 100 para trabalhar com inteiros e evitar problemas de precisão com decimais.
         const limite = Math.round(heighPerf * 100)
 
-        // Cria uma cópia do array de sobras:
-        // - Multiplica cada sobra por 100 e arredonda para inteiro.
-        // - Filtra apenas valores positivos (descarta sobras nulas ou negativas).
-        const sobrasCopy = sobras
-            .map(sobra => Math.round(sobra * 100))
+        // Busca as sobras diretamente nas linhas da tabela
+        const sobrasCopy = linhasTabelaPerf
+            .map(linha => Math.round(linha.sobras * 100))
             .filter(sobra => sobra > 0)
 
         // Array que vai armazenar todas as combinações encontradas
@@ -288,14 +282,21 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
                                 <th>Entradas</th>
                                 <th>Barras</th>
                                 <th>Sobra</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {linhasTabelaPerf.map((linha, index) => (
-                                <tr key={index}>
+                            {linhasTabelaPerf.map((linha) => (
+                                <tr key={linha.id}>
                                     <td>{Number(linha.valor).toFixed(2)}m</td>
                                     <td>{linha.qtdPerf}x{metragem.toFixed(2)}m</td>
                                     <td>{Number(linha.sobras).toFixed(2)}m</td>
+                                    <td>
+                                        <ButtonExc
+                                            id={`remover-${linha.id}`}
+                                            action={() => removerLinhaPerf(linha.id)}
+                                        />
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -309,7 +310,7 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
                                 e.preventDefault()
                                 const combinacoes = calculandoSobras()
                                 enviarTrue("relatorio")
-                                barrasInteiras(perfilInteriros)
+                                barrasInteiras(perfisInteiros)
                                 barrasCortes(combinacoes.length)
                                 enviarCombinacoes(combinacoes)
                             }}

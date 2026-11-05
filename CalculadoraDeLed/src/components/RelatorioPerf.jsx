@@ -7,6 +7,7 @@ const RelatorioPerf = ({ perfisInteiros, perfisCortes, combinacoesSobras, close,
 
   const inteiros = perfisInteiros
   const cortados = perfisCortes
+  
 
   // Retorna a estrutura JSX que será renderizada na tela
   return (
