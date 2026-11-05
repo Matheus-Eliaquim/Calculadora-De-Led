@@ -32,14 +32,14 @@
 
 
 .obrigatorio {
-    color: red;
+    color: var(--cor-erro-hover);
 }
 
 .erro {
     position: relative;
     inset: -3.5rem 0 0 -6.5rem;
     justify-self: center;
-    color: var(--color-erro)
+    color: var(--cor-erro)
 }
 
 .erro span {
