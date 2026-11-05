@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './InputMetros.css' // Estilos específicos para este componente
 import './responsividade.css' // Estilos de responsividade
 import Button from "./buttons/Button.jsx"
@@ -210,9 +210,27 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
         return combinacoes
     }
 
+    useEffect(() => {
+
+        const handleGlobalEnter = (e) => {
+            if (e.key === 'Enter') {
+                handleKeydownPerf(e)
+            }
+        }
+
+        window.addEventListener('keydown', handleGlobalEnter)
+
+
+        return () => {
+            window.removeEventListener('keydown', handleGlobalEnter)
+        }
+    }, [valorDigitado])
+
     return (
 
         <>
+
+         
 
             <div id='home02'>
                 <HomeButton action={() => back(null)} />
@@ -233,7 +251,7 @@ const InputPerf = ({ metragem, enviarTrue, barrasInteiras, barrasCortes, enviarC
                         placeholder="17.75"
                         value={valorDigitado}
                         onChange={handleChangePerf}
-                        onKeyDown={handleKeydownPerf}
+                        
                     />
 
                      <span>

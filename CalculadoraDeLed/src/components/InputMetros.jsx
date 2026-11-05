@@ -208,7 +208,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
 
         <>
 
-            <div id='home02'>
+            <div id='home02' >
                 <HomeButton action={() => back(null)} />
             </div>
 
