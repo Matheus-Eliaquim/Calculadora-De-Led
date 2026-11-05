@@ -1,3 +1,30 @@
+:root {
+    /* Fundos */
+    --cor-fundo: #121212;
+    --cor-container: #202020;
+    --cor-campo: #303030;
+
+    /* Textos */
+    --cor-texto-principal: #F1F1F1;
+    --cor-texto-secundario: #A0A0A0;
+
+    /* Ações */
+    --cor-botao: #176B20;
+    --cor-botao-hover: #21852B;
+    --cor-botao-active: #105218;
+
+    /* Destaques */
+    --cor-destaque: #E6D500;
+
+    /* Bordas e divisórias */
+    --cor-borda: #393939;
+    --cor-borda-foco: #176B20;
+
+    /* Estados */
+    --cor-erro: #E05252;
+    --cor-sucesso: #4CAF50;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +34,7 @@
 }
 
 body {
-  background-color: black;
+  background-color: var(--cor-fundo);
   height: 100vh;
   max-width: 100%;
   align-content: center;

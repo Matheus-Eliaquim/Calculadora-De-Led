@@ -14,7 +14,7 @@
 /* Cabeçalho com dados para cálculo */
 #dados-para-calculo {
     display: grid;
-    grid-template-columns: 8rem;
+    grid-template-columns: 17rem;
     text-align: center;
     justify-content: center;
     margin-bottom: 2rem;
@@ -23,9 +23,15 @@
 }
 
 #dados-para-calculo h3 {
-    margin: 0.5rem 0;
-    font-size: 0.7rem;
-    color: var(--color-font-h3);
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+}
+
+#dados-para-calculo h2 {
+    margin: 0.5rem 0 0 0;
+    font-size: 1.5rem;
+    color: var(--cor-texto-secundario);
 }
 
 /* Área de metragem individual */
@@ -42,7 +48,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: azure;
+    color: var( --cor-texto-principal);
 }
 
 #inputs #entradaValor {
@@ -53,6 +59,15 @@
     border-radius: 20px;
     width: 90vw;
     max-width: 25rem;
+    background: var(--cor-campo);
+    color: var( --cor-texto-principal);
+}
+
+#inputs h2 {
+    width: 100%;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
 }
 
 #inputs h4 {
@@ -61,6 +76,13 @@
     align-items: center;
     justify-content: space-between;
     min-width: 13rem;
+}
+
+#inputs p {
+    width: 100%;
+    color: var(--cor-texto-secundario);
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
 }
 
 #fontLedSpace span{
@@ -91,16 +113,22 @@
 /* Tabela */
 #tabela-entradas {
     color: white;
-    border-bottom: 2px solid rgb(131, 131, 131);
+    border-bottom: 2px solid var(--cor-texto-principal);
     margin-top: 1rem;
 }
 
 #tabela-entradas th {
     padding: 0 1rem;
+    min-width: 8rem;
 }
 
 #tabela-entradas td {
     text-align: center;
+    min-width: 8rem;
+}
+
+#tabela-entradas tr:hover {
+    background: var(--cor-campo);
 }
 
 /* Div do botão */

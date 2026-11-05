@@ -123,7 +123,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
         //caso a opção fontes de 200W esteja ativa, utiliza a potencia da fonte para calcular quantas fontes serão usadas
         if (fontePotencia === '200' && valorCalculado !== null) {
             const coeficienteReal = coeficiente / 100 + 1
-            setFonteQTD(Math.ceil(((valorCalculado * potencia)*coeficienteReal) / fontePotencia))
+            setFonteQTD(Math.ceil(((valorCalculado * potencia) * coeficienteReal) / fontePotencia))
             return
         }
         if (valorCalculado !== null && distancia) {
@@ -151,7 +151,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
     }, [valorCalculado, fonteQTD, potencia, coeficiente, fonte200])
 
 
-    
+
 
     // Função chamada ao apertar Enter no input
     const handleKeydown = (e) => {
@@ -223,6 +223,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
             <div className="dados-de-input">
                 {/* Cabeçalho com informações recebidas via props */}
                 <header id="dados-para-calculo">
+                    <h2>Dimensionamento: </h2>
                     <h3>Potencia da fita: {potencia}W/m</h3>
                     <h3>Rolo de fita: {rolo}m</h3>
                     <h3>Coeficiente de segurança: {coeficiente}%</h3>
@@ -233,9 +234,8 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                 {/* Área de entrada de dados */}
                 <div id="metragem-individual">
 
-
-
                     <div id="inputs">
+                        <h2>Metragem de entrada (m)</h2>
                         {/* Campo de texto para digitar metragem */}
                         <span className='spanInput'>
 
@@ -283,19 +283,20 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                             </span>
 
                         </span>
+                        <p>pressione enter para enviar o valor</p>
 
                         <h4 id='fontLedSpace'>Espaçamento por Fonte
                             <span>
                                 <Tooltip
                                     title={
                                         "1 - O tamanho padrão para o calculo da distancia entre fontes é de 5.00 metros\n" +
-                                        "Para os exemplos será usada uma fita led com potencia de 15W/m e coeficiente de 20%\n" + 
+                                        "Para os exemplos será usada uma fita led com potencia de 15W/m e coeficiente de 20%\n" +
                                         "Exemplo: Entrada= 12.00m, Fontes= 03x72W \n" +
-                                        "2 - O segundo padrão que pode ser utilizado é de uma fonte a cada 7.00m\n" + 
+                                        "2 - O segundo padrão que pode ser utilizado é de uma fonte a cada 7.00m\n" +
                                         "Exemplo: Entrada= 12.00m, Fontes= 02x150W \n" +
-                                        "3 - O terceiro padrão é utilizar apenas fontes de 200W, nesse padrão a potencia total do circuito \n" + 
-                                        "é divida por 200 potencia da fonte e são dimensionadas quantas fontes de 200 são necessarias para alimentar\n " + 
-                                        "o circuito em questão \n" + 
+                                        "3 - O terceiro padrão é utilizar apenas fontes de 200W, nesse padrão a potencia total do circuito \n" +
+                                        "é divida por 200 potencia da fonte e são dimensionadas quantas fontes de 200 são necessarias para alimentar\n " +
+                                        "o circuito em questão \n" +
                                         "Exemplo: Entrada= 100.00m, Fontes= 8x200W\n" +
                                         "4 - Ao enviar tamanho do circuito para o calculo a distancia entre as fontes é enviada junto automaticamente\n" +
                                         "5 - O valor da distancia entre as fontes pode ser alterado a qualquer momento, mas o valor enviado para o calculo não é alterado, \n" +
