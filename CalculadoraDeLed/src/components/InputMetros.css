@@ -114,8 +114,7 @@
 
 #tabela-entradas th {
     padding: 0 1rem;
-    min-width: 8rem;
-    
+    min-width: 8rem;  
 }
 
 #tabela-entradas td {
@@ -124,10 +123,6 @@
     height: 2.5rem;
     border-bottom: 2px solid var(--cor-campo);
     
-}
-
-#tabela-entradas tr:hover {
-    color: var(--cor-destaque);
 }
 
 .remover-linha {
@@ -144,9 +139,6 @@
     cursor: pointer;
 }
 
-.remover-linha:hover {
-    color: var(--cor-erro);
-}
 
 /* Div do botão */
 #button-div {
