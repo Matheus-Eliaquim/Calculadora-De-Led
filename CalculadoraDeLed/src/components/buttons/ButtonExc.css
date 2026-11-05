@@ -1,0 +1,20 @@
+.Exclude {
+    text-transform: uppercase; /* deixa o texto em caixa alta */
+    font-weight: bolder;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--cor-erro);
+    border: none;
+}
+
+.Exclude:hover{
+    transform: scale(1.2);
+    color: var(--cor-erro-hover);  
+}
+
+.Exclude:active {
+    transform: scale(0.95);
+    transition: transform 0.15s ease;
+    color: var(--cor-erro-active)
+}

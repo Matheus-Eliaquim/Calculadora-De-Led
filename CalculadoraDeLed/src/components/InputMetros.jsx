@@ -1,42 +1,44 @@
 // Importa hooks do React e componentes externos
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Button from './buttons/Button.jsx' // Componente de botão personalizado
 import HomeButton from './buttons/HomeButton.jsx'
+import ButtonExc from './buttons/ButtonExc.jsx'
 import './InputMetros.css' // Estilos específicos para este componente
 import './responsividade.css' // Estilos de responsividade
 import { avaliarExpressao } from '../utils/avaliarExpressao.js'
+import Tooltip from '@mui/material/Tooltip' //importando componentes do Material UI
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined' //importando componentes do Material UI
 
-//importando componentes do Material UI
-import Tooltip from '@mui/material/Tooltip'
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 
-const calcularFontes = (linhas) => linhas.reduce((fontesCalculadas, linha) => {
-    const potenciaFonte = Number(linha.potenciaFonte)
-    const potenciaPadrao = [18, 24, 36, 48, 60, 72, 100, 150, 200]
-        .find((potencia) => potenciaFonte <= potencia)
-
-    if (potenciaPadrao) {
-        const chaveFonte = `fonte${potenciaPadrao}W`
-        fontesCalculadas[chaveFonte] += Number(linha.qtdFonte) || 0
-    }
-
-    return fontesCalculadas
-}, {
-    fonte18W: 0,
-    fonte24W: 0,
-    fonte36W: 0,
-    fonte48W: 0,
-    fonte60W: 0,
-    fonte72W: 0,
-    fonte100W: 0,
-    fonte150W: 0,
-    fonte200W: 0,
-})
 
 // Componente principal que recebe propriedades de configuração
 const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) => {
+
+    const calcularFontes = (linhas) => linhas.reduce((fontesCalculadas, linha) => {
+        const potenciaFonte = Number(linha.potenciaFonte)
+        const potenciaPadrao = [18, 24, 36, 48, 60, 72, 100, 150, 200]
+            .find((potencia) => potenciaFonte <= potencia)
+
+        if (potenciaPadrao) {
+            const chaveFonte = `fonte${potenciaPadrao}W`
+            fontesCalculadas[chaveFonte] += Number(linha.qtdFonte) || 0
+        }
+
+        return fontesCalculadas
+    }, {
+        fonte18W: 0,
+        fonte24W: 0,
+        fonte36W: 0,
+        fonte48W: 0,
+        fonte60W: 0,
+        fonte72W: 0,
+        fonte100W: 0,
+        fonte150W: 0,
+        fonte200W: 0,
+    })
+
     // Estados internos do componente
+    const proximoId = useRef(0)
     const [valor, setValor] = useState("") // Valor digitado pelo usuário (metragem)
     const [distancia, setDistancia] = useState("5") // Espaçamento entre fontes (default 5m)
     const [fonteQTD, setFonteQTD] = useState(0) // Quantidade de fontes calculadas
@@ -47,6 +49,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
     const [fonte200, setFonte200] = useState(false); // estado para saber se a opção apenas fontes de 200w está ativa
     const [erroLed, setErroLed] = useState("") // estado utilizado para validar se há algum numero errado e retornar mensagem para usuario
     const [abrirRelatorio, setAbrirRelatorio] = useState(false)
+
 
     // Resultado numérico da expressão, utilizado nos cálculos de metragem e fontes
     let valorCalculado = null
@@ -113,8 +116,12 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
 
     }, [valorCalculado, fonteQTD, potencia, coeficiente, fonte200])
 
-
-
+    // Função para remover uma linha
+    const removerLinha = (id) => {
+        setLinhasTabela((prev) =>
+            prev.filter((linha) => linha.id !== id)
+        )
+    }
 
     // Função chamada ao apertar Enter no input
     const handleKeydown = (e) => {
@@ -130,6 +137,7 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
             setLinhasTabela((prev) => [
                 ...prev,
                 {
+                    id: proximoId.current++,
                     valor: va,
                     qtdFonte: fonteQTD,
                     potenciaFonte: fontePotencia,
@@ -343,15 +351,12 @@ const InputMetros = ({ potencia, rolo, coeficiente, receberRelatorio, back }) =>
                                             <td>{Number(linha.valor).toFixed(2)}m</td>
                                             <td>{linha.qtdFonte}x{linha.potenciaFonte}W</td>
                                             <td>
-                                                <button
-                                                    type="button"
-                                                    className="remover-linha"
-                                                    aria-label={`Remover entrada ${index + 1}`}
-                                                    title="Remover entrada"
-                                                    onClick={() => setLinhasTabela((prev) => prev.filter((_, linhaIndex) => linhaIndex !== index))}
-                                                >
-                                                    <DeleteOutlineIcon fontSize="small" />
-                                                </button>
+                                                <ButtonExc
+                                                    id={`remover-${linha.id}`}
+                                                    action={() => removerLinha(linha.id)}                                                    
+                                                />
+
+
                                             </td>
                                         </tr>
                                     ))}

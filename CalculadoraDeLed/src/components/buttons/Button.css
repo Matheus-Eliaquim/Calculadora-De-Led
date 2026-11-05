@@ -1,4 +1,4 @@
-button {
+.buttonBasic {
     text-transform: uppercase; /* deixa o texto em caixa alta */
     font-weight: bolder;
     margin: 1rem 0;
@@ -10,11 +10,11 @@ button {
     border: none;
 }
 
-button:hover {
+.buttonBasic:hover {
     cursor: pointer;
 }
 
-button:active {
+.buttonBasic:active {
     transform: scale(0.95);
     transition: transform 0.15s ease;
     background-color: var(--cor-botao-active)

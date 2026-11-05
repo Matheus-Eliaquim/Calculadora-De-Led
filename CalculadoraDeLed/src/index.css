@@ -24,6 +24,8 @@
 
     /* Estados */
     --cor-erro: #E05252;
+    --cor-erro-active: #ac2b2b;
+    --cor-erro-hover:#ff1717;
     --cor-sucesso: #4CAF50;
 }
 

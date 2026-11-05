@@ -8,7 +8,7 @@ const RelatorioFinal = ({ fontes = {}, rolo, totalMetros, close, back }) => {
     const potencias = [200, 150, 100, 72, 60, 48, 36, 24, 18]
     const metragem = Number(totalMetros) || 0
     const tamanhoRolo = Number(rolo) || 0
-    const rolos = tamanhoRolo > 0 ? Math.ceil(totalMetros / tamanhoRolo) : 0
+    const rolos = tamanhoRolo > 0 ? Math.ceil(metragem / tamanhoRolo) : 0
 
     return (
         <>

@@ -7,7 +7,7 @@ const Button = ({id, text, action}) => {
 
     return (
         <div>
-            <button id={id} onClick={handleAction} > {text} </button>
+            <button id={id} onClick={handleAction} className='buttonBasic'> {text} </button>
         </div>
     )
 }
