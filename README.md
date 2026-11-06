@@ -31,7 +31,7 @@ No meu dia a dia de trabalho, o projeto já facilita bastante, realizando cálcu
 
 ## 🚀 Próximos Passos
 
-- Permitir que o usuário exclua valores adicionados e garantir que essa exclusão seja registrada no relatório.
+- Melhorar a semântica do projeto. 
 
 ---
 
